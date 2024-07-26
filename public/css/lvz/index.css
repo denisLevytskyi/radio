@@ -1,0 +1,24 @@
+.linksWrapper {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.linksWrapperA {
+    border-radius: 5px;
+    border: 1px solid black;
+    font-weight: bold;
+    padding: 5px 0;
+    width: 180px;
+    max-width: 100%;
+    text-align: center;
+    margin: 5px;
+    transition-duration: 1s;
+    color: black;
+}
+
+.linksWrapperA:hover {
+    transition-duration: 1s;
+    background: palegreen;
+}

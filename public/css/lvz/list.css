@@ -1,0 +1,33 @@
+.listWrapItem {
+    background: lightgrey;
+    border-radius: 5px;
+    margin: 5px 0;
+    padding: 5px;
+}
+
+.listWrapItemA {
+    color: black;
+}
+
+/* PAGINATOR */
+
+.listWrapPagination {
+    margin: 0 auto;
+    width: max-content;
+}
+
+.listWrapPagination li {
+    display: inline;
+}
+
+.paginatorActive {
+    color: gray;
+    font-weight: 700;
+    cursor: default;
+    text-decoration: underline;
+}
+
+.paginatorDisabled {
+    color: gray;
+    cursor: default;
+}

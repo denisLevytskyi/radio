@@ -19,7 +19,7 @@ class NewPasswordController extends Controller
      */
     public function create(Request $request): View
     {
-        return view('auth.reset-password', ['request' => $request]);
+        return view('_lvz.reset-password', ['request' => $request]);
     }
 
     /**
@@ -31,18 +31,26 @@ class NewPasswordController extends Controller
     {
         $request->validate([
             'token' => ['required'],
-            'email' => ['required', 'email'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'resetPasswordEmail' => ['required', 'email'],
+            'resetPasswordPassword' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+
+        $credential = [
+            'email' => $request->resetPasswordEmail,
+            'password' => $request->resetPasswordPassword,
+            'password_confirmation' => $request->resetPasswordPassword_confirmation,
+            'token' => $request->token
+        ];
+
 
         // Here we will attempt to reset the user's password. If it is successful we
         // will update the password on an actual user model and persist it to the
         // database. Otherwise we will parse the error and return the response.
         $status = Password::reset(
-            $request->only('email', 'password', 'password_confirmation', 'token'),
+            $credential,
             function ($user) use ($request) {
                 $user->forceFill([
-                    'password' => Hash::make($request->password),
+                    'password' => Hash::make($request->resetPasswordPassword),
                     'remember_token' => Str::random(60),
                 ])->save();
 
@@ -55,7 +63,6 @@ class NewPasswordController extends Controller
         // redirect them back to where they came from with their error message.
         return $status == Password::PASSWORD_RESET
                     ? redirect()->route('login')->with('status', __($status))
-                    : back()->withInput($request->only('email'))
-                            ->withErrors(['email' => __($status)]);
+                    : back()->withInput()->withErrors(['resetPasswordEmail' => __($status)]);
     }
 }

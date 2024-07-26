@@ -1,0 +1,112 @@
+@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap);
+
+/** {
+    border: 1px solid red;
+}
+*/
+
+div, p, input, button, form, span, a, ul, li, pre, * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body, button {
+    font-family: 'Roboto', sans-serif;
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+}
+
+body {
+    background: grey;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+ul, li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: blue;
+    font-size: 16px;
+}
+
+button {
+    width: fit-content;
+    display: inline;
+    background: #95F3FF;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px 20px;
+    margin: 0 0 0 auto;
+    border: 1px solid grey;
+    border-radius: 5px;
+    cursor: pointer;
+    transition-duration: 1s;
+}
+
+button:hover {
+    background: palegreen;
+    transition-duration: 1s;
+}
+
+input, textarea, select {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 5px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+section {
+    margin: 25px auto;
+}
+
+/* ALL PAGES */
+
+.container {
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.typicalContainer {
+    background: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.headerWrap {
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    background: black;
+    color: white;
+}
+
+.headerWrapLinkImg {
+    height: 50px;
+    background: white;
+}
+
+.status .container {
+    background: palegreen;
+    text-align: center;
+}
+
+.statusError .container {
+    background: #d32121;
+    text-align: center;
+    color: white;
+}

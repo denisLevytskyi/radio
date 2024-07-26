@@ -6,9 +6,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -34,7 +35,7 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 
@@ -70,5 +71,21 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function roles () {
+        return $this->belongsToMany(Role::class, 'user_roles', 'user_id', 'role_id');
+    }
+
+    public function isAdministrator () {
+        return $this->roles()->where('role', '=', 'ADMIN')->exists();
+    }
+
+    public function isUser () {
+        return $this->roles()->where('role', '=', 'USER')->exists();
+    }
+
+    public function isGuest () {
+        return $this->roles()->where('role', '=', 'GUEST')->exists();
     }
 }
