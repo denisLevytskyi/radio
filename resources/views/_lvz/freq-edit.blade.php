@@ -7,7 +7,7 @@
         Обновление частоты
     </x-slot:header_info>
     <pre class="productFormP">Запись №: {{ $freq->id }}</pre>
-    <pre class="productFormP">Добавлена пользователем: [{{ $freq->user_id }}] {{ $freq->user->name }}</pre>
+    <pre class="productFormP">Добавлена: [{{ $freq->user_id }}] {{ $freq->user->name }}</pre>
     <br>
     <p class="formFormP">
         Название
