@@ -8,6 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
 use App\Observers\UserObserver;
+use Illuminate\Support\Facades\Schema;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -28,5 +29,6 @@ class AppServiceProvider extends ServiceProvider
         Paginator::defaultView('_lvz/layouts/paginator');
         Gate::policy(User::class, AdminPolicy::class);
         User::observe(UserObserver::class);
+        Schema::defaultStringLength(191);
     }
 }
