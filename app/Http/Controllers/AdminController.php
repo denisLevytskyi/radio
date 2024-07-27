@@ -138,8 +138,7 @@ class AdminController extends Controller
                 'status' => 'Вы не можете выполнить данное действие'
             ]);
         }
-        $result = $admin->delete();
-        if ($result) {
+        if ($admin->delete()) {
             return to_route('app.admin.index')->with(['status' => 'Запись успешно удалена']);
         } else {
             return back()->withErrors([

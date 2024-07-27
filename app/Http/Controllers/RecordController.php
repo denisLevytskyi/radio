@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Record;
 use App\Http\Requests\StoreRecordRequest;
 use App\Http\Requests\UpdateRecordRequest;
+use Illuminate\Http\Request;
 
 class RecordController extends Controller
 {
@@ -13,7 +14,8 @@ class RecordController extends Controller
      */
     public function index()
     {
-        //
+        $records = Record::orderBy('id', 'desc')->paginate(20);
+        return view('_lvz/record-index', ['records' => $records]);
     }
 
     /**
@@ -35,9 +37,14 @@ class RecordController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Record $record)
+    public function show(Request $request, Record $record)
     {
-        //
+        if ($request->user()->cannot('view', $record)) {
+            return back()->withErrors([
+                'status' => 'Вы не можете выполнить данное действие'
+            ]);
+        }
+        return view('_lvz/record-show', ['record' => $record]);
     }
 
     /**
@@ -59,8 +66,19 @@ class RecordController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Record $record)
+    public function destroy(Request $request, Record $record)
     {
-        //
+        if ($request->user()->cannot('delete', $record)) {
+            return back()->withErrors([
+                'status' => 'Вы не можете выполнить данное действие'
+            ]);
+        }
+        if ($record->delete()) {
+            return to_route('app.record.index')->with(['status' => 'Запись успешно удалена']);
+        } else {
+            return back()->withErrors([
+                'status' => 'Ошибка внесения данных в БД'
+            ]);
+        }
     }
 }

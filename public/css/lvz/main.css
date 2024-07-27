@@ -68,6 +68,12 @@ input, textarea, select {
     margin-bottom: 5px;
 }
 
+audio {
+    display: block;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
 section {
     margin: 25px auto;
 }

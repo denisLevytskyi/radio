@@ -7,7 +7,8 @@
         Обновление частоты
     </x-slot:header_info>
     <pre class="productFormP">Запись №: {{ $freq->id }}</pre>
-    <pre class="productFormP">Добавлена пользователем: {{ $freq->user_id }}</pre>
+    <pre class="productFormP">Добавлена пользователем: [{{ $freq->user_id }}] {{ $freq->user->name }}</pre>
+    <br>
     <p class="formFormP">
         Название
     </p>
@@ -16,8 +17,7 @@
     <p class="formFormP">
         Частота
     </p>
-    <x-l::form-input-error :messages="$errors->get('freqEditFreq')"/>
-    <x-l::form-input name="freqEditFreq" readonly type="number" step="0.000001" :value="old('freqEditFreq', $freq->freq)"/>
+    <x-l::form-input readonly :value="$freq->freq"/>
     <x-l::form-btn>
         Обновить
     </x-l::form-btn>

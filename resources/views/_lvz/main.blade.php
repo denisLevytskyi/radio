@@ -17,6 +17,9 @@
                 <a href="{{ route('app.freq.index') }}" class="linksWrapperA">
                     Частоты
                 </a>
+                <a href="{{ route('app.record.index') }}" class="linksWrapperA">
+                    Записи
+                </a>
                 <a href="{{ route('app.import') }}" class="linksWrapperA">
                     Получить записи
                 </a>
