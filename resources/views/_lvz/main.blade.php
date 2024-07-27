@@ -17,6 +17,9 @@
                 <a href="/" class="linksWrapperA">
                     ------
                 </a>
+                <a href="{{ route('app.import') }}" class="linksWrapperA">
+                    Получить записи
+                </a>
                 @if(Auth::user()->isAdministrator())
                     <a href="{{ route('app.prop.index') }}" class="linksWrapperA">
                         Параметры

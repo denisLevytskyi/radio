@@ -5,6 +5,7 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use App\Http\Middleware\IsAdministrator;
 use App\Http\Middleware\IsGuest;
+use App\Http\Middleware\IsUser;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -16,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'isAdministrator' => IsAdministrator::class,
             'isGuest' => IsGuest::class,
+            'isUser' => IsUser::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

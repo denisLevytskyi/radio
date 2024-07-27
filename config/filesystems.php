@@ -44,6 +44,21 @@ return [
             'throw' => false,
         ],
 
+        'records' => [
+            'driver' => 'local',
+            'root' => storage_path('app/records'),
+            'url' => env('APP_URL').'/records',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'ftp' => [
+            'driver' => 'ftp',
+            'host' => '127.0.0.1',
+            'username' => 'records',
+            'password' => 'records',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
@@ -71,6 +86,7 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+        public_path('records') => storage_path('app/records'),
     ],
 
 ];
