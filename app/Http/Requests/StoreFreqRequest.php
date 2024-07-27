@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreFreqRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class StoreFreqRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return TRUE;
     }
 
     /**
@@ -22,7 +23,8 @@ class StoreFreqRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'freqCreateName' => ['required', 'min:3', 'max:30'],
+            'freqCreateFreq' => ['required', 'numeric', 'min:1', 'max:5000', Rule::unique('freqs', 'freq')],
         ];
     }
 }

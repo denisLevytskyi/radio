@@ -14,8 +14,8 @@
                 Доступные действия
             </h1>
             <div class="linksWrapper">
-                <a href="/" class="linksWrapperA">
-                    ------
+                <a href="{{ route('app.freq.index') }}" class="linksWrapperA">
+                    Частоты
                 </a>
                 <a href="{{ route('app.import') }}" class="linksWrapperA">
                     Получить записи

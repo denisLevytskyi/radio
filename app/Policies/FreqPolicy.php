@@ -29,7 +29,11 @@ class FreqPolicy
      */
     public function create(User $user): bool
     {
-        //
+        if ($user->isUser() or $user->isAdministrator()) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
     }
 
     /**
@@ -37,7 +41,11 @@ class FreqPolicy
      */
     public function update(User $user, Freq $freq): bool
     {
-        //
+        if ($user->isAdministrator() or ($user->id == $freq->user_id and $user->isUser())) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
     }
 
     /**
@@ -45,7 +53,11 @@ class FreqPolicy
      */
     public function delete(User $user, Freq $freq): bool
     {
-        //
+        if ($user->isAdministrator() or ($user->id == $freq->user_id and $user->isUser())) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
     }
 
     /**

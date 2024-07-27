@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateFreqRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdateFreqRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return TRUE;
     }
 
     /**
@@ -22,7 +23,7 @@ class UpdateFreqRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'freqEditName' => ['required', 'min:3', 'max:30'],
         ];
     }
 }
