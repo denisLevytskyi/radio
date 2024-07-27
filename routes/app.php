@@ -9,7 +9,7 @@ use App\Http\Controllers\RecordController;
 Route::name('app.')->middleware(['auth', 'verified', 'isGuest'])->group(function() {
     Route::resource('admin', AdminController::class)->middleware('isAdministrator');
     Route::resource('prop', PropController::class)->middleware('isAdministrator');
-    Route::get('import', [ImportController::class, 'import'])->name('import')->middleware('isUser');
+    Route::get('import', [ImportController::class, 'import'])->name('import')->middleware(['ftp', 'isUser']);
     Route::resource('freq', FreqController::class);
     Route::resource('record', RecordController::class);
 });

@@ -52,13 +52,6 @@ return [
             'throw' => false,
         ],
 
-        'ftp' => [
-            'driver' => 'ftp',
-            'host' => '127.0.0.1',
-            'username' => 'records',
-            'password' => 'records',
-        ],
-
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

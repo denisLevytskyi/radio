@@ -9,17 +9,22 @@
         Host
     </p>
     <x-l::form-input-error :messages="$errors->get('propFtpHost')"/>
-    <x-l::form-input name="propFtpHost" type="text" placeholder="Email" :value="old('propFtpHost', $prop->get_prop('ftp_host'))"/>
+    <x-l::form-input name="propFtpHost" type="text" :value="old('propFtpHost', $prop->get_prop('ftp_host'))"/>
     <p class="formFormP">
         Username
     </p>
     <x-l::form-input-error :messages="$errors->get('propFtpUsername')"/>
-    <x-l::form-input name="propFtpUsername" type="text" placeholder="Email" :value="old('propFtpUsername', $prop->get_prop('ftp_username'))"/>
+    <x-l::form-input name="propFtpUsername" type="text" :value="old('propFtpUsername', $prop->get_prop('ftp_username'))"/>
     <p class="formFormP">
         Password
     </p>
     <x-l::form-input-error :messages="$errors->get('propFtpPassword')"/>
-    <x-l::form-input name="propFtpPassword" type="text" placeholder="Email" :value="old('propFtpPassword', $prop->get_prop('ftp_password'))"/>
+    <x-l::form-input name="propFtpPassword" type="text" :value="old('propFtpPassword', $prop->get_prop('ftp_password'))"/>
+    <p class="formFormP">
+        Port
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propFtpPort')"/>
+    <x-l::form-input name="propFtpPort" type="number" :value="old('propFtpPort', $prop->get_prop('ftp_port'))"/>
     <x-l::form-btn>
         Обновить
     </x-l::form-btn>

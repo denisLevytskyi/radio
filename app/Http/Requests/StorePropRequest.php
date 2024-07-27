@@ -25,6 +25,7 @@ class StorePropRequest extends FormRequest
             'propFtpHost' => ['required', 'min:2', 'max:100'],
             'propFtpUsername' => ['required', 'min:2', 'max:100'],
             'propFtpPassword' => ['required', 'min:2', 'max:100'],
+            'propFtpPort' => ['required', 'min:0', 'max:100', 'numeric'],
         ];
     }
 }
