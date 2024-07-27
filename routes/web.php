@@ -7,13 +7,13 @@ Route::get('/', function () {
     return view('_lvz.main');
 })->middleware(['auth', 'verified']);
 
-Route::get('/_migration', function () {
+Route::get('_migration', function () {
     $a = Artisan::call('migrate:fresh');
     $b = Artisan::call('db:seed');
     dd($a, $b);
 });
 
-Route::get('/_clean', function () {
+Route::get('_clean', function () {
     $a = Artisan::call('config:cache');
     $b = Artisan::call('route:clear');
     $c = Artisan::call('view:clear');
@@ -28,10 +28,10 @@ Route::get('/_clean', function () {
 //})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::put('/profile', [PasswordController::class, 'update'])->name('profile.password.update');
+    Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::put('profile', [PasswordController::class, 'update'])->name('profile.password.update');
 });
 
 require __DIR__.'/auth.php';
