@@ -24,7 +24,7 @@ class StoreFreqRequest extends FormRequest
     {
         return [
             'freqCreateName' => ['required', 'min:3', 'max:30'],
-            'freqCreateFreq' => ['required', 'numeric', 'min:1', 'max:5000', Rule::unique('freqs', 'freq')],
+            'freqCreateFreq' => ['required', 'numeric', 'min:1', 'max:5000'],
         ];
     }
 }
