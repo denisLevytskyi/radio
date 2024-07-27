@@ -13,6 +13,16 @@ Route::get('/_migration', function () {
     dd($a, $b);
 });
 
+Route::get('/_clean', function () {
+    $a = Artisan::call('config:cache');
+    $b = Artisan::call('route:clear');
+    $c = Artisan::call('view:clear');
+    $d = Artisan::call('event:clear');
+    $e = Artisan::call('cache:clear');
+    $f = Artisan::call('storage:link');
+    dd($a, $b, $c, $d, $e, $f);
+});
+
 //Route::get('/dashboard', function () {
 //    return view('dashboard');
 //})->middleware(['auth', 'verified'])->name('dashboard');
