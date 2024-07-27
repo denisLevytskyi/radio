@@ -20,7 +20,7 @@ class LvzNamespaceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Blade::componentNamespace('App\\View\\Components\\_lvz\\Layouts', 'l-layout');
+        Blade::componentNamespace('App\\View\\Components\\_lvz\\layouts', 'l-layout');
         Blade::componentNamespace('App\\View\\Components\\_lvz', 'l');
     }
 }
