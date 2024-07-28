@@ -7,6 +7,9 @@
     </x-slot:header_info>
     <section class="list">
         <div class="container typicalContainer">
+            <a href="{{ route('app.import')}}" class="listA">
+                Получить записи
+            </a>
             <div class="listWrap">
                 @foreach($records as $record)
                     <div class="listWrapItem">
