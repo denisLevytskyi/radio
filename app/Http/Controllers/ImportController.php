@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use Auth;
 use App\Models\Record;
+use Exception;
 
 class ImportController extends Controller
 {
@@ -22,13 +23,17 @@ class ImportController extends Controller
     }
 
     public function import () {
-        $list = Storage::disk('ftp')->files();
-        foreach ($list as $k => $v) {
-            $file = Storage::disk('ftp')->get($v);
-            Storage::disk('records')->put($v, $file);
-            Storage::disk('ftp')->delete($v);
-            Record::create($this->parse($v));
+        try {
+            $list = Storage::disk('ftp')->files();
+            foreach ($list as $k => $v) {
+                $file = Storage::disk('ftp')->get($v);
+                Storage::disk('records')->put($v, $file);
+                Storage::disk('ftp')->delete($v);
+                Record::create($this->parse($v));
+            }
+            return back()->with(['status' => 'Данные загружены']);
+        } catch (Exception $e) {
+            return back()->withErrors(['status' => 'Ошибка FTP']);
         }
-        return back()->with(['status' => 'Данные загружены']);
     }
 }
