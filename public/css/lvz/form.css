@@ -26,12 +26,11 @@
 }
 
 .formFormA {
-    margin: 5px 0 auto auto;
+    margin-left: auto;
     cursor: pointer;
 }
 
 .formFormP {
-    margin-bottom: 5px;
     text-align: justify;
 }
 
