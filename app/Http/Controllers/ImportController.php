@@ -8,6 +8,8 @@ use Carbon\Carbon;
 use Auth;
 use App\Models\Record;
 use Exception;
+use Error;
+use Throwable;
 
 class ImportController extends Controller
 {
@@ -33,7 +35,11 @@ class ImportController extends Controller
             }
             return back()->with(['status' => 'Данные загружены']);
         } catch (Exception $e) {
-            return back()->withErrors(['status' => 'Ошибка FTP']);
+            return back()->withErrors(['status' => 'Исключение [FTP]']);
+        } catch (Error $e) {
+            return back()->withErrors(['status' => 'Ошибка [FTP]']);
+        } catch (Throwable $e) {
+            return back()->withErrors(['status' => 'Ошибка...']);
         }
     }
 }
