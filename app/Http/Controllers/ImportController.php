@@ -26,7 +26,9 @@ class ImportController extends Controller
 
     public function import () {
         try {
-            $list = Storage::disk('ftp')->files();
+            if (!$list = Storage::disk('ftp')->files()) {
+                return back()->withErrors(['status' => 'Нет новых записей']);
+            }
             foreach ($list as $k => $v) {
                 $file = Storage::disk('ftp')->get($v);
                 Storage::disk('records')->put($v, $file);
