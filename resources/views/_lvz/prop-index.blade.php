@@ -25,6 +25,11 @@
     </p>
     <x-l::form-input-error :messages="$errors->get('propFtpPort')"/>
     <x-l::form-input name="propFtpPort" type="number" :value="old('propFtpPort', $prop->get_prop('ftp_port'))"/>
+    <p class="formFormP">
+        Limit
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propFtpLimit')"/>
+    <x-l::form-input name="propFtpLimit" type="number" :value="old('propFtpLimit', $prop->get_prop('ftp_limit'))"/>
     <x-l::form-btn>
         Обновить
     </x-l::form-btn>
