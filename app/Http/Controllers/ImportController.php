@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use Auth;
 use App\Models\Record;
+use App\Models\Prop;
 use Exception;
 use Error;
 use Throwable;
@@ -24,12 +25,18 @@ class ImportController extends Controller
         ];
     }
 
-    public function import () {
+    public function import (Request $request, Prop $prop) {
+        $limit = (int) $prop->get_prop('ftp_limit');
+        $current = 0;
         try {
             if (!$list = Storage::disk('ftp')->files()) {
                 return back()->withErrors(['status' => 'Нет новых записей']);
             }
             foreach ($list as $k => $v) {
+                if ($current == $limit and $limit != 0) {
+                    return to_route($request->route()->getName());
+                }
+                $current++;
                 $file = Storage::disk('ftp')->get($v);
                 Storage::disk('records')->put($v, $file);
                 Storage::disk('ftp')->delete($v);
@@ -41,7 +48,7 @@ class ImportController extends Controller
         } catch (Error $e) {
             return back()->withErrors(['status' => 'Ошибка [FTP]']);
         } catch (Throwable $e) {
-            return back()->withErrors(['status' => 'Ошибка...']);
+            return back()->withErrors(['status' => 'ОМГ, ты не должен был это увидеть...']);
         }
     }
 }
