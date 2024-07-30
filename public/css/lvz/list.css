@@ -1,3 +1,12 @@
+.listFormInput {
+    width: 100%;
+    background: lightgrey;
+    border: none;
+    font-size: 16px;
+    padding: 5px 0;
+    font-weight: normal;
+}
+
 .listWrapItem {
     background: lightgrey;
     border-radius: 5px;
