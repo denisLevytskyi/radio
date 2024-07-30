@@ -12,4 +12,5 @@ Route::name('app.')->middleware(['auth', 'verified', 'isGuest'])->group(function
     Route::get('import', [ImportController::class, 'import'])->name('import')->middleware(['ftp', 'isUser']);
     Route::resource('freq', FreqController::class);
     Route::resource('record', RecordController::class);
+    Route::any('record-search/{freq?}', [RecordController::class, 'search'])->name('record.search');
 });

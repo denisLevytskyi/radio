@@ -2,20 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Freq;
 use App\Models\Record;
 use App\Http\Requests\StoreRecordRequest;
 use App\Http\Requests\UpdateRecordRequest;
 use Illuminate\Http\Request;
+use App\Http\Requests\SearchRecordRequest;
 
 class RecordController extends Controller
 {
+    public function search(SearchRecordRequest $request, $paginator_freq = NULL)
+    {
+        if ($search_freq = $request->recordSearchFreq) {
+            $freq = $search_freq;
+        } elseif ((int) $paginator_freq) {
+            $freq = $paginator_freq;
+        } else {
+            return to_route('app.record.index')->withErrors(['status' => 'Ошибка поиска']);
+        }
+        $freqs = Freq::orderBy('freq')->get();
+        $records = Record::where('freq', '=', $freq)->orderBy('id', 'desc')->paginate(10)->withPath(route('app.record.search' , ['freq' => $freq]));
+        return view('_lvz/record-index', ['records' => $records, 'freqs' => $freqs]);
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $records = Record::orderBy('id', 'desc')->paginate(20);
-        return view('_lvz/record-index', ['records' => $records]);
+        $freqs = Freq::orderBy('freq')->get();
+        $records = Record::orderBy('id', 'desc')->paginate(10);
+        return view('_lvz/record-index', ['records' => $records, 'freqs' => $freqs]);
     }
 
     /**
