@@ -37,7 +37,7 @@ class PropController extends Controller
             ['key' => 'ftp_limit', 'value' => $request->propFtpLimit],
             ['key' => 'register_reach', 'value' => $request->propRegisterReach],
         ];
-        if (Prop::upsert($data, 'key', ['key', 'value'])) {
+        if (Prop::upsert($data, ['key'], ['value'])) {
             return back()->with(['status' => 'Обновлено']);
         } else {
             return back()->withErrors(['status' => 'Ошибка внесения данных в БД']);
