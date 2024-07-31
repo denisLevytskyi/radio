@@ -31,7 +31,7 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request, Prop $prop): RedirectResponse
     {
-        if (!(int) $prop->get_prop('register_reach')) {
+        if (!(int) $prop->get_prop('register_option')) {
             return back()->withInput()->withErrors(['status' => 'Регистрация недоступна']);
         }
 
