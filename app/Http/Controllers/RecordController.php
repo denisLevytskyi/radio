@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Freq;
 use App\Models\Record;
 use App\Http\Requests\StoreRecordRequest;
 use App\Http\Requests\UpdateRecordRequest;
@@ -11,18 +10,18 @@ use App\Http\Requests\SearchRecordRequest;
 
 class RecordController extends Controller
 {
-    public function search(SearchRecordRequest $request, $paginator_freq = NULL)
+    public function search(SearchRecordRequest $request, $url_freq = NULL)
     {
-        if ($search_freq = $request->recordSearchFreq) {
-            $freq = $search_freq;
-        } elseif ((int) $paginator_freq) {
-            $freq = $paginator_freq;
+        if ($request_freq = $request->recordSearchFreq) {
+            $search = $request_freq;
+        } elseif ((int) $url_freq) {
+            $search = $url_freq;
         } else {
-            return to_route('app.record.index')->withErrors(['status' => 'Ошибка поиска']);
+            return to_route('app.record.index')->with(['status' => 'Все записи']);
         }
-        $freqs = Freq::orderBy('freq')->get();
-        $records = Record::where('freq', '=', $freq)->orderBy('id', 'desc')->paginate(10)->withPath(route('app.record.search' , ['freq' => $freq]));
-        return view('_lvz/record-index', ['records' => $records, 'freqs' => $freqs]);
+        $freqs = Record::select('freq')->orderby('freq')->distinct()->get();
+        $records = Record::where('freq', '=', $search)->orderBy('id', 'desc')->paginate(10)->withPath(route('app.record.search' , ['freq' => $search]));
+        return view('_lvz/record-index', ['records' => $records, 'freqs' => $freqs, 'current' => $search]);
     }
 
     /**
@@ -30,9 +29,9 @@ class RecordController extends Controller
      */
     public function index()
     {
-        $freqs = Freq::orderBy('freq')->get();
+        $freqs = Record::select(['freq'])->orderby('freq')->distinct()->get();
         $records = Record::orderBy('id', 'desc')->paginate(10);
-        return view('_lvz/record-index', ['records' => $records, 'freqs' => $freqs]);
+        return view('_lvz/record-index', ['records' => $records, 'freqs' => $freqs, 'current' => NULL]);
     }
 
     /**
