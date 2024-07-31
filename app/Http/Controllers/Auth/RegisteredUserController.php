@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use App\Models\UserRole;
+use App\Models\Prop;
 
 class RegisteredUserController extends Controller
 {
@@ -28,8 +29,12 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request, Prop $prop): RedirectResponse
     {
+        if (!(int) $prop->get_prop('register_reach')) {
+            return back()->withInput()->withErrors(['status' => 'Регистрация недоступна']);
+        }
+
         $request->validate([
             'registerName' => ['required', 'string', 'max:255'],
             'registerEmail' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class.',email'],

@@ -30,6 +30,11 @@
     </p>
     <x-l::form-input-error :messages="$errors->get('propFtpLimit')"/>
     <x-l::form-input name="propFtpLimit" type="number" :value="old('propFtpLimit', $prop->get_prop('ftp_limit'))"/>
+    <p class="formFormP">
+        Register reach
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propRegisterReach')"/>
+    <x-l::form-input name="propRegisterReach" type="number" :value="old('propRegisterReach', $prop->get_prop('register_reach'))"/>
     <x-l::form-btn>
         Обновить
     </x-l::form-btn>
