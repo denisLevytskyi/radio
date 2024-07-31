@@ -13,9 +13,11 @@
             <form action="{{ route('app.record.search') }}" method="post" class="listForm" id="form">
                 @csrf
                 <select class="listFormInput" id="input" name="recordSearchFreq">
-                    <option value="">Поиск по частоте</option>
+                    <option value="0">Поиск по частоте</option>
                     @foreach($freqs as $freq)
-                        <option value="{{ $freq->freq }}">{{ $freq->freq . ' --> ' . $freq->name }}</option>
+                        <option value="{{ $freq->freq }}" {{ $current == $freq->freq ? 'selected' : '' }}>
+                            {{ $freq->freq . ' ==> ' . $freq->name() }}
+                        </option>
                     @endforeach
                 </select>
             </form>
