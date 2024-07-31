@@ -35,7 +35,8 @@ class PropController extends Controller
             ['key' => 'ftp_password', 'value' => $request->propFtpPassword],
             ['key' => 'ftp_port', 'value' => $request->propFtpPort],
             ['key' => 'ftp_limit', 'value' => $request->propFtpLimit],
-            ['key' => 'register_reach', 'value' => $request->propRegisterReach],
+            ['key' => 'ftp_redirect', 'value' => $request->propFtpRedirect],
+            ['key' => 'register_option', 'value' => $request->propRegisterOption],
         ];
         if (Prop::upsert($data, ['key'], ['value'])) {
             return back()->with(['status' => 'Обновлено']);

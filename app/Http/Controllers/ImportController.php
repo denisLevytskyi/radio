@@ -25,16 +25,24 @@ class ImportController extends Controller
         ];
     }
 
+    public function answer (Request $request, Prop $prop) {
+        if (!(int) $prop->get_prop('ftp_redirect')) {
+            return back()->with(['status' => 'Данные частично загружены']);
+        } else {
+            return to_route($request->route()->getName());
+        }
+    }
+
     public function import (Request $request, Prop $prop) {
         $limit = (int) $prop->get_prop('ftp_limit');
         $current = 0;
         try {
             if (!$list = Storage::disk('ftp')->files()) {
-                return back()->withErrors(['status' => 'Нет новых записей']);
+                return back()->withErrors(['status' => 'Нет новых данных']);
             }
             foreach ($list as $k => $v) {
                 if ($current == $limit and $limit != 0) {
-                    return to_route($request->route()->getName());
+                    return $this->answer($request, $prop);
                 }
                 $current++;
                 $file = Storage::disk('ftp')->get($v);
