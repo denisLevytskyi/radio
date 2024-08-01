@@ -23,6 +23,7 @@ class FtpSetter
                 'host' => $model->get_prop('ftp_host'),
                 'username' => $model->get_prop('ftp_username'),
                 'password' => $model->get_prop('ftp_password'),
+                'root' => $model->get_prop('ftp_root'),
                 'port' => (int) $model->get_prop('ftp_port'),
             ]
         ]);

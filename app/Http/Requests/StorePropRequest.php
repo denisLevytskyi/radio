@@ -22,12 +22,13 @@ class StorePropRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'propFtpHost' => ['required', 'min:2', 'max:100'],
-            'propFtpUsername' => ['required', 'min:2', 'max:100'],
-            'propFtpPassword' => ['required', 'min:2', 'max:100'],
-            'propFtpPort' => ['required', 'min:0', 'max:100', 'numeric'],
-            'propFtpLimit' => ['required', 'min:0', 'max:100', 'integer'],
-            'propFtpRedirect' => ['required', 'min:0', 'max:1', 'integer'],
+            'propFtpHost' => ['required', 'min:1', 'max:100'],
+            'propFtpUsername' => ['required', 'min:1', 'max:100'],
+            'propFtpPassword' => ['required', 'min:1', 'max:100'],
+            'propFtpRoot' => ['required', 'min:1', 'max:100'],
+            'propFtpPort' => ['required', 'min:0', 'max:100', 'integer'],
+            'propImportLimit' => ['required', 'min:0', 'max:100', 'integer'],
+            'propImportRedirect' => ['required', 'min:0', 'max:1', 'integer'],
             'propRegisterOption' => ['required', 'min:0', 'max:1', 'integer'],
         ];
     }

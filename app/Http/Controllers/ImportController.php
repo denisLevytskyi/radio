@@ -26,7 +26,7 @@ class ImportController extends Controller
     }
 
     public function answer (Request $request, Prop $prop) {
-        if (!(int) $prop->get_prop('ftp_redirect')) {
+        if (!(int) $prop->get_prop('import_redirect')) {
             return back()->with(['status' => 'Данные частично загружены']);
         } else {
             return to_route($request->route()->getName());
@@ -34,7 +34,7 @@ class ImportController extends Controller
     }
 
     public function import (Request $request, Prop $prop) {
-        $limit = (int) $prop->get_prop('ftp_limit');
+        $limit = (int) $prop->get_prop('import_limit');
         $current = 0;
         try {
             if (!$list = Storage::disk('ftp')->files()) {
