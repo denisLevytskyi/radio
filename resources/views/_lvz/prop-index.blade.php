@@ -52,14 +52,19 @@
     <x-l::form-input name="propImportRedirect" type="number" :value="old('propImportRedirect', $prop->get_prop('import_redirect'))"/>
     <p class="formFormP">
         <strong>
-            REGISTER
+            APP
         </strong>
     </p>
     <p class="formFormP">
-        Option
+        Mode
     </p>
-    <x-l::form-input-error :messages="$errors->get('propRegisterOption')"/>
-    <x-l::form-input name="propRegisterOption" type="number" :value="old('propRegisterOption', $prop->get_prop('register_option'))"/>
+    <x-l::form-input-error :messages="$errors->get('propAppMode')"/>
+    <x-l::form-input name="propAppMode" type="number" :value="old('propAppMode', $prop->get_prop('app_mode'))"/>
+    <p class="formFormP">
+        Register
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propAppRegister')"/>
+    <x-l::form-input name="propAppRegister" type="number" :value="old('propAppRegister', $prop->get_prop('app_register'))"/>
     <p class="formFormP">
         <strong>
             Настройка Audio Recorder в SDR#:
