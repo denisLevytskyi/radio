@@ -29,7 +29,8 @@ class StorePropRequest extends FormRequest
             'propFtpPort' => ['required', 'min:0', 'max:100', 'integer'],
             'propImportLimit' => ['required', 'min:0', 'max:100', 'integer'],
             'propImportRedirect' => ['required', 'min:0', 'max:1', 'integer'],
-            'propRegisterOption' => ['required', 'min:0', 'max:1', 'integer'],
+            'propAppMode' => ['required', 'min:0', 'max:1', 'integer'],
+            'propAppRegister' => ['required', 'min:0', 'max:1', 'integer'],
         ];
     }
 }
