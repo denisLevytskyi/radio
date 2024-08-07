@@ -1,4 +1,4 @@
-st<x-l-layout::form action="/" >
+<x-l-layout::form action="/" >
     <x-slot:title>
         Диктофон
     </x-slot:title>
@@ -25,7 +25,11 @@ st<x-l-layout::form action="/" >
         Мин. продолжительность
     </p>
     <x-l::form-input type="number" id="minDuration" min="0" max="1000" value="0"/>
-    <x-l::form-btn id="startStopBtn">
+    <p class="formFormP">
+        Макс. продолжительность
+    </p>
+    <x-l::form-input type="number" id="maxDuration" min="10" max="10000" value="0"/>
+    <x-l::form-btn id="startEndBtn">
         Старт
     </x-l::form-btn>
     <a href="/" class="formFormA">
@@ -33,115 +37,88 @@ st<x-l-layout::form action="/" >
     </a>
     <x-slot:after>
         <script>
-            let audio;
-            let mediaRecorder;
-            let audioChunks = [];
-            let isRecording = false;
-            let silenceTimer;
-            let audioContext;
+            let stream;
             let analyser;
-            let dataArray;
-            let recordingStartTime;
-            let minDuration;
+            let analyserData;
+            let recorder;
+            let recorderData = [];
+            let recorderStartTime;
+            let isRecorderRecording;
+            let isRecorderPausing;
+            let monitorPauseTimer;
+            let monitorStopTimer;
 
             const status = document.getElementById('status');
             const freq = document.getElementById('freq');
             const thresholdInput = document.getElementById('threshold');
             const delayInput = document.getElementById('delay');
             const minDurationInput = document.getElementById('minDuration');
-            const startStopBtn = document.getElementById('startStopBtn');
+            const maxDurationInput = document.getElementById('maxDuration');
+            const startEndBtn = document.getElementById('startEndBtn');
 
-            startStopBtn.onclick = () => {
-                event.preventDefault();
-                if (!audioContext) {
-                    navigator.mediaDevices.getUserMedia({ audio: true })
-                        .then((stream) => {
-                            audioContext = new window.AudioContext();
-                            analyser = audioContext.createAnalyser();
-                            dataArray = new Uint8Array(analyser.fftSize);
-                            mediaRecorder = new MediaRecorder(stream);
-
-                            audioContext.createMediaStreamSource(stream).connect(analyser);
-
-                            mediaRecorder.ondataavailable = (event) => {
-                                audioChunks.push(event.data);
-                            };
-
-                            mediaRecorder.onstop = () => {
-                                isRecording = null;
-
-                                if (Date.now() - recordingStartTime >= minDuration) {
-                                    const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-                                    audioChunks = [];
-                                    playAudio(audioBlob);
-                                    sendData(audioBlob);
-                                } else {
-                                    audioChunks = [];
-                                    status.value = 'Ошибка длительности';
-                                }
-                            };
-
-                            monitorSound();
-                            startStopBtn.textContent = 'Стоп';
-                            status.value = 'Ожидание';
-                        })
-                        .catch((err) => {
-                            status.value = 'Ошибка доступа к данным';
-                        });
-                } else {
-                    audioContext.close();
-                    audioContext = null;
-                    startStopBtn.textContent = 'Старт';
-                    if (mediaRecorder && mediaRecorder.state === "recording") {
-                        mediaRecorder.stop();
-                    }
+            const monitorMaxDuration = () => {
+                const maxDuration = parseInt(maxDurationInput.value, 10) * 1000;
+                if (!stream) {
+                    return;
                 }
+                if (Date.now() - recorderStartTime >= maxDuration) {
+                    recorder.stop();
+                }
+                requestAnimationFrame(monitorMaxDuration);
+            }
+
+            const resumeRecording = () => {
+                if (isRecorderPausing) {
+                    recorder.resume();
+                }
+            }
+
+            const stopRecording = () => {
+                recorder.stop();
+            };
+
+            const pauseRecording = () => {
+                recorder.pause();
+            }
+
+            const startRecording = () => {
+                recorder.start();
             };
 
             const monitorSound = () => {
-                if (!audioContext) {
+                if (!stream) {
                     return;
                 }
-
-                analyser.getByteTimeDomainData(dataArray);
-                minDuration = parseInt(minDurationInput.value, 10);
-
+                analyser.getByteTimeDomainData(analyserData);
                 const threshold = parseInt(thresholdInput.value, 10) / 100;
                 const delay = parseInt(delayInput.value, 10) * 1000;
-                const isSoundDetected = dataArray.some((value) => Math.abs(value - 128) > threshold * 128);
-
-                if (isSoundDetected && !isRecording) {
+                const isSoundDetected = analyserData.some((value) => Math.abs(value - 128) > threshold * 128);
+                if (isSoundDetected && !isRecorderRecording) {
                     startRecording();
-                } else if (!isSoundDetected && isRecording && !silenceTimer) {
-                    silenceTimer = setTimeout(stopRecording, delay);
-                } else if (isSoundDetected && isRecording) {
-                    clearTimeout(silenceTimer);
-                    silenceTimer = null;
+                } else if (!isSoundDetected && isRecorderRecording && !monitorStopTimer) {
+                    monitorPauseTimer = setTimeout(pauseRecording, 1000);
+                    monitorStopTimer = setTimeout(stopRecording, delay);
+                } else if (isSoundDetected && isRecorderRecording && monitorStopTimer) {
+                    resumeRecording();
+                    clearTimeout(monitorPauseTimer);
+                    clearTimeout(monitorStopTimer);
+                    monitorStopTimer = null;
                 }
-
-                requestAnimationFrame(monitorSound);
+                setTimeout(monitorSound, 100);
             };
 
-            const startRecording = () => {
-                isRecording = true;
-                recordingStartTime = Date.now();
-                status.value = 'Идет запись';
-                mediaRecorder.start();
-            };
-
-            const stopRecording = () => {
-                mediaRecorder.stop();
-            };
-
-            const sendData = (audioBlob) => {
-                const request = new XMLHttpRequest();
+            const makeFormData = (audioData) => {
                 const formData = new FormData();
-
                 formData.append('_token', '{{ csrf_token() }}');
-                formData.append('recorderUserId', {{ Auth::user()->id }});
+                formData.append('recorderUserId', '{{ Auth::user()->id }}');
                 formData.append('recorderFreq', freq.value);
-                formData.append('recorderFile', audioBlob, 'recording.wav');
+                formData.append('recorderFile', audioData, 'recording.webm');
+                return formData;
+            }
 
+            const sendData = (audioData) => {
+                const request = new XMLHttpRequest();
+                const formData = makeFormData(audioData);
                 request.open('POST', '{{ route('app.recorder') }}', true);
                 request.onload = () => {
                     if (request.status === 200 && request.responseText === '1') {
@@ -161,8 +138,80 @@ st<x-l-layout::form action="/" >
             function playAudio(audioBlob) {
                 const audioURL = URL.createObjectURL(audioBlob);
                 const audio = new Audio(audioURL);
-                audio.play();
+                if (true) {
+                    audio.play();
+                }
             }
+
+            const registerRecorderEvents = () => {
+                recorder.onstart = () => {
+                    isRecorderRecording = true;
+                    recorderStartTime = Date.now();
+                    status.value = 'Идет запись';
+                }
+                recorder.onpause = () => {
+                    isRecorderPausing = true;
+                    status.value = 'Пауза';
+                }
+                recorder.onresume = () => {
+                    isRecorderPausing = false;
+                    status.value = 'Идет запись';
+                }
+                recorder.onstop = () => {
+                    isRecorderRecording = false;
+                    isRecorderPausing = false;
+                    const minDuration = parseInt(minDurationInput.value, 10) * 1000;
+                    if (Date.now() - recorderStartTime >= minDuration) {
+                        const audioData = new Blob(recorderData, { type: 'audio/webm' });
+                        recorderData = [];
+                        playAudio(audioData);
+                        sendData(audioData);
+                    } else {
+                        recorderData = [];
+                        status.value = 'Ошибка длительности';
+                    }
+                };
+            }
+
+            const makeRecorder = () => {
+                recorder = new MediaRecorder(stream);
+                recorder.ondataavailable = (event) => {
+                    recorderData.push(event.data);
+                };
+            }
+
+            const makeContext = () => {
+                let audioContext = new window.AudioContext();
+                analyser = audioContext.createAnalyser();
+                analyserData = new Uint8Array(analyser.fftSize);
+                audioContext.createMediaStreamSource(stream).connect(analyser);
+            }
+
+            startEndBtn.onclick = () => {
+                event.preventDefault();
+                if (!stream) {
+                    navigator.mediaDevices.getUserMedia({ audio: true })
+                        .then((newStream) => {
+                            stream = newStream;
+                            makeContext();
+                            makeRecorder();
+                            registerRecorderEvents();
+                            monitorSound();
+                            monitorMaxDuration();
+                            startEndBtn.textContent = 'Стоп';
+                            status.value = 'Ожидание';
+                        }).catch((err) => {
+                            status.value = 'Ошибка доступа к данным';
+                        });
+                } else {
+                    if (isRecorderRecording) {
+                        recorder.stop();
+                    }
+                    startEndBtn.textContent = 'Старт';
+                    // stream.stop();
+                    stream = false;
+                }
+            };
         </script>
     </x-slot:after>
 </x-l-layout::form>

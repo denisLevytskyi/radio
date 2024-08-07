@@ -15,7 +15,6 @@ class RecorderController extends Controller
         return view('_lvz/recorder-index');
     }
 
-
     public function terminal(StoreRecorderRequest $request)
     {
         $data = [
