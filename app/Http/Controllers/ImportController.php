@@ -29,7 +29,7 @@ class ImportController extends Controller
         if (!(int) $prop->getProp('import_redirect')) {
             return back()->with(['status' => 'Данные частично загружены']);
         } else {
-            return to_route($request->route()->getName());
+            return redirect()->action([self::class, 'import']);
         }
     }
 
