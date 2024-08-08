@@ -16,12 +16,12 @@ class PasswordController extends Controller
     public function update(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'profileUpdatePasswordOld' => ['required', 'current_password'],
-            'profileUpdatePassword' => ['required', Password::defaults(), 'confirmed'],
+            'profileEditPasswordOld' => ['required', 'current_password'],
+            'profileEditPassword' => ['required', Password::defaults(), 'confirmed'],
         ]);
 
         $request->user()->update([
-            'password' => Hash::make($validated['profileUpdatePassword']),
+            'password' => Hash::make($validated['profileEditPassword']),
         ]);
 
         return back()->with('status', 'Сохранено');
