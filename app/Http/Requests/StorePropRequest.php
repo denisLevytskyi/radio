@@ -29,6 +29,13 @@ class StorePropRequest extends FormRequest
             'propFtpPort' => ['required', 'min:0', 'max:100', 'integer'],
             'propImportLimit' => ['required', 'min:0', 'max:100', 'integer'],
             'propImportRedirect' => ['required', 'min:0', 'max:1', 'integer'],
+            'propRecorderFreq' => ['required', 'min:1', 'max:5000', 'numeric'],
+            'propRecorderThreshold' => ['required', 'min:1', 'max:100', 'integer'],
+            'propRecorderDelayPause' => ['required', 'min:1', 'max:10', 'integer'],
+            'propRecorderDelayStop' => ['required', 'min:1', 'max:100', 'integer'],
+            'propRecorderMinDuration' => ['required', 'min:0', 'max:100', 'integer'],
+            'propRecorderMaxDuration' => ['required', 'min:10', 'max:1000', 'integer'],
+            'propRecorderPlay' => ['required', 'min:0', 'max:1', 'integer'],
             'propAppMode' => ['required', 'min:0', 'max:1', 'integer'],
             'propAppRegister' => ['required', 'min:0', 'max:1', 'integer'],
         ];

@@ -7,12 +7,13 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreRecorderRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Record;
+use App\Models\Prop;
 
 class RecorderController extends Controller
 {
-    public function index()
+    public function index(Prop $prop)
     {
-        return view('_lvz/recorder-index');
+        return view('_lvz/recorder-index', ['prop' => $prop]);
     }
 
     public function terminal(StoreRecorderRequest $request)

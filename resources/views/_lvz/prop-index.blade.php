@@ -52,6 +52,46 @@
     <x-l::form-input name="propImportRedirect" type="number" :value="old('propImportRedirect', $prop->get_prop('import_redirect'))"/>
     <p class="formFormP">
         <strong>
+            RECORDER
+        </strong>
+    </p>
+    <p class="formFormP">
+        Freq
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propRecorderFreq')"/>
+    <x-l::form-input name="propRecorderFreq" type="number" step="0.0005" :value="old('propRecorderFreq', $prop->get_prop('recorder_freq'))"/>
+    <p class="formFormP">
+        Threshold
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propRecorderThreshold')"/>
+    <x-l::form-input name="propRecorderThreshold" type="number" :value="old('propRecorderThreshold', $prop->get_prop('recorder_threshold'))"/>
+    <p class="formFormP">
+        Delay pause
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propRecorderDelayPause')"/>
+    <x-l::form-input name="propRecorderDelayPause" type="number" :value="old('propRecorderDelayPause', $prop->get_prop('recorder_delay_pause'))"/>
+    <p class="formFormP">
+        Delay stop
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propRecorderDelayStop')"/>
+    <x-l::form-input name="propRecorderDelayStop" type="number" :value="old('propRecorderDelayStop', $prop->get_prop('recorder_delay_stop'))"/>
+    <p class="formFormP">
+        Min duration
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propRecorderMinDuration')"/>
+    <x-l::form-input name="propRecorderMinDuration" type="number" :value="old('propRecorderMinDuration', $prop->get_prop('recorder_min_duration'))"/>
+    <p class="formFormP">
+        Max duration
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propRecorderMaxDuration')"/>
+    <x-l::form-input name="propRecorderMaxDuration" type="number" :value="old('propRecorderMaxDuration', $prop->get_prop('recorder_max_duration'))"/>
+    <p class="formFormP">
+        Play
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propRecorderPlay')"/>
+    <x-l::form-input name="propRecorderPlay" type="number" :value="old('propRecorderPlay', $prop->get_prop('recorder_play'))"/>
+    <p class="formFormP">
+        <strong>
             APP
         </strong>
     </p>

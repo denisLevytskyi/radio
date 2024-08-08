@@ -37,6 +37,13 @@ class PropController extends Controller
             ['key' => 'ftp_port', 'value' => $request->propFtpPort],
             ['key' => 'import_limit', 'value' => $request->propImportLimit],
             ['key' => 'import_redirect', 'value' => $request->propImportRedirect],
+            ['key' => 'recorder_freq', 'value' => $request->propRecorderFreq],
+            ['key' => 'recorder_threshold', 'value' => $request->propRecorderThreshold],
+            ['key' => 'recorder_delay_pause', 'value' => $request->propRecorderDelayPause],
+            ['key' => 'recorder_delay_stop', 'value' => $request->propRecorderDelayStop],
+            ['key' => 'recorder_min_duration', 'value' => $request->propRecorderMinDuration],
+            ['key' => 'recorder_max_duration', 'value' => $request->propRecorderMaxDuration],
+            ['key' => 'recorder_play', 'value' => $request->propRecorderPlay],
             ['key' => 'app_mode', 'value' => $request->propAppMode],
             ['key' => 'app_register', 'value' => $request->propAppRegister],
         ];

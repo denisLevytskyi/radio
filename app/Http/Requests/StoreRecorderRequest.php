@@ -25,7 +25,7 @@ class StoreRecorderRequest extends FormRequest
     {
         return [
             'recorderUserId' => ['required', 'exists:users,id'],
-            'recorderFreq' => ['required', 'min:0', 'max:1000', 'numeric'],
+            'recorderFreq' => ['required', 'min:1', 'max:5000', 'numeric'],
             'recorderFile' => ['required'],
         ];
     }
