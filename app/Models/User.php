@@ -67,4 +67,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isGuest () {
         return $this->roles()->where('role', '=', 'GUEST')->exists();
     }
+
+    public function isAdminWhenStrong () {
+        $prop = new Prop();
+        $isAdmin = $this->isAdministrator();
+        $mode = $prop->getProp('app_mode');
+        return ($isAdmin or (int) $mode);
+    }
 }

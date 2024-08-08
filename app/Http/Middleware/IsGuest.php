@@ -19,7 +19,7 @@ class IsGuest
             return $next($request);
         } else {
             return redirect('/')->withErrors([
-                'status' => 'Вы временно лишены права входа'
+                'status' => 'Недостаточно прав'
             ]);
         }
     }
