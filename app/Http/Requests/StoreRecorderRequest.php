@@ -24,7 +24,6 @@ class StoreRecorderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'recorderUserId' => ['required', 'exists:users,id'],
             'recorderFreq' => ['required', 'min:1', 'max:5000', 'numeric'],
             'recorderFile' => ['required'],
         ];

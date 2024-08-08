@@ -12,7 +12,7 @@ Route::name('app.')->middleware(['auth', 'verified', 'isGuest'])->group(function
     Route::resource('prop', PropController::class)->middleware('isAdministrator');
     Route::get('import', [ImportController::class, 'import'])->name('import')->middleware(['ftp', 'isUser']);
     Route::get('recorder', [RecorderController::class, 'index'])->name('recorder')->middleware('isUser');
-    Route::post('recorder', [RecorderController::class, 'terminal']);
+    Route::post('recorder', [RecorderController::class, 'terminal'])->middleware('isUser');
     Route::resource('freq', FreqController::class)->middleware('checkAppMode');
     Route::resource('record', RecordController::class);
     Route::any('record-search/{freq?}', [RecordController::class, 'search'])->name('record.search');

@@ -19,7 +19,7 @@ class RecorderController extends Controller
     public function terminal(StoreRecorderRequest $request)
     {
         $data = [
-            'user_id' => $request->recorderUserId,
+            'user_id' => $request->user()->id,
             'timestamp' => Carbon::now(),
             'freq' => $request->recorderFreq,
             'path' => Storage::disk('records')->putFile('manual', $request->file('recorderFile')),
