@@ -6,11 +6,11 @@ use App\Models\Record;
 use App\Http\Requests\StoreRecordRequest;
 use App\Http\Requests\UpdateRecordRequest;
 use Illuminate\Http\Request;
-use App\Http\Requests\SearchRecordRequest;
+use App\Http\Requests\StoreRecordSearchRequest;
 
 class RecordController extends Controller
 {
-    public function search(SearchRecordRequest $request, $url_freq = NULL)
+    public function search(StoreRecordSearchRequest $request, $url_freq = NULL)
     {
         if ($request_freq = $request->recordSearchFreq) {
             $search = $request_freq;

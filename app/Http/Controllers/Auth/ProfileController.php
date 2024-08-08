@@ -29,8 +29,8 @@ class ProfileController extends Controller
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $credential = [
-            'name' => $request->profileUpdateName,
-            'email' => $request->profileUpdateEmail,
+            'name' => $request->profileEditName,
+            'email' => $request->profileEditEmail,
         ];
         $request->user()->fill($credential);
 
@@ -49,7 +49,7 @@ class ProfileController extends Controller
     public function destroy(Request $request): RedirectResponse
     {
         $request->validate([
-            'profileDeletePassword' => ['required', 'current-password'],
+            'profileEditDeletePassword' => ['required', 'current-password'],
         ]);
 
         $user = $request->user();
