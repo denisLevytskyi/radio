@@ -1,4 +1,4 @@
-<x-l-layout::form :action="route('app.record.store')">
+<x-l-layout::form action="/">
     <x-slot:title>
         Запись № {{ $record->id }}
     </x-slot:title>

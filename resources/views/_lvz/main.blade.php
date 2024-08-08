@@ -23,6 +23,9 @@
                 <a href="{{ route('app.import') }}" class="linksWrapperA">
                     Получить записи
                 </a>
+                <a href="{{ route('app.recorder') }}" class="linksWrapperA">
+                    Диктофон
+                </a>
                 @if(Auth::user()->isAdministrator())
                     <a href="{{ route('app.prop.index') }}" class="linksWrapperA">
                         Параметры

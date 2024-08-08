@@ -21,7 +21,7 @@ class RecordController extends Controller
         }
         $freqs = Record::select('freq')->orderby('freq')->distinct()->get();
         $records = Record::where('freq', '=', $search)->orderBy('id', 'desc')->paginate(10)->withPath(route('app.record.search' , ['freq' => $search]));
-        return view('_lvz/record-index', ['records' => $records, 'freqs' => $freqs, 'current' => $search]);
+        return view('_lvz.record-index', ['records' => $records, 'freqs' => $freqs, 'current' => $search]);
     }
 
     /**
@@ -31,7 +31,7 @@ class RecordController extends Controller
     {
         $freqs = Record::select(['freq'])->orderby('freq')->distinct()->get();
         $records = Record::orderBy('id', 'desc')->paginate(10);
-        return view('_lvz/record-index', ['records' => $records, 'freqs' => $freqs, 'current' => NULL]);
+        return view('_lvz.record-index', ['records' => $records, 'freqs' => $freqs, 'current' => NULL]);
     }
 
     /**
@@ -60,7 +60,7 @@ class RecordController extends Controller
                 'status' => 'Вы не можете выполнить данное действие'
             ]);
         }
-        return view('_lvz/record-show', ['record' => $record]);
+        return view('_lvz.record-show', ['record' => $record]);
     }
 
     /**

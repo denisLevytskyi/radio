@@ -17,7 +17,7 @@ class CheckAppMode
     public function handle(Request $request, Closure $next): Response
     {
         $prop = new Prop();
-        if ($request->user() and ((int) $prop->get_prop('app_mode') or $request->user()->isAdministrator())) {
+        if ($request->user() and ((int) $prop->getProp('app_mode') or $request->user()->isAdministrator())) {
             return $next($request);
         } else {
             return redirect('/')->withErrors([

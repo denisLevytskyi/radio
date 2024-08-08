@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Paginator::defaultView('_lvz/layouts/paginator');
+        Paginator::defaultView('_lvz.layouts.paginator');
         Gate::policy(User::class, AdminPolicy::class);
         User::observe(UserObserver::class);
         Schema::defaultStringLength(191);

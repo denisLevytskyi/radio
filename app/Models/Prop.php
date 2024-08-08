@@ -14,7 +14,7 @@ class Prop extends Model
         'value',
     ];
 
-    public function get_prop ($key) {
+    public function getProp ($key) {
         $prop = $this->where('key', '=', $key)->first();
         if ($prop) {
             return $prop->value;
