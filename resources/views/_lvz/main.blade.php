@@ -14,18 +14,25 @@
                 Доступные действия
             </h1>
             <div class="linksWrapper">
-                <a href="{{ route('app.freq.index') }}" class="linksWrapperA">
-                    Частоты
-                </a>
+                @if(Auth::user()->isAdminWhenStrong())
+                    <a href="{{ route('app.freq.index') }}" class="linksWrapperA">
+                        Частоты
+                    </a>
+                @endif
                 <a href="{{ route('app.record.index') }}" class="linksWrapperA">
                     Записи
                 </a>
                 <a href="{{ route('app.import') }}" class="linksWrapperA">
                     Получить записи
                 </a>
-                <a href="{{ route('app.recorder') }}" class="linksWrapperA">
-                    Диктофон
-                </a>
+                @if(Auth::user()->isRecorder())
+                    <a href="{{ route('app.manual.connect') }}" class="linksWrapperA">
+                        Ручное подключение
+                    </a>
+                    <a href="{{ route('app.recorder') }}" class="linksWrapperA">
+                        Диктофон
+                    </a>
+                @endif
                 @if(Auth::user()->isAdministrator())
                     <a href="{{ route('app.prop.index') }}" class="linksWrapperA">
                         Параметры
