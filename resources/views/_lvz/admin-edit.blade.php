@@ -26,13 +26,16 @@
     </p>
     <x-l::form-input-error :messages="$errors->get('adminEditPassword_confirmation')"/>
     <x-l::form-input name="adminEditPassword_confirmation" type="text" :value="old('adminEditPassword_confirmation')"/>
-    <x-l::form-input-check name="adminEditAdmin" :checked="old('adminEditAdmin', $roles['admin'])">
+    <x-l::form-input-check name="adminEditAdmin" :checked="old('adminEditAdmin', $user->isAdministrator())">
         Администратор
     </x-l::form-input-check>
-    <x-l::form-input-check name="adminEditUser" :checked="old('adminEditUser', $roles['user'])">
+    <x-l::form-input-check name="adminEditRecorder" :checked="old('adminEditRecorder', $user->isRecorder())">
+        Диктофон
+    </x-l::form-input-check>
+    <x-l::form-input-check name="adminEditUser" :checked="old('adminEditUser', $user->isUser())">
         Пользователь
     </x-l::form-input-check>
-    <x-l::form-input-check name="adminEditGuest" :checked="old('adminEditGuest', $roles['guest'])">
+    <x-l::form-input-check name="adminEditGuest" :checked="old('adminEditGuest', $user->isGuest())">
         Гость
     </x-l::form-input-check>
     <x-l::form-btn>

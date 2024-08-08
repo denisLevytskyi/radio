@@ -24,8 +24,12 @@ class RoleSeeder extends Seeder
             ],
             [
                 'id' => 3,
+                'role' => 'RECORDER'
+            ],
+            [
+                'id' => 4,
                 'role' => 'ADMIN'
-            ]
+            ],
         ];
         foreach ($data as $value) {
             Role::create($value);

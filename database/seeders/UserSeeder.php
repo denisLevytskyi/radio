@@ -34,6 +34,10 @@ class UserSeeder extends Seeder
                 'user_id' => $user->id,
                 'role_id' => 3
             ]);
+            UserRole::create([
+                'user_id' => $user->id,
+                'role_id' => 4
+            ]);
         }
     }
 }

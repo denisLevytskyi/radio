@@ -33,6 +33,9 @@
         Макс. продолжительность
     </p>
     <x-l::form-input type="number" id="maxDuration" min="10" max="1000" value="{{ $prop->getProp('recorder_max_duration') }}"/>
+    <x-l::form-input-check id="play" :checked="(bool) (int) $prop->getProp('recorder_play')">
+        Воспроизводить
+    </x-l::form-input-check>
     <x-l::form-btn id="startEndBtn">
         Старт
     </x-l::form-btn>
@@ -57,11 +60,10 @@
             const delayStopInput = document.getElementById('delayStop');
             const minDurationInput = document.getElementById('minDuration');
             const maxDurationInput = document.getElementById('maxDuration');
+            const playInput = document.getElementById('play');
             const startEndBtn = document.getElementById('startEndBtn');
 
             const php_token = '{{ csrf_token() }}';
-            const php_play = {{ (int) $prop->getProp('recorder_play') }};
-            const php_user_id = '{{ Auth::user()->id }}';
             const php_route = '{{ route('app.recorder') }}';
 
             const monitorMaxDuration = () => {
@@ -126,7 +128,6 @@
             const makeFormData = (audioData) => {
                 const formData = new FormData();
                 formData.append('_token', php_token);
-                formData.append('recorderUserId', php_user_id);
                 formData.append('recorderFreq', freq.value);
                 formData.append('recorderFile', audioData, 'recording.webm');
                 return formData;
@@ -154,7 +155,7 @@
             function playAudio(audioData) {
                 const audioURL = URL.createObjectURL(audioData);
                 const audio = new Audio(audioURL);
-                if (php_play) {
+                if (playInput.checked) {
                     audio.play();
                 }
             }
