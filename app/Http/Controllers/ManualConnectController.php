@@ -23,6 +23,6 @@ class ManualConnectController extends Controller
                 'port' => (int) $request->manualConnectPort,
             ]
         ]);
-        return $controller->import($request, $prop);
+        return $controller->import($request, $prop)->withInput();
     }
 }
