@@ -28,6 +28,9 @@
     <x-l::form-input-check name="adminCreateAdmin" :checked="(bool) old('adminCreateAdmin')">
         Администратор
     </x-l::form-input-check>
+    <x-l::form-input-check name="adminCreateRecorder" :checked="(bool) old('adminCreateRecorder')">
+        Диктофон
+    </x-l::form-input-check>
     <x-l::form-input-check name="adminCreateUser" :checked="(bool) old('adminCreateUser')">
         Пользователь
     </x-l::form-input-check>

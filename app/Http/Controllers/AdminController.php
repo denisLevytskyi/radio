@@ -44,6 +44,12 @@ class AdminController extends Controller
             if ($request->boolean('adminCreateAdmin')) {
                 UserRole::create([
                     'user_id' => $user->id,
+                    'role_id' => 4
+                ]);
+            }
+            if ($request->boolean('adminCreateRecorder')) {
+                UserRole::create([
+                    'user_id' => $user->id,
                     'role_id' => 3
                 ]);
             }
@@ -80,12 +86,7 @@ class AdminController extends Controller
      */
     public function edit(User $admin)
     {
-        $roles = [
-            'admin' => $admin->isAdministrator(),
-            'user' => $admin->isUser(),
-            'guest' => $admin->isGuest()
-        ];
-        return view('_lvz.admin-edit', ['user' => $admin, 'roles' => $roles]);
+        return view('_lvz.admin-edit', ['user' => $admin]);
     }
 
     /**
@@ -103,6 +104,12 @@ class AdminController extends Controller
         if ($admin->update($data)) {
             UserRole::where('user_id', $admin->id)->delete();
             if ($request->boolean('adminEditAdmin')) {
+                UserRole::create([
+                    'user_id' => $admin->id,
+                    'role_id' => 4
+                ]);
+            }
+            if ($request->boolean('adminEditRecorder')) {
                 UserRole::create([
                     'user_id' => $admin->id,
                     'role_id' => 3
