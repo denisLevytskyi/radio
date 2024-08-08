@@ -20,11 +20,11 @@ class FtpSetter
         config([
             'filesystems.disks.ftp' => [
                 'driver' => 'ftp',
-                'host' => $model->get_prop('ftp_host'),
-                'username' => $model->get_prop('ftp_username'),
-                'password' => $model->get_prop('ftp_password'),
-                'root' => $model->get_prop('ftp_root'),
-                'port' => (int) $model->get_prop('ftp_port'),
+                'host' => $model->getProp('ftp_host'),
+                'username' => $model->getProp('ftp_username'),
+                'password' => $model->getProp('ftp_password'),
+                'root' => $model->getProp('ftp_root'),
+                'port' => (int) $model->getProp('ftp_port'),
             ]
         ]);
         return $next($request);

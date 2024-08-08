@@ -15,7 +15,7 @@ class FreqController extends Controller
     public function index()
     {
         $freqs = Freq::paginate(10);
-        return view('_lvz/freq-index', ['freqs' => $freqs]);
+        return view('_lvz.freq-index', ['freqs' => $freqs]);
     }
 
     /**
@@ -23,7 +23,7 @@ class FreqController extends Controller
      */
     public function create()
     {
-        return view('_lvz/freq-create');
+        return view('_lvz.freq-create');
     }
 
     /**
@@ -63,7 +63,7 @@ class FreqController extends Controller
      */
     public function edit(Freq $freq)
     {
-        return view('_lvz/freq-edit', ['freq' => $freq]);
+        return view('_lvz.freq-edit', ['freq' => $freq]);
     }
 
     /**

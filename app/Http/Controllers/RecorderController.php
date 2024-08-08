@@ -13,7 +13,7 @@ class RecorderController extends Controller
 {
     public function index(Prop $prop)
     {
-        return view('_lvz/recorder-index', ['prop' => $prop]);
+        return view('_lvz.recorder-index', ['prop' => $prop]);
     }
 
     public function terminal(StoreRecorderRequest $request)

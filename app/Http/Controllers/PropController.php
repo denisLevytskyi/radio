@@ -13,7 +13,7 @@ class PropController extends Controller
      */
     public function index(Prop $prop)
     {
-        return view('_lvz/prop-index', ['prop' => $prop]);
+        return view('_lvz.prop-index', ['prop' => $prop]);
     }
 
     /**
