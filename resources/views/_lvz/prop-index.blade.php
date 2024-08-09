@@ -46,6 +46,11 @@
     <x-l::form-input-error :messages="$errors->get('propImportLimit')"/>
     <x-l::form-input name="propImportLimit" type="number" :value="old('propImportLimit', $prop->getProp('import_limit'))"/>
     <p class="formFormP">
+        Sleep
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propImportSleep')"/>
+    <x-l::form-input name="propImportSleep" type="number" step="0.01" :value="old('propImportSleep', $prop->getProp('import_sleep'))"/>
+    <p class="formFormP">
         Redirect
     </p>
     <x-l::form-input-error :messages="$errors->get('propImportRedirect')"/>

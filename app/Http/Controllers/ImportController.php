@@ -25,32 +25,48 @@ class ImportController extends Controller
         ];
     }
 
-    public function answer (Request $request, Prop $prop) {
-        if (!(int) $prop->getProp('import_redirect')) {
-            return back()->with(['status' => 'Данные частично загружены']);
+    public function answer (Prop $prop) {
+        if ((int) $prop->getProp('import_redirect')) {
+            return to_route('app.record.index')->with(['status' => 'Данные загружены']);
         } else {
-            return redirect()->action([self::class, 'import']);
+            return back()->with(['status' => 'Данные загружены']);
         }
     }
 
-    public function import (Request $request, Prop $prop) {
+    public function local_disk () {
+        return Storage::disk('records');
+    }
+
+    public function ftp_disk (Prop $prop) {
+        return Storage::build([
+            'driver' => 'ftp',
+            'host' => $prop->getProp('ftp_host'),
+            'username' => $prop->getProp('ftp_username'),
+            'password' => $prop->getProp('ftp_password'),
+            'root' => $prop->getProp('ftp_root'),
+            'port' => (int) $prop->getProp('ftp_port'),
+        ]);
+    }
+
+    public function import (Prop $prop) {
         $limit = (int) $prop->getProp('import_limit');
         $current = 0;
         try {
-            if (!$list = Storage::disk('ftp')->files()) {
+            if (!$list = $this->ftp_disk($prop)->files()) {
                 return back()->withErrors(['status' => 'Нет новых данных']);
             }
             foreach ($list as $k => $v) {
                 if ($current == $limit and $limit != 0) {
-                    return $this->answer($request, $prop);
+                    return back()->with(['status' => 'Данные частично загружены']);
                 }
                 $current++;
-                $file = Storage::disk('ftp')->get($v);
-                Storage::disk('records')->put($v, $file);
-                Storage::disk('ftp')->delete($v);
+                $file = $this->ftp_disk($prop)->get($v);
+                $this->local_disk()->put($v, $file);
+                $this->ftp_disk($prop)->delete($v);
                 Record::create($this->parse($v));
+                sleep((float) $prop->getProp('import_sleep'));
             }
-            return back()->with(['status' => 'Данные загружены']);
+            return $this->answer($prop);
         } catch (Exception $e) {
             return back()->withErrors(['status' => 'Исключение [FTP]']);
         } catch (Error $e) {

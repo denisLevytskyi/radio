@@ -36,6 +36,7 @@ class PropController extends Controller
             ['key' => 'ftp_root', 'value' => $request->propFtpRoot],
             ['key' => 'ftp_port', 'value' => $request->propFtpPort],
             ['key' => 'import_limit', 'value' => $request->propImportLimit],
+            ['key' => 'import_sleep', 'value' => $request->propImportSleep],
             ['key' => 'import_redirect', 'value' => $request->propImportRedirect],
             ['key' => 'recorder_freq', 'value' => $request->propRecorderFreq],
             ['key' => 'recorder_threshold', 'value' => $request->propRecorderThreshold],

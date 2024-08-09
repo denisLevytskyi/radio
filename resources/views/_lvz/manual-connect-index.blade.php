@@ -31,6 +31,11 @@
     <x-l::form-input-error :messages="$errors->get('manualConnectPort')"/>
     <x-l::form-input name="manualConnectPort" type="number" :value="old('manualConnectPort', $prop->getProp('ftp_port'))"/>
     <p class="formFormP">
+        Freq
+    </p>
+    <x-l::form-input-error :messages="$errors->get('manualConnectFreq')"/>
+    <x-l::form-input name="manualConnectFreq" type="number" step="0.0005" :value="old('manualConnectFreq')"/>
+    <p class="formFormP">
         <strong>
             Настройка Audio Recorder в SDR#:
         </strong>
