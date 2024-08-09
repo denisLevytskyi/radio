@@ -82,7 +82,7 @@
                 const delayStop = parseInt(delayStopInput.value, 10) * 1000;
                 if (!monitorPauseTimer) {
                     monitorPauseTimer = setTimeout(() => {
-                        if (recorder && recorder.state === 'active') {
+                        if (recorder && recorder.state === 'recording') {
                             recorder.pause();
                         }
                     }, delayPause);
