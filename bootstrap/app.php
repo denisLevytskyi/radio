@@ -8,7 +8,6 @@ use App\Http\Middleware\IsGuest;
 use App\Http\Middleware\IsUser;
 use App\Http\Middleware\IsRecorder;
 use App\Http\Middleware\CheckAppMode;
-use App\Http\Middleware\FtpSetter;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -23,7 +22,6 @@ return Application::configure(basePath: dirname(__DIR__))
             'isUser' => IsUser::class,
             'isRecorder' => IsRecorder::class,
             'checkAppMode' => CheckAppMode::class,
-            'ftp' => FtpSetter::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

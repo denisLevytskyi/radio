@@ -11,9 +11,9 @@ use App\Http\Controllers\RecordController;
 Route::name('app.')->middleware(['auth', 'verified', 'isGuest'])->group(function() {
     Route::resource('admin', AdminController::class)->middleware('isAdministrator');
     Route::resource('prop', PropController::class)->middleware('isAdministrator');
-    Route::get('import', [ImportController::class, 'import'])->name('import')->middleware(['ftp', 'isUser']);
+    Route::get('import', [ImportController::class, 'import'])->name('import')->middleware('isUser');
     Route::get('manual-connect', [ManualConnectController::class, 'index'])->name('manual.connect')->middleware('isRecorder');
-    Route::post('manual-connect', [ManualConnectController::class, 'import'])->middleware('isRecorder');
+    Route::post('manual-connect', [ManualConnectController::class, 'store'])->middleware('isRecorder');
     Route::get('recorder', [RecorderController::class, 'index'])->name('recorder')->middleware('isRecorder');
     Route::post('recorder', [RecorderController::class, 'terminal'])->middleware('isRecorder');
     Route::resource('freq', FreqController::class)->middleware('checkAppMode');
