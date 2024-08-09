@@ -71,7 +71,7 @@
                 if (!stream) {
                     return;
                 }
-                if (Date.now() - recorderStartTime >= maxDuration && recorder && recorder.state === 'recording') {
+                if (Date.now() - recorderStartTime >= maxDuration && recorder && recorder.state !== 'inactive') {
                     recorder.stop();
                 }
                 requestAnimationFrame(monitorMaxDuration);
@@ -82,7 +82,7 @@
                 const delayStop = parseInt(delayStopInput.value, 10) * 1000;
                 if (!monitorPauseTimer) {
                     monitorPauseTimer = setTimeout(() => {
-                        if (recorder && recorder.state === 'recording') {
+                        if (recorder && recorder.state === 'active') {
                             recorder.pause();
                         }
                     }, delayPause);
@@ -218,11 +218,7 @@
                         status.value = 'Ошибка доступа к данным';
                     });
                 } else {
-                    if (recorder && recorder.state === 'recording') {
-                        clearTimeout(monitorPauseTimer);
-                        clearTimeout(monitorStopTimer);
-                        monitorPauseTimer = null;
-                        monitorStopTimer = null;
+                    if (recorder && recorder.state !== 'inactive') {
                         recorder.stop();
                     }
                     startEndBtn.textContent = 'Старт';
