@@ -89,7 +89,7 @@
                 }
                 if (!monitorStopTimer) {
                     monitorStopTimer = setTimeout(() => {
-                        if (recorder && recorder.state === 'paused') {
+                        if (recorder && recorder.state !== 'inactive') {
                             recorder.stop();
                         }
                     }, delayStop);
@@ -195,7 +195,7 @@
                 }
             }
 
-            const makeContext = () => {
+            const makeAnalyser = () => {
                 const audioContext = new window.AudioContext();
                 analyser = audioContext.createAnalyser();
                 analyserData = new Uint8Array(analyser.fftSize);
@@ -207,7 +207,7 @@
                 if (!stream) {
                     navigator.mediaDevices.getUserMedia({ audio: true }).then((newStream) => {
                         stream = newStream;
-                        makeContext();
+                        makeAnalyser();
                         makeRecorder();
                         registerRecorderEvents();
                         monitorSound();
