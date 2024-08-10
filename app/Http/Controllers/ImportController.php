@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
 use Auth;
 use App\Models\Record;
@@ -14,6 +15,15 @@ use Throwable;
 
 class ImportController extends Controller
 {
+    public function __construct (public Prop $prop, public bool $isDiskSet = FALSE) {}
+
+    public function fakeSleep ($time) {
+        if (!$time) {
+            return FALSE;
+        }
+        return Http::get('https://httpbin.org/delay/' . $time);
+    }
+
     public function parse ($filename) {
         $basename = str_replace(' MHz.wav', '', $filename);
         $parts = explode('.', $basename);
@@ -25,8 +35,8 @@ class ImportController extends Controller
         ];
     }
 
-    public function answer (Prop $prop) {
-        if ((int) $prop->getProp('import_redirect')) {
+    public function answer () {
+        if ((int) $this->prop->getProp('import_redirect')) {
             return to_route('app.record.index')->with(['status' => 'Данные загружены']);
         } else {
             return back()->with(['status' => 'Данные загружены']);
@@ -37,36 +47,41 @@ class ImportController extends Controller
         return Storage::disk('records');
     }
 
-    public function ftp_disk (Prop $prop) {
-        return Storage::build([
-            'driver' => 'ftp',
-            'host' => $prop->getProp('ftp_host'),
-            'username' => $prop->getProp('ftp_username'),
-            'password' => $prop->getProp('ftp_password'),
-            'root' => $prop->getProp('ftp_root'),
-            'port' => (int) $prop->getProp('ftp_port'),
-        ]);
+    public function ftp_disk () {
+        if ((int) $this->prop->getProp('import_separate') or !$this->isDiskSet) {
+            $this->isDiskSet = TRUE;
+            $this->disk = Storage::build([
+                'driver' => 'ftp',
+                'host' => $this->prop->getProp('ftp_host'),
+                'username' => $this->prop->getProp('ftp_username'),
+                'password' => $this->prop->getProp('ftp_password'),
+                'root' => $this->prop->getProp('ftp_root'),
+                'port' => (int) $this->prop->getProp('ftp_port'),
+            ]);
+        }
+        return $this->disk;
     }
 
-    public function import (Prop $prop) {
-        $limit = (int) $prop->getProp('import_limit');
-        $current = 0;
+    public function import () {
+        $limit = (int) $this->prop->getProp('import_limit');
+        $start = Carbon::now()->getTimestamp();
+        $frp_disk = $this->ftp_disk();
+        $local_disk = $this->local_disk();
         try {
-            if (!$list = $this->ftp_disk($prop)->files()) {
+            if (!$list = $frp_disk->files()) {
                 return back()->withErrors(['status' => 'Нет новых данных']);
             }
             foreach ($list as $k => $v) {
-                if ($current == $limit and $limit != 0) {
-                    return back()->with(['status' => 'Данные частично загружены']);
+                if ($start + $limit <= Carbon::now()->getTimestamp() and $limit != 0) {
+                    return back()->withErrors(['status' => 'Исчерпан лимит времени']);
                 }
-                $current++;
-                $file = $this->ftp_disk($prop)->get($v);
-                $this->local_disk()->put($v, $file);
-                $this->ftp_disk($prop)->delete($v);
+                $local_disk->put($v, $frp_disk->get($v));
+                $frp_disk->delete($v);
                 Record::create($this->parse($v));
-                sleep((float) $prop->getProp('import_sleep'));
+                $frp_disk = $this->ftp_disk();
+                $this->fakeSleep((int) $this->prop->getProp('import_sleep'));
             }
-            return $this->answer($prop);
+            return $this->answer();
         } catch (Exception $e) {
             return back()->withErrors(['status' => 'Исключение [FTP]']);
         } catch (Error $e) {

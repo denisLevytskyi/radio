@@ -49,12 +49,17 @@
         Sleep
     </p>
     <x-l::form-input-error :messages="$errors->get('propImportSleep')"/>
-    <x-l::form-input name="propImportSleep" type="number" step="0.01" :value="old('propImportSleep', $prop->getProp('import_sleep'))"/>
+    <x-l::form-input name="propImportSleep" type="number" :value="old('propImportSleep', $prop->getProp('import_sleep'))"/>
     <p class="formFormP">
         Redirect
     </p>
     <x-l::form-input-error :messages="$errors->get('propImportRedirect')"/>
     <x-l::form-input name="propImportRedirect" type="number" :value="old('propImportRedirect', $prop->getProp('import_redirect'))"/>
+    <p class="formFormP">
+        Separate
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propImportSeparate')"/>
+    <x-l::form-input name="propImportSeparate" type="number" :value="old('propImportSeparate', $prop->getProp('import_separate'))"/>
     <p class="formFormP">
         <strong>
             RECORDER

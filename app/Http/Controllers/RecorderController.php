@@ -22,7 +22,7 @@ class RecorderController extends Controller
             'user_id' => $request->user()->id,
             'timestamp' => Carbon::now(),
             'freq' => $request->recorderFreq,
-            'path' => Storage::disk('records')->putFile('manual', $request->file('recorderFile')),
+            'path' => Storage::disk('records')->putFile('recorder', $request->file('recorderFile')),
         ];
         if (Record::create($data)) {
             echo 1;

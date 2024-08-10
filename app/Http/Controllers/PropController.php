@@ -38,6 +38,7 @@ class PropController extends Controller
             ['key' => 'import_limit', 'value' => $request->propImportLimit],
             ['key' => 'import_sleep', 'value' => $request->propImportSleep],
             ['key' => 'import_redirect', 'value' => $request->propImportRedirect],
+            ['key' => 'import_separate', 'value' => $request->propImportSeparate],
             ['key' => 'recorder_freq', 'value' => $request->propRecorderFreq],
             ['key' => 'recorder_threshold', 'value' => $request->propRecorderThreshold],
             ['key' => 'recorder_delay_pause', 'value' => $request->propRecorderDelayPause],
