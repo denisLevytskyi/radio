@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreManualConnectRequest;
-use App\Models\Prop;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -11,8 +10,8 @@ use Auth;
 
 class ManualConnectController extends ImportController
 {
-    public function index (Prop $prop) {
-        return view('_lvz.manual-connect-index', ['prop' => $prop]);
+    public function index () {
+        return view('_lvz.manual-connect-index', ['prop' => $this->prop]);
     }
 
     public StoreManualConnectRequest $request;
@@ -30,19 +29,23 @@ class ManualConnectController extends ImportController
         }
     }
 
-    public function ftp_disk (Prop $prop) {
-        return Storage::build([
-            'driver' => 'ftp',
-            'host' => $this->request->manualConnectHost,
-            'username' => $this->request->manualConnectUsername,
-            'password' => $this->request->manualConnectPassword,
-            'root' => $this->request->manualConnectRoot,
-            'port' => (int) $this->request->manualConnectPort,
-        ]);
+    public function ftp_disk () {
+        if ((int) $this->prop->getProp('import_separate') or !$this->isDiskSet) {
+            $this->isDiskSet = TRUE;
+            $this->disk = Storage::build([
+                'driver' => 'ftp',
+                'host' => $this->request->manualConnectHost,
+                'username' => $this->request->manualConnectUsername,
+                'password' => $this->request->manualConnectPassword,
+                'root' => $this->request->manualConnectRoot,
+                'port' => (int) $this->request->manualConnectPort,
+            ]);
+        }
+        return $this->disk;
     }
 
-    public function store (StoreManualConnectRequest $request, Prop $prop) {
+    public function store (StoreManualConnectRequest $request) {
         $this->request = $request;
-        return $this->import($prop);
+        return $this->import()->withInput();
     }
 }
