@@ -12,27 +12,27 @@
     <p class="formFormP">
         Частота
     </p>
-    <x-l::form-input type="number" id="freq" min="1" max="5000" step="0.000001" value="{{ $prop->getProp('recorder_freq') }}"/>
+    <x-l::form-input type="number" id="freq" min="1" max="5000" step="0.000001" value="{{ (float) $prop->getProp('recorder_freq') }}"/>
     <p class="formFormP">
         Уровень
     </p>
-    <x-l::form-input type="number" id="threshold" min="1" max="100" value="{{ $prop->getProp('recorder_threshold') }}"/>
+    <x-l::form-input type="number" id="threshold" min="1" max="100" value="{{ (int) $prop->getProp('recorder_threshold') }}"/>
     <p class="formFormP">
         Задержка паузы
     </p>
-    <x-l::form-input type="number" id="delayPause" min="1" max="10" value="{{ $prop->getProp('recorder_delay_pause') }}"/>
+    <x-l::form-input type="number" id="delayPause" min="1" max="10" value="{{ (int) $prop->getProp('recorder_delay_pause') }}"/>
     <p class="formFormP">
         Задержка остановки
     </p>
-    <x-l::form-input type="number" id="delayStop" min="1" max="100" value="{{ $prop->getProp('recorder_delay_stop') }}"/>
+    <x-l::form-input type="number" id="delayStop" min="1" max="100" value="{{ (int) $prop->getProp('recorder_delay_stop') }}"/>
     <p class="formFormP">
         Мин. продолжительность
     </p>
-    <x-l::form-input type="number" id="minDuration" min="0" max="100" value="{{ $prop->getProp('recorder_min_duration') }}"/>
+    <x-l::form-input type="number" id="minDuration" min="0" max="100" value="{{ (int) $prop->getProp('recorder_min_duration') }}"/>
     <p class="formFormP">
         Макс. продолжительность
     </p>
-    <x-l::form-input type="number" id="maxDuration" min="10" max="1000" value="{{ $prop->getProp('recorder_max_duration') }}"/>
+    <x-l::form-input type="number" id="maxDuration" min="10" max="1000" value="{{ (int) $prop->getProp('recorder_max_duration') }}"/>
     <x-l::form-input-check id="play" :checked="(bool) (int) $prop->getProp('recorder_play')">
         Воспроизводить
     </x-l::form-input-check>

@@ -32,6 +32,9 @@
                     <a href="{{ route('app.recorder') }}" class="linksWrapperA">
                         Диктофон
                     </a>
+                    <a href="{{ route('app.autoloader') }}" class="linksWrapperA">
+                        Автозагрузчик
+                    </a>
                 @endif
                 @if(Auth::user()->isAdministrator())
                     <a href="{{ route('app.prop.index') }}" class="linksWrapperA">

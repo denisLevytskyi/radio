@@ -46,6 +46,7 @@ class PropController extends Controller
             ['key' => 'recorder_min_duration', 'value' => $request->propRecorderMinDuration],
             ['key' => 'recorder_max_duration', 'value' => $request->propRecorderMaxDuration],
             ['key' => 'recorder_play', 'value' => $request->propRecorderPlay],
+            ['key' => 'autoloader_delay', 'value' => $request->propAutoloaderDelay],
             ['key' => 'app_mode', 'value' => $request->propAppMode],
             ['key' => 'app_register', 'value' => $request->propAppRegister],
         ];
