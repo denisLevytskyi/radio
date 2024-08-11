@@ -12,7 +12,7 @@
     <p class="formFormP">
         Частота
     </p>
-    <x-l::form-input type="number" id="freq" min="1" max="5000" step="0.0005" value="{{ $prop->getProp('recorder_freq') }}"/>
+    <x-l::form-input type="number" id="freq" min="1" max="5000" step="0.000001" value="{{ $prop->getProp('recorder_freq') }}"/>
     <p class="formFormP">
         Уровень
     </p>

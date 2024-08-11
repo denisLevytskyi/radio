@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\FreqPrecision;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreManualConnectRequest extends FormRequest
@@ -27,7 +28,7 @@ class StoreManualConnectRequest extends FormRequest
             'manualConnectPassword' => ['required', 'min:1', 'max:100'],
             'manualConnectRoot' => ['required', 'min:1', 'max:100'],
             'manualConnectPort' => ['required', 'min:0', 'max:100', 'integer'],
-            'manualConnectFreq' => ['nullable', 'numeric', 'min:1', 'max:5000'],
+            'manualConnectFreq' => ['nullable', 'min:1', 'max:5000', 'numeric', new FreqPrecision(6)],
         ];
     }
 }

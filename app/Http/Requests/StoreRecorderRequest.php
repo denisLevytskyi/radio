@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\FreqPrecision;
 use Illuminate\Foundation\Http\FormRequest;
 use \Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -24,7 +25,7 @@ class StoreRecorderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'recorderFreq' => ['required', 'min:1', 'max:5000', 'numeric'],
+            'recorderFreq' => ['required', 'min:1', 'max:5000', 'numeric', new FreqPrecision(6)],
             'recorderFile' => ['required'],
         ];
     }

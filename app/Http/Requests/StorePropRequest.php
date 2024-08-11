@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\FreqPrecision;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StorePropRequest extends FormRequest
@@ -31,7 +32,7 @@ class StorePropRequest extends FormRequest
             'propImportSleep' => ['required', 'min:0', 'max:10', 'integer'],
             'propImportRedirect' => ['required', 'min:0', 'max:1', 'integer'],
             'propImportSeparate' => ['required', 'min:0', 'max:1', 'integer'],
-            'propRecorderFreq' => ['required', 'min:1', 'max:5000', 'numeric'],
+            'propRecorderFreq' => ['required', 'min:1', 'max:5000', 'numeric', new FreqPrecision(6)],
             'propRecorderThreshold' => ['required', 'min:1', 'max:100', 'integer'],
             'propRecorderDelayPause' => ['required', 'min:1', 'max:10', 'integer'],
             'propRecorderDelayStop' => ['required', 'min:1', 'max:100', 'integer'],
