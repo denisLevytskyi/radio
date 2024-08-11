@@ -16,7 +16,7 @@ class ManualConnectController extends ImportController
 
     public StoreManualConnectRequest $request;
 
-    public function parse ($filename) {
+    public function parse (string $filename) {
         if ($this->request->manualConnectFreq) {
             return [
                 'user_id' => Auth::user()->id,
@@ -26,6 +26,14 @@ class ManualConnectController extends ImportController
             ];
         } else {
             return parent::parse($filename);
+        }
+    }
+
+    public function checkFileName (string $filename) {
+        if ($this->request->manualConnectFreq) {
+            return TRUE;
+        } else {
+            return parent::checkFileName($filename);
         }
     }
 
