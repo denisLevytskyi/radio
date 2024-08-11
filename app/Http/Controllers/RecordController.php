@@ -14,7 +14,7 @@ class RecordController extends Controller
     {
         if ($request_freq = $request->recordSearchFreq) {
             $search = $request_freq;
-        } elseif ((int) $url_freq) {
+        } elseif ((float) $url_freq) {
             $search = $url_freq;
         } else {
             return to_route('app.record.index')->with(['status' => 'Все записи']);
@@ -53,6 +53,15 @@ class RecordController extends Controller
     /**
      * Display the specified resource.
      */
+    public function getNavigatorData (Record $record) {
+        return [
+            'previousById' => Record::where('id', '<', $record->id)->select('id')->orderBy('id', 'desc')->first(),
+            'previousByFreq' => Record::where('id', '<', $record->id)->where('freq', '=', $record->freq)->select('id')->orderBy('id', 'desc')->first(),
+            'nextById' => Record::where('id', '>', $record->id)->select('id')->orderBy('id', 'asc')->first(),
+            'nextByFreq' => Record::where('id', '>', $record->id)->where('freq', '=', $record->freq)->select('id')->orderBy('id', 'asc')->first(),
+        ];
+    }
+
     public function show(Request $request, Record $record)
     {
         if ($request->user()->cannot('view', $record)) {
@@ -60,7 +69,7 @@ class RecordController extends Controller
                 'status' => 'Вы не можете выполнить данное действие'
             ]);
         }
-        return view('_lvz.record-show', ['record' => $record]);
+        return view('_lvz.record-show', ['record' => $record, 'navigator' => $this->getNavigatorData($record)]);
     }
 
     /**

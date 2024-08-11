@@ -18,6 +18,29 @@
         Частота
     </p>
     <x-l::form-input readonly :value="$freq->freq"/>
+    <p class="formFormP">
+        Навигация
+    </p>
+    <div class="formFormNavigator">
+        @if($navigator['previousById'])
+            <a href="{{ route('app.freq.edit', $navigator['previousById']->id) }}" class="formFormNavigatorA">
+                [ &#x21D0; ]
+            </a>
+        @else
+            <p class="formFormNavigatorP">
+                [ X ]
+            </p>
+        @endif
+        @if($navigator['nextById'])
+            <a href="{{ route('app.freq.edit', $navigator['nextById']->id) }}" class="formFormNavigatorA">
+                [ &#x21D2; ]
+            </a>
+        @else
+            <p class="formFormNavigatorP">
+                [ X ]
+            </p>
+        @endif
+    </div>
     <x-l::form-btn>
         Обновить
     </x-l::form-btn>

@@ -61,9 +61,16 @@ class FreqController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
+    public function getNavigatorData (Freq $freq) {
+        return [
+            'previousById' => Freq::where('id', '<', $freq->id)->select('id')->orderBy('id', 'desc')->first(),
+            'nextById' => Freq::where('id', '>', $freq->id)->select('id')->orderBy('id', 'asc')->first(),
+        ];
+    }
+
     public function edit(Freq $freq)
     {
-        return view('_lvz.freq-edit', ['freq' => $freq]);
+        return view('_lvz.freq-edit', ['freq' => $freq, 'navigator' => $this->getNavigatorData($freq)]);
     }
 
     /**
