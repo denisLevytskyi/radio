@@ -73,7 +73,7 @@ class ImportController extends Controller
         $local_disk = $this->local_disk();
         try {
             if (!$list = $frp_disk->files()) {
-                return back()->withErrors(['status' => 'Нет новых данных']);
+                return back()->with(['status' => 'Нет новых данных']);
             }
             foreach ($list as $k => $v) {
                 if ($start + $limit <= Carbon::now()->getTimestamp() and $limit != 0) {
