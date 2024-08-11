@@ -102,6 +102,16 @@
     <x-l::form-input name="propRecorderPlay" type="number" :value="old('propRecorderPlay', $prop->getProp('recorder_play'))"/>
     <p class="formFormP">
         <strong>
+            AUTOLOADER
+        </strong>
+    </p>
+    <p class="formFormP">
+        Delay
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propAutoloaderDelay')"/>
+    <x-l::form-input name="propAutoloaderDelay" type="number" :value="old('propAutoloaderDelay', $prop->getProp('autoloader_delay'))"/>
+    <p class="formFormP">
+        <strong>
             APP
         </strong>
     </p>

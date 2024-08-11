@@ -5,6 +5,7 @@ use App\Http\Controllers\PropController;
 use App\Http\Controllers\ImportController;
 use App\Http\Controllers\ManualConnectController;
 use App\Http\Controllers\RecorderController;
+use App\Http\Controllers\AutoloaderController;
 use App\Http\Controllers\FreqController;
 use App\Http\Controllers\RecordController;
 
@@ -16,6 +17,7 @@ Route::name('app.')->middleware(['auth', 'verified', 'isGuest'])->group(function
     Route::post('manual-connect', [ManualConnectController::class, 'store'])->middleware('isRecorder');
     Route::get('recorder', [RecorderController::class, 'index'])->name('recorder')->middleware('isRecorder');
     Route::post('recorder', [RecorderController::class, 'terminal'])->middleware('isRecorder');
+    Route::get('autoloader', [AutoloaderController::class, 'index'])->name('autoloader')->middleware(['isRecorder', 'isUser']);
     Route::resource('freq', FreqController::class)->middleware('checkAppMode');
     Route::resource('record', RecordController::class);
     Route::any('record-search/{freq?}', [RecordController::class, 'search'])->name('record.search');
