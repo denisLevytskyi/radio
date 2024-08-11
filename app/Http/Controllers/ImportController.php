@@ -17,14 +17,22 @@ class ImportController extends Controller
 {
     public function __construct (public Prop $prop, public bool $isDiskSet = FALSE) {}
 
-    public function fakeSleep ($time) {
+    public function answer () {
+        if ((int) $this->prop->getProp('import_redirect')) {
+            return to_route('app.record.index')->with(['status' => 'Данные загружены']);
+        } else {
+            return back()->with(['status' => 'Данные загружены']);
+        }
+    }
+
+    public function fakeSleep (int $time) {
         if (!$time) {
             return FALSE;
         }
         return Http::get('https://httpbin.org/delay/' . $time);
     }
 
-    public function parse ($filename) {
+    public function parse (string $filename) {
         $basename = str_replace(' MHz.wav', '', $filename);
         $parts = explode('.', $basename);
         return [
@@ -35,12 +43,8 @@ class ImportController extends Controller
         ];
     }
 
-    public function answer () {
-        if ((int) $this->prop->getProp('import_redirect')) {
-            return to_route('app.record.index')->with(['status' => 'Данные загружены']);
-        } else {
-            return back()->with(['status' => 'Данные загружены']);
-        }
+    public function checkFileName (string $filename) {
+        return is_numeric($filename[0]);
     }
 
     public function local_disk () {
@@ -74,6 +78,8 @@ class ImportController extends Controller
             foreach ($list as $k => $v) {
                 if ($start + $limit <= Carbon::now()->getTimestamp() and $limit != 0) {
                     return back()->withErrors(['status' => 'Исчерпан лимит времени']);
+                } elseif (!$this->checkFileName($v)) {
+                    return back()->withErrors(['status' => 'Найден временный файл']);
                 }
                 $local_disk->put($v, $frp_disk->get($v));
                 $frp_disk->delete($v);
