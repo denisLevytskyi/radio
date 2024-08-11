@@ -34,7 +34,7 @@
         Freq
     </p>
     <x-l::form-input-error :messages="$errors->get('manualConnectFreq')"/>
-    <x-l::form-input name="manualConnectFreq" type="number" step="0.0005" :value="old('manualConnectFreq')"/>
+    <x-l::form-input name="manualConnectFreq" type="number" step="0.000001" :value="old('manualConnectFreq')"/>
     <p class="formFormP">
         <strong>
             Настройка Audio Recorder в SDR#:

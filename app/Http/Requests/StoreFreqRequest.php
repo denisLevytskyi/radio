@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\FreqPrecision;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -24,7 +25,7 @@ class StoreFreqRequest extends FormRequest
     {
         return [
             'freqCreateName' => ['required', 'min:3', 'max:30'],
-            'freqCreateFreq' => ['required', 'numeric', 'min:1', 'max:5000'],
+            'freqCreateFreq' => ['required', 'min:1', 'max:5000', 'numeric', new FreqPrecision(6)],
         ];
     }
 }

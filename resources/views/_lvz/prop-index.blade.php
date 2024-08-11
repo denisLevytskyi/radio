@@ -69,7 +69,7 @@
         Freq
     </p>
     <x-l::form-input-error :messages="$errors->get('propRecorderFreq')"/>
-    <x-l::form-input name="propRecorderFreq" type="number" step="0.0005" :value="old('propRecorderFreq', $prop->getProp('recorder_freq'))"/>
+    <x-l::form-input name="propRecorderFreq" type="number" step="0.000001" :value="old('propRecorderFreq', $prop->getProp('recorder_freq'))"/>
     <p class="formFormP">
         Threshold
     </p>
