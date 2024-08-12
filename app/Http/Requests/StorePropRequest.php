@@ -42,6 +42,7 @@ class StorePropRequest extends FormRequest
             'propAutoloaderDelay' => ['required', 'min:1', 'max:5000', 'integer'],
             'propAppMode' => ['required', 'min:0', 'max:1', 'integer'],
             'propAppRegister' => ['required', 'min:0', 'max:1', 'integer'],
+            'propAppPaginator' => ['required', 'min:1', 'max:100', 'integer'],
         ];
     }
 }

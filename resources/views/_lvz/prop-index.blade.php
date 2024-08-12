@@ -126,6 +126,11 @@
     <x-l::form-input-error :messages="$errors->get('propAppRegister')"/>
     <x-l::form-input name="propAppRegister" type="number" :value="old('propAppRegister', $prop->getProp('app_register'))"/>
     <p class="formFormP">
+        Paginator
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propAppPaginator')"/>
+    <x-l::form-input name="propAppPaginator" type="number" :value="old('propAppPaginator', $prop->getProp('app_paginator'))"/>
+    <p class="formFormP">
         <strong>
             Настройка Audio Recorder в SDR#:
         </strong>

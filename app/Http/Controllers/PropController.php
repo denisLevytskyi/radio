@@ -49,6 +49,8 @@ class PropController extends Controller
             ['key' => 'autoloader_delay', 'value' => $request->propAutoloaderDelay],
             ['key' => 'app_mode', 'value' => $request->propAppMode],
             ['key' => 'app_register', 'value' => $request->propAppRegister],
+            ['key' => 'app_paginator', 'value' => $request->propAppPaginator],
+            ['key' => 'app_request_status', 'value' => 0],
         ];
         if ($this->prop->upsert($data, ['key'], ['value'])) {
             return back()->with(['status' => 'Обновлено']);

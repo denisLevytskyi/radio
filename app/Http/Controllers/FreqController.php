@@ -14,7 +14,7 @@ class FreqController extends Controller
      */
     public function index()
     {
-        $freqs = Freq::paginate(10);
+        $freqs = Freq::paginate((int) $this->prop->getProp('app_paginator'));
         return view('_lvz.freq-index', ['freqs' => $freqs]);
     }
 
