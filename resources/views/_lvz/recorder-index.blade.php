@@ -64,7 +64,7 @@
             const startEndBtn = document.getElementById('startEndBtn');
 
             const php_token = '{{ csrf_token() }}';
-            const php_route = '{{ route('app.recorder') }}';
+            const php_route = '{{ route('app.recorder.store') }}';
 
             const monitorMaxDuration = () => {
                 const maxDuration = parseInt(maxDurationInput.value, 10) * 1000;

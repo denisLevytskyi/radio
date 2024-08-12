@@ -14,7 +14,7 @@
     </a>
     <x-slot:after>
         <script>
-            const php_route = '{{ route('app.autoloader.import') }}';
+            const php_route = '{{ route('app.autoloader.store') }}';
             const php_delay = {{ (int) $prop->getProp('autoloader_delay') }};
 
             const timerInput = document.getElementById('timer');

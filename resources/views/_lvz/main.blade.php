@@ -14,7 +14,7 @@
                 Доступные действия
             </h1>
             <div class="linksWrapper">
-                @if(Auth::user()->isAdminWhenStrong())
+                @if(Auth::user()->isPassStrongMod())
                     <a href="{{ route('app.freq.index') }}" class="linksWrapperA">
                         Частоты
                     </a>
@@ -28,13 +28,13 @@
                     </a>
                 @endif
                 @if(Auth::user()->isRecorder())
-                    <a href="{{ route('app.manual.connect') }}" class="linksWrapperA">
+                    <a href="{{ route('app.manual.connect.index') }}" class="linksWrapperA">
                         Ручное подключение
                     </a>
-                    <a href="{{ route('app.recorder') }}" class="linksWrapperA">
+                    <a href="{{ route('app.recorder.index') }}" class="linksWrapperA">
                         Диктофон
                     </a>
-                    <a href="{{ route('app.autoloader') }}" class="linksWrapperA">
+                    <a href="{{ route('app.autoloader.index') }}" class="linksWrapperA">
                         Автозагрузчик
                     </a>
                 @endif
