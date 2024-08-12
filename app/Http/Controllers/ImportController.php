@@ -14,6 +14,12 @@ use Throwable;
 
 class ImportController extends Controller
 {
+    public function __destruct () {
+        if ($this->canChangeStatus) {
+            $this->prop->updateOrCreate(['key' => 'app_request_status'], ['value' => 0]);
+        }
+    }
+
     public function answer () {
         if ((int) $this->prop->getProp('import_redirect')) {
             return to_route('app.record.index')->with(['status' => 'Данные загружены']);
@@ -44,6 +50,18 @@ class ImportController extends Controller
         return is_numeric($filename[0]);
     }
 
+    public bool $canChangeStatus = FALSE;
+
+    public function checkRequestStatus () {
+        if ((int) $this->prop->getProp('app_request_status')) {
+            return TRUE;
+        } else {
+            $this->canChangeStatus = TRUE;
+            $this->prop->updateOrCreate(['key' => 'app_request_status'], ['value' => 1]);
+            return FALSE;
+        }
+    }
+
     public function local_disk () {
         return Storage::disk('records');
     }
@@ -72,6 +90,9 @@ class ImportController extends Controller
         $start = Carbon::now()->getTimestamp();
         $frp_disk = $this->ftp_disk();
         $local_disk = $this->local_disk();
+        if ($this->checkRequestStatus()) {
+            return back()->withErrors(['status' => 'Запрос уже выполняется']);
+        }
         try {
             if (!$list = $frp_disk->files()) {
                 return back()->with(['status' => 'Нет новых данных']);
