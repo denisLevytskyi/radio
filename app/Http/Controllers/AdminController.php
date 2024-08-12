@@ -17,7 +17,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(10);
+        $users = User::paginate((int) $this->prop->getProp('app_paginator'));
         return view('_lvz.admin-index', ['users' => $users]);
     }
 

@@ -11,9 +11,9 @@ class PropController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Prop $prop)
+    public function index()
     {
-        return view('_lvz.prop-index', ['prop' => $prop]);
+        return view('_lvz.prop-index', ['prop' => $this->prop]);
     }
 
     /**
@@ -49,8 +49,10 @@ class PropController extends Controller
             ['key' => 'autoloader_delay', 'value' => $request->propAutoloaderDelay],
             ['key' => 'app_mode', 'value' => $request->propAppMode],
             ['key' => 'app_register', 'value' => $request->propAppRegister],
+            ['key' => 'app_paginator', 'value' => $request->propAppPaginator],
+            ['key' => 'app_request_status', 'value' => 0],
         ];
-        if (Prop::upsert($data, ['key'], ['value'])) {
+        if ($this->prop->upsert($data, ['key'], ['value'])) {
             return back()->with(['status' => 'Обновлено']);
         } else {
             return back()->withErrors(['status' => 'Ошибка внесения данных в БД']);

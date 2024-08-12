@@ -20,7 +20,7 @@ class RecordController extends Controller
             return to_route('app.record.index')->with(['status' => 'Все записи']);
         }
         $freqs = Record::select('freq')->orderby('freq')->distinct()->get();
-        $records = Record::where('freq', '=', $search)->orderBy('id', 'desc')->paginate(10)->withPath(route('app.record.search' , ['freq' => $search]));
+        $records = Record::where('freq', '=', $search)->orderBy('id', 'desc')->paginate((int) $this->prop->getProp('app_paginator'))->withPath(route('app.record.search' , ['freq' => $search]));
         return view('_lvz.record-index', ['records' => $records, 'freqs' => $freqs, 'current' => $search]);
     }
 
@@ -30,7 +30,7 @@ class RecordController extends Controller
     public function index()
     {
         $freqs = Record::select(['freq'])->orderby('freq')->distinct()->get();
-        $records = Record::orderBy('id', 'desc')->paginate(10);
+        $records = Record::orderBy('id', 'desc')->paginate((int) $this->prop->getProp('app_paginator'));
         return view('_lvz.record-index', ['records' => $records, 'freqs' => $freqs, 'current' => NULL]);
     }
 
