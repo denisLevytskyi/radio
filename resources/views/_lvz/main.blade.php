@@ -22,9 +22,11 @@
                 <a href="{{ route('app.record.index') }}" class="linksWrapperA">
                     Записи
                 </a>
-                <a href="{{ route('app.import') }}" class="linksWrapperA">
-                    Получить записи
-                </a>
+                @if(Auth::user()->isUser())
+                    <a href="{{ route('app.import') }}" class="linksWrapperA">
+                        Получить записи
+                    </a>
+                @endif
                 @if(Auth::user()->isRecorder())
                     <a href="{{ route('app.manual.connect') }}" class="linksWrapperA">
                         Ручное подключение
