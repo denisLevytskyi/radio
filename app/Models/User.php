@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -68,10 +67,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->roles()->where('role', '=', 'GUEST')->exists();
     }
 
-    public function isAdminWhenStrong () {
-        $prop = new Prop();
-        $isAdmin = $this->isAdministrator();
-        $mode = $prop->getProp('app_mode');
-        return ($isAdmin or (int) $mode);
+    public function isPassStrongMod () {
+        return $this->isAdministrator() or (int) (new Prop())->getProp('app_mode');
     }
 }

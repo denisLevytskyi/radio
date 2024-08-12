@@ -1,4 +1,4 @@
-<x-l-layout::form :action="route('app.manual.connect')" >
+<x-l-layout::form :action="route('app.manual.connect.store')" >
     <x-slot:title>
         Ручное подключение
     </x-slot:title>
