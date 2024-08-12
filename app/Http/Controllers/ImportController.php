@@ -8,15 +8,12 @@ use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
 use Auth;
 use App\Models\Record;
-use App\Models\Prop;
 use Exception;
 use Error;
 use Throwable;
 
 class ImportController extends Controller
 {
-    public function __construct (public Prop $prop, public bool $isDiskSet = FALSE) {}
-
     public function answer () {
         if ((int) $this->prop->getProp('import_redirect')) {
             return to_route('app.record.index')->with(['status' => 'Данные загружены']);
@@ -50,6 +47,10 @@ class ImportController extends Controller
     public function local_disk () {
         return Storage::disk('records');
     }
+
+    public bool $isDiskSet = FALSE;
+
+    public object $disk;
 
     public function ftp_disk () {
         if ((int) $this->prop->getProp('import_separate') or !$this->isDiskSet) {

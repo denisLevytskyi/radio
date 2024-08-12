@@ -14,10 +14,11 @@ class CheckAppMode
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
+    public function __construct (public Prop $prop) {}
+
     public function handle(Request $request, Closure $next): Response
     {
-        $prop = new Prop();
-        if ($request->user() and ((int) $prop->getProp('app_mode') or $request->user()->isAdministrator())) {
+        if ($request->user() and ((int) $this->prop->getProp('app_mode') or $request->user()->isAdministrator())) {
             return $next($request);
         } else {
             return redirect('/')->withErrors([
