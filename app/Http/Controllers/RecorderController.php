@@ -16,7 +16,7 @@ class RecorderController extends Controller
         return view('_lvz.recorder-index', ['prop' => $prop]);
     }
 
-    public function terminal(StoreRecorderRequest $request)
+    public function store(StoreRecorderRequest $request)
     {
         $data = [
             'user_id' => $request->user()->id,

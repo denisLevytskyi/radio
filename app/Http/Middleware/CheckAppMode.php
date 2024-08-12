@@ -21,7 +21,7 @@ class CheckAppMode
             return $next($request);
         } else {
             return redirect('/')->withErrors([
-                'status' => 'Действие недоступно'
+                'status' => 'Недостаточно прав'
             ]);
         }
     }
