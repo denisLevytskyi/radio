@@ -20,7 +20,7 @@
         <x-slot:before>
             <section class="form">
                 <div class="container">
-                    <form method="post" action="{{ route('verification.send') }}" class="formForm">
+                    <form method="POST" action="{{ route('verification.send') }}" class="formForm">
                         @csrf
                         <p class="formFormP">
                             Необходимо подтвердить email!
@@ -36,7 +36,7 @@
     <x-slot:after>
         <section class="form">
             <div class="container">
-                <form method="post" action="{{ route('profile.password.update') }}" class="formForm">
+                <form method="POST" action="{{ route('profile.password.update') }}" class="formForm">
                     @csrf
                     @method('put')
                     <p class="formFormP">
@@ -64,7 +64,7 @@
                         Удалить профиль
                     </x-l::form-btn>
                 </form>
-                <form method="post" action="{{ route('profile.destroy') }}" class="formForm inactive" id="form2">
+                <form method="POST" action="{{ route('profile.destroy') }}" class="formForm inactive" id="form2">
                     @csrf
                     @method('delete')
                     <p class="formFormP">

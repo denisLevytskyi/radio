@@ -36,6 +36,11 @@
     <x-l::form-input-error :messages="$errors->get('propFtpPort')"/>
     <x-l::form-input name="propFtpPort" type="number" :value="old('propFtpPort', $prop->getProp('ftp_port'))"/>
     <p class="formFormP">
+        Timeout
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propFtpTimeout')"/>
+    <x-l::form-input name="propFtpTimeout" type="number" :value="old('propFtpTimeout', $prop->getProp('ftp_timeout'))"/>
+    <p class="formFormP">
         <strong>
             IMPORT
         </strong>

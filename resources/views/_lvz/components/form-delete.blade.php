@@ -2,7 +2,7 @@
     {{ $slot }}
 </a>
 <x-slot:after>
-    <form action="{{ $action }}" method="Post" style="display: none" id="form">
+    <form action="{{ $action }}" method="POST" id="form">
         @csrf
         @method('delete')
     </form>

@@ -47,6 +47,7 @@ class ManualConnectController extends ImportController
                 'password' => $this->request->manualConnectPassword,
                 'root' => $this->request->manualConnectRoot,
                 'port' => (int) $this->request->manualConnectPort,
+                'timeout' => (int) $this->request->manualConnectTimeout,
             ]);
         }
         return $this->disk;
