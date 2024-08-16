@@ -10,7 +10,7 @@
             <a href="{{ route('app.import')}}" class="listA">
                 Получить записи
             </a>
-            <form action="{{ route('app.record.search') }}" method="post" class="listForm" id="form">
+            <form action="{{ route('app.record.search') }}" method="POST" class="listForm" id="form">
                 @csrf
                 <select class="listFormInput" id="input" name="recordSearchFreq">
                     <option value="0">Поиск по частоте</option>

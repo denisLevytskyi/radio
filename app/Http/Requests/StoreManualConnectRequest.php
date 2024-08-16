@@ -27,7 +27,8 @@ class StoreManualConnectRequest extends FormRequest
             'manualConnectUsername' => ['required', 'min:1', 'max:100'],
             'manualConnectPassword' => ['required', 'min:1', 'max:100'],
             'manualConnectRoot' => ['required', 'min:1', 'max:100'],
-            'manualConnectPort' => ['required', 'min:0', 'max:100', 'integer'],
+            'manualConnectPort' => ['required', 'min:1', 'max:100', 'integer'],
+            'manualConnectTimeout' => ['required', 'min:1', 'max:100', 'integer'],
             'manualConnectFreq' => ['nullable', 'min:1', 'max:5000', 'numeric', new FreqPrecision(6)],
         ];
     }

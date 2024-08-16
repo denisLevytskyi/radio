@@ -31,6 +31,11 @@
     <x-l::form-input-error :messages="$errors->get('manualConnectPort')"/>
     <x-l::form-input name="manualConnectPort" type="number" :value="old('manualConnectPort', $prop->getProp('ftp_port'))"/>
     <p class="formFormP">
+        Timeout
+    </p>
+    <x-l::form-input-error :messages="$errors->get('manualConnectTimeout')"/>
+    <x-l::form-input name="manualConnectTimeout" type="number" :value="old('manualConnectTimeout', $prop->getProp('ftp_timeout'))"/>
+    <p class="formFormP">
         Freq
     </p>
     <x-l::form-input-error :messages="$errors->get('manualConnectFreq')"/>

@@ -80,6 +80,7 @@ class ImportController extends Controller
                 'password' => $this->prop->getProp('ftp_password'),
                 'root' => $this->prop->getProp('ftp_root'),
                 'port' => (int) $this->prop->getProp('ftp_port'),
+                'timeout' => (int) $this->prop->getProp('ftp_timeout'),
             ]);
         }
         return $this->disk;
