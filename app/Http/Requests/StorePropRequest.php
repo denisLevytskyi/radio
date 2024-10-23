@@ -28,6 +28,7 @@ class StorePropRequest extends FormRequest
             'propFtpPassword' => ['required', 'min:1', 'max:100'],
             'propFtpRoot' => ['required', 'min:1', 'max:100'],
             'propFtpPort' => ['required', 'min:1', 'max:100', 'integer'],
+            'propFtpPassive' => ['required', 'min:0', 'max:1', 'integer'],
             'propFtpTimeout' => ['required', 'min:1', 'max:100', 'integer'],
             'propImportLimit' => ['required', 'min:0', 'max:100', 'integer'],
             'propImportSleep' => ['required', 'min:0', 'max:10', 'integer'],
