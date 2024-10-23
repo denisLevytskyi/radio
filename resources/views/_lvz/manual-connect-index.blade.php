@@ -31,6 +31,11 @@
     <x-l::form-input-error :messages="$errors->get('manualConnectPort')"/>
     <x-l::form-input name="manualConnectPort" type="number" :value="old('manualConnectPort', $prop->getProp('ftp_port'))"/>
     <p class="formFormP">
+        Passive
+    </p>
+    <x-l::form-input-error :messages="$errors->get('manualConnectPassive')"/>
+    <x-l::form-input name="manualConnectPassive" type="number" :value="old('manualConnectPassive', $prop->getProp('ftp_passive'))"/>
+    <p class="formFormP">
         Timeout
     </p>
     <x-l::form-input-error :messages="$errors->get('manualConnectTimeout')"/>
