@@ -51,6 +51,11 @@
         </strong>
     </p>
     <p class="formFormP">
+        Self
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propImportSelf')"/>
+    <x-l::form-input name="propImportSelf" type="number" :value="old('propImportSelf', $prop->getProp('import_self'))"/>
+    <p class="formFormP">
         Limit
     </p>
     <x-l::form-input-error :messages="$errors->get('propImportLimit')"/>
