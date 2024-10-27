@@ -66,37 +66,53 @@ class ImportController extends Controller
         return Storage::disk('records');
     }
 
+    public function set_ftp_disk () {
+        $this->disk = Storage::build([
+            'driver' => 'ftp',
+            'host' => $this->prop->getProp('ftp_host'),
+            'username' => $this->prop->getProp('ftp_username'),
+            'password' => $this->prop->getProp('ftp_password'),
+            'root' => $this->prop->getProp('ftp_root'),
+            'port' => (int) $this->prop->getProp('ftp_port'),
+            'passive' => (bool) (int) $this->prop->getProp('ftp_passive'),
+            'timeout' => (int) $this->prop->getProp('ftp_timeout'),
+        ]);
+    }
+
+    public function set_self_disk () {
+        $this->disk = Storage::build([
+            'driver' => 'local',
+            'root' => public_path('local_records'),
+            'throw' => false,
+        ]);
+    }
+
     public bool $isDiskSet = FALSE;
 
     public object $disk;
 
-    public function ftp_disk () {
-        if ((int) $this->prop->getProp('import_separate') or !$this->isDiskSet) {
-            $this->isDiskSet = TRUE;
-            $this->disk = Storage::build([
-                'driver' => 'ftp',
-                'host' => $this->prop->getProp('ftp_host'),
-                'username' => $this->prop->getProp('ftp_username'),
-                'password' => $this->prop->getProp('ftp_password'),
-                'root' => $this->prop->getProp('ftp_root'),
-                'port' => (int) $this->prop->getProp('ftp_port'),
-                'passive' => (bool) (int) $this->prop->getProp('ftp_passive'),
-                'timeout' => (int) $this->prop->getProp('ftp_timeout'),
-            ]);
+    public function remote_disk () {
+        if (!(int) $this->prop->getProp('import_separate') and $this->isDiskSet) {
+            return $this->disk;
+        } elseif ((int) $this->prop->getProp('import_self')) {
+            $this->set_self_disk();
+        } else {
+            $this->set_ftp_disk();
         }
+        $this->isDiskSet = TRUE;
         return $this->disk;
     }
 
     public function import () {
         $limit = (int) $this->prop->getProp('import_limit');
         $start = Carbon::now()->getTimestamp();
-        $frp_disk = $this->ftp_disk();
+        $remote_disk = $this->remote_disk();
         $local_disk = $this->local_disk();
         if ($this->checkRequestStatus()) {
             return back()->withErrors(['status' => 'Запрос уже выполняется']);
         }
         try {
-            if (!$list = $frp_disk->files()) {
+            if (!$list = $remote_disk->files()) {
                 return back()->with(['status' => 'Нет новых данных']);
             }
             foreach ($list as $k => $v) {
@@ -105,10 +121,10 @@ class ImportController extends Controller
                 } elseif (!$this->checkFileName($v)) {
                     return back()->withErrors(['status' => 'Найден временный файл']);
                 }
-                $local_disk->put($v, $frp_disk->get($v));
-                $frp_disk->delete($v);
+                $local_disk->put($v, $remote_disk->get($v));
+                $remote_disk->delete($v);
                 Record::create($this->parse($v));
-                $frp_disk = $this->ftp_disk();
+                $remote_disk = $this->remote_disk();
                 $this->fakeSleep((int) $this->prop->getProp('import_sleep'));
             }
             return $this->answer();

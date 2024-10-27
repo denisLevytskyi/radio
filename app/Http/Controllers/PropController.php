@@ -37,6 +37,7 @@ class PropController extends Controller
             ['key' => 'ftp_port', 'value' => $request->propFtpPort],
             ['key' => 'ftp_passive', 'value' => $request->propFtpPassive],
             ['key' => 'ftp_timeout', 'value' => $request->propFtpTimeout],
+            ['key' => 'import_self', 'value' => $request->propImportSelf],
             ['key' => 'import_limit', 'value' => $request->propImportLimit],
             ['key' => 'import_sleep', 'value' => $request->propImportSleep],
             ['key' => 'import_redirect', 'value' => $request->propImportRedirect],
