@@ -82,7 +82,7 @@ class ImportController extends Controller
     public function set_self_disk () {
         $this->disk = Storage::build([
             'driver' => 'local',
-            'root' => public_path('local_records'),
+            'root' => public_path($this->prop->getProp('self_path')),
             'throw' => false,
         ]);
     }
@@ -94,10 +94,12 @@ class ImportController extends Controller
     public function remote_disk () {
         if (!(int) $this->prop->getProp('import_separate') and $this->isDiskSet) {
             return $this->disk;
-        } elseif ((int) $this->prop->getProp('import_self')) {
+        } elseif ((int) $this->prop->getProp('import_disk') == 0) {
             $this->set_self_disk();
-        } else {
+        } elseif ((int) $this->prop->getProp('import_disk') == 1) {
             $this->set_ftp_disk();
+        } else {
+            abort(404);
         }
         $this->isDiskSet = TRUE;
         return $this->disk;

@@ -30,6 +30,7 @@ class PropController extends Controller
     public function store(StorePropRequest $request)
     {
         $data = [
+            ['key' => 'self_path', 'value' => $request->propSelfPath],
             ['key' => 'ftp_host', 'value' => $request->propFtpHost],
             ['key' => 'ftp_username', 'value' => $request->propFtpUsername],
             ['key' => 'ftp_password', 'value' => $request->propFtpPassword],
@@ -37,7 +38,7 @@ class PropController extends Controller
             ['key' => 'ftp_port', 'value' => $request->propFtpPort],
             ['key' => 'ftp_passive', 'value' => $request->propFtpPassive],
             ['key' => 'ftp_timeout', 'value' => $request->propFtpTimeout],
-            ['key' => 'import_self', 'value' => $request->propImportSelf],
+            ['key' => 'import_disk', 'value' => $request->propImportDisk],
             ['key' => 'import_limit', 'value' => $request->propImportLimit],
             ['key' => 'import_sleep', 'value' => $request->propImportSleep],
             ['key' => 'import_redirect', 'value' => $request->propImportRedirect],
