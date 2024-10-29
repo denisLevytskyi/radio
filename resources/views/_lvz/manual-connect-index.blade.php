@@ -5,41 +5,49 @@
     <x-slot:header_info>
         Ручное подключение
     </x-slot:header_info>
-    <p class="formFormP">
-        Host
-    </p>
-    <x-l::form-input-error :messages="$errors->get('manualConnectHost')"/>
-    <x-l::form-input name="manualConnectHost" type="text" :value="old('manualConnectHost', $prop->getProp('ftp_host'))"/>
-    <p class="formFormP">
-        Username
-    </p>
-    <x-l::form-input-error :messages="$errors->get('manualConnectUsername')"/>
-    <x-l::form-input name="manualConnectUsername" type="text" :value="old('manualConnectUsername', $prop->getProp('ftp_username'))"/>
-    <p class="formFormP">
-        Password
-    </p>
-    <x-l::form-input-error :messages="$errors->get('manualConnectPassword')"/>
-    <x-l::form-input name="manualConnectPassword" type="text" :value="old('manualConnectPassword', $prop->getProp('ftp_password'))"/>
-    <p class="formFormP">
-        Root
-    </p>
-    <x-l::form-input-error :messages="$errors->get('manualConnectRoot')"/>
-    <x-l::form-input name="manualConnectRoot" type="text" :value="old('manualConnectRoot', $prop->getProp('ftp_root'))"/>
-    <p class="formFormP">
-        Port
-    </p>
-    <x-l::form-input-error :messages="$errors->get('manualConnectPort')"/>
-    <x-l::form-input name="manualConnectPort" type="number" :value="old('manualConnectPort', $prop->getProp('ftp_port'))"/>
-    <p class="formFormP">
-        Passive
-    </p>
-    <x-l::form-input-error :messages="$errors->get('manualConnectPassive')"/>
-    <x-l::form-input name="manualConnectPassive" type="number" :value="old('manualConnectPassive', $prop->getProp('ftp_passive'))"/>
-    <p class="formFormP">
-        Timeout
-    </p>
-    <x-l::form-input-error :messages="$errors->get('manualConnectTimeout')"/>
-    <x-l::form-input name="manualConnectTimeout" type="number" :value="old('manualConnectTimeout', $prop->getProp('ftp_timeout'))"/>
+    @if((int) $prop->getProp('import_disk') == 0)
+        <p class="formFormP">
+            Path
+        </p>
+        <x-l::form-input-error :messages="$errors->get('manualConnectSelfPath')"/>
+        <x-l::form-input name="manualConnectSelfPath" type="text" :value="old('manualConnectSelfPath', $prop->getProp('self_path'))"/>
+    @elseif((int) $prop->getProp('import_disk') == 1)
+        <p class="formFormP">
+            Host
+        </p>
+        <x-l::form-input-error :messages="$errors->get('manualConnectFtpHost')"/>
+        <x-l::form-input name="manualConnectFtpHost" type="text" :value="old('manualConnectFtpHost', $prop->getProp('ftp_host'))"/>
+        <p class="formFormP">
+            Username
+        </p>
+        <x-l::form-input-error :messages="$errors->get('manualConnectFtpUsername')"/>
+        <x-l::form-input name="manualConnectFtpUsername" type="text" :value="old('manualConnectFtpUsername', $prop->getProp('ftp_username'))"/>
+        <p class="formFormP">
+            Password
+        </p>
+        <x-l::form-input-error :messages="$errors->get('manualConnectFtpPassword')"/>
+        <x-l::form-input name="manualConnectFtpPassword" type="text" :value="old('manualConnectFtpPassword', $prop->getProp('ftp_password'))"/>
+        <p class="formFormP">
+            Root
+        </p>
+        <x-l::form-input-error :messages="$errors->get('manualConnectFtpRoot')"/>
+        <x-l::form-input name="manualConnectFtpRoot" type="text" :value="old('manualConnectFtpRoot', $prop->getProp('ftp_root'))"/>
+        <p class="formFormP">
+            Port
+        </p>
+        <x-l::form-input-error :messages="$errors->get('manualConnectFtpPort')"/>
+        <x-l::form-input name="manualConnectFtpPort" type="number" :value="old('manualConnectFtpPort', $prop->getProp('ftp_port'))"/>
+        <p class="formFormP">
+            Passive
+        </p>
+        <x-l::form-input-error :messages="$errors->get('manualConnectFtpPassive')"/>
+        <x-l::form-input name="manualConnectFtpPassive" type="number" :value="old('manualConnectFtpPassive', $prop->getProp('ftp_passive'))"/>
+        <p class="formFormP">
+            Timeout
+        </p>
+        <x-l::form-input-error :messages="$errors->get('manualConnectFtpTimeout')"/>
+        <x-l::form-input name="manualConnectFtpTimeout" type="number" :value="old('manualConnectFtpTimeout', $prop->getProp('ftp_timeout'))"/>
+    @endif
     <p class="formFormP">
         Freq
     </p>

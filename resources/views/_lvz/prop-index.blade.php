@@ -7,6 +7,16 @@
     </x-slot:header_info>
     <p class="formFormP">
         <strong>
+            Self
+        </strong>
+    </p>
+    <p class="formFormP">
+        Path
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propSelfPath')"/>
+    <x-l::form-input name="propSelfPath" type="text" :value="old('propSelfPath', $prop->getProp('self_path'))"/>
+    <p class="formFormP">
+        <strong>
             FTP
         </strong>
     </p>
@@ -51,10 +61,10 @@
         </strong>
     </p>
     <p class="formFormP">
-        Self
+        Disk
     </p>
-    <x-l::form-input-error :messages="$errors->get('propImportSelf')"/>
-    <x-l::form-input name="propImportSelf" type="number" :value="old('propImportSelf', $prop->getProp('import_self'))"/>
+    <x-l::form-input-error :messages="$errors->get('propImportDisk')"/>
+    <x-l::form-input name="propImportDisk" type="number" :value="old('propImportDisk', $prop->getProp('import_disk'))"/>
     <p class="formFormP">
         Limit
     </p>

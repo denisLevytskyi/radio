@@ -40,13 +40,21 @@ class ManualConnectController extends ImportController
     public function set_ftp_disk () {
         $this->disk = Storage::build([
             'driver' => 'ftp',
-            'host' => $this->request->manualConnectHost,
-            'username' => $this->request->manualConnectUsername,
-            'password' => $this->request->manualConnectPassword,
-            'root' => $this->request->manualConnectRoot,
-            'port' => (int) $this->request->manualConnectPort,
-            'passive' => (bool) (int) $this->request->manualConnectPassive,
-            'timeout' => (int) $this->request->manualConnectTimeout,
+            'host' => $this->request->manualConnectFtpHost,
+            'username' => $this->request->manualConnectFtpUsername,
+            'password' => $this->request->manualConnectFtpPassword,
+            'root' => $this->request->manualConnectFtpRoot,
+            'port' => (int) $this->request->manualConnectFtpPort,
+            'passive' => (bool) (int) $this->request->manualConnectFtpPassive,
+            'timeout' => (int) $this->request->manualConnectFtpTimeout,
+        ]);
+    }
+
+    public function set_self_disk () {
+        $this->disk = Storage::build([
+            'driver' => 'local',
+            'root' => public_path($this->request->manualConnectSelfPath),
+            'throw' => false,
         ]);
     }
 

@@ -75,7 +75,7 @@ audio {
 }
 
 section {
-    margin: 25px auto;
+    margin: 20px auto;
 }
 
 /* ALL PAGES */
@@ -91,6 +91,10 @@ section {
     border-radius: 5px;
 }
 
+.header .container {
+    max-width: none;
+}
+
 .headerWrap {
     padding: 0 5px;
     display: flex;
@@ -104,6 +108,16 @@ section {
 .headerWrapLinkImg {
     height: 50px;
     background: white;
+}
+
+.auth .container {
+    background: none;
+    border: 1px solid white;
+    color: white;
+}
+
+.authA {
+    color: white;
 }
 
 .status .container {
