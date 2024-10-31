@@ -53,7 +53,7 @@ class ManualConnectController extends ImportController
     public function set_self_disk () {
         $this->disk = Storage::build([
             'driver' => 'local',
-            'root' => public_path($this->request->manualConnectSelfPath),
+            'root' => storage_path('app/self/' . $this->request->manualConnectSelfPath),
             'throw' => false,
         ]);
     }

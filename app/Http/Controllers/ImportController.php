@@ -82,7 +82,7 @@ class ImportController extends Controller
     public function set_self_disk () {
         $this->disk = Storage::build([
             'driver' => 'local',
-            'root' => public_path($this->prop->getProp('self_path')),
+            'root' => storage_path('app/self/' . $this->prop->getProp('self_path')),
             'throw' => false,
         ]);
     }
