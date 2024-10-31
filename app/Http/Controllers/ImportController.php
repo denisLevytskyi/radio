@@ -16,7 +16,7 @@ class ImportController extends Controller
 {
     public function __destruct () {
         if ($this->canChangeStatus) {
-            $this->prop->updateOrCreate(['key' => 'app_request_status'], ['value' => 0]);
+            $this->prop->updateOrCreate(['key' => 'app_import_status'], ['value' => 0]);
         }
     }
 
@@ -53,11 +53,11 @@ class ImportController extends Controller
     public bool $canChangeStatus = FALSE;
 
     public function checkRequestStatus () {
-        if ((int) $this->prop->getProp('app_request_status')) {
+        if ((int) $this->prop->getProp('app_import_status')) {
             return TRUE;
         } else {
             $this->canChangeStatus = TRUE;
-            $this->prop->updateOrCreate(['key' => 'app_request_status'], ['value' => 1]);
+            $this->prop->updateOrCreate(['key' => 'app_import_status'], ['value' => 1]);
             return FALSE;
         }
     }

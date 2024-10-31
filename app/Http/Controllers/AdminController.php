@@ -44,6 +44,12 @@ class AdminController extends Controller
             if ($request->boolean('adminCreateAdmin')) {
                 UserRole::create([
                     'user_id' => $user->id,
+                    'role_id' => 5
+                ]);
+            }
+            if ($request->boolean('adminCreateExporter')) {
+                UserRole::create([
+                    'user_id' => $user->id,
                     'role_id' => 4
                 ]);
             }
@@ -104,6 +110,12 @@ class AdminController extends Controller
         if ($admin->update($data)) {
             UserRole::where('user_id', $admin->id)->delete();
             if ($request->boolean('adminEditAdmin')) {
+                UserRole::create([
+                    'user_id' => $admin->id,
+                    'role_id' => 5
+                ]);
+            }
+            if ($request->boolean('adminEditExporter')) {
                 UserRole::create([
                     'user_id' => $admin->id,
                     'role_id' => 4

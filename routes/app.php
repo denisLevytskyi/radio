@@ -6,6 +6,9 @@ use App\Http\Controllers\ImportController;
 use App\Http\Controllers\ManualConnectController;
 use App\Http\Controllers\RecorderController;
 use App\Http\Controllers\AutoloaderController;
+use App\Http\Controllers\ExportController;
+use App\Http\Controllers\ManualExportController;
+use App\Http\Controllers\ExporterController;
 use App\Http\Controllers\FreqController;
 use App\Http\Controllers\RecordController;
 
@@ -19,6 +22,11 @@ Route::name('app.')->middleware(['auth', 'verified', 'isGuest'])->group(function
     Route::post('recorder', [RecorderController::class, 'store'])->name('recorder.store')->middleware('isRecorder');
     Route::get('autoloader', [AutoloaderController::class, 'index'])->name('autoloader.index')->middleware('isRecorder');
     Route::get('autoloader-store', [ImportController::class, 'import'])->name('autoloader.store')->middleware('isRecorder');
+    Route::get('export', [ExportController::class, 'export'])->name('export')->middleware('isExporter');
+    Route::get('manual-export', [ManualExportController::class, 'index'])->name('manual.export.index')->middleware('isExporter');
+    Route::post('manual-export', [ManualExportController::class, 'store'])->name('manual.export.store')->middleware('isExporter');
+    Route::get('exporter', [ExporterController::class, 'index'])->name('exporter.index')->middleware('isExporter');
+    Route::get('exporter-store', [ExportController::class, 'export'])->name('exporter.store')->middleware('isExporter');
     Route::resource('freq', FreqController::class)->middleware('isPassStrongMod');
     Route::resource('record', RecordController::class);
     Route::any('record-search/{freq?}', [RecordController::class, 'search'])->name('record.search');
