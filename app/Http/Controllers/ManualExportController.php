@@ -22,7 +22,7 @@ class ManualExportController extends ExportController
         ]);
     }
 
-    public function set_ftp_disk () {
+    public function set_out_disk () {
         $this->disk = Storage::build([
             'driver' => 'ftp',
             'host' => $this->request->manualExportHost,
