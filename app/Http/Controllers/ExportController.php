@@ -35,11 +35,24 @@ class ExportController extends ImportController
         ]);
     }
 
+    public function set_out_disk () {
+        $this->disk = Storage::build([
+            'driver' => 'ftp',
+            'host' => $this->prop->getProp('out_host'),
+            'username' => $this->prop->getProp('out_username'),
+            'password' => $this->prop->getProp('out_password'),
+            'root' => $this->prop->getProp('out_root'),
+            'port' => (int) $this->prop->getProp('out_port'),
+            'passive' => (bool) (int) $this->prop->getProp('out_passive'),
+            'timeout' => (int) $this->prop->getProp('out_timeout'),
+        ]);
+    }
+
     public function remote_disk () {
         if (!(int) $this->prop->getProp('export_separate') and $this->isDiskSet) {
             return $this->disk;
         } else {
-            $this->set_ftp_disk();
+            $this->set_out_disk();
         }
         $this->isDiskSet = TRUE;
         return $this->disk;

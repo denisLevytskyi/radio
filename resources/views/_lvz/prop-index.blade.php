@@ -137,6 +137,16 @@
     <x-l::form-input name="propImportSeparate" type="number" :value="old('propImportSeparate', $prop->getProp('import_separate'))"/>
     <p class="formFormP">
         <strong>
+            IMPORTER
+        </strong>
+    </p>
+    <p class="formFormP">
+        Delay
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propImporterDelay')"/>
+    <x-l::form-input name="propImporterDelay" type="number" :value="old('propImporterDelay', $prop->getProp('importer_delay'))"/>
+    <p class="formFormP">
+        <strong>
             RECORDER
         </strong>
     </p>
@@ -175,16 +185,6 @@
     </p>
     <x-l::form-input-error :messages="$errors->get('propRecorderPlay')"/>
     <x-l::form-input name="propRecorderPlay" type="number" :value="old('propRecorderPlay', $prop->getProp('recorder_play'))"/>
-    <p class="formFormP">
-        <strong>
-            AUTOLOADER
-        </strong>
-    </p>
-    <p class="formFormP">
-        Delay
-    </p>
-    <x-l::form-input-error :messages="$errors->get('propAutoloaderDelay')"/>
-    <x-l::form-input name="propAutoloaderDelay" type="number" :value="old('propAutoloaderDelay', $prop->getProp('autoloader_delay'))"/>
     <p class="formFormP">
         <strong>
             EXPORT

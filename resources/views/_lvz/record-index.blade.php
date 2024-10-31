@@ -8,7 +8,7 @@
     <section class="list">
         <div class="container typicalContainer">
             <a href="{{ route('app.import')}}" class="listA">
-                Получить записи
+                Импорт
             </a>
             <form action="{{ route('app.record.search') }}" method="POST" class="listForm" id="form">
                 @csrf
