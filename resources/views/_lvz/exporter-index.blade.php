@@ -1,9 +1,9 @@
 <x-l-layout::form action="/" >
     <x-slot:title>
-        Экспортировщик
+        Экспортер
     </x-slot:title>
     <x-slot:header_info>
-        Экспортировщик
+        Экспортер
     </x-slot:header_info>
     <p class="formFormP">
         Секунд до запроса

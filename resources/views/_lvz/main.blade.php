@@ -24,18 +24,18 @@
                 </a>
                 @if(Auth::user()->isUser())
                     <a href="{{ route('app.import') }}" class="linksWrapperA">
-                        Получить записи
+                        Импорт
                     </a>
                 @endif
                 @if(Auth::user()->isRecorder())
-                    <a href="{{ route('app.manual.connect.index') }}" class="linksWrapperA">
-                        Ручное подключение
+                    <a href="{{ route('app.manual.import.index') }}" class="linksWrapperA">
+                        Ручной импорт
+                    </a>
+                    <a href="{{ route('app.importer.index') }}" class="linksWrapperA">
+                        Импортер
                     </a>
                     <a href="{{ route('app.recorder.index') }}" class="linksWrapperA">
                         Диктофон
-                    </a>
-                    <a href="{{ route('app.autoloader.index') }}" class="linksWrapperA">
-                        Автозагрузчик
                     </a>
                 @endif
                 @if(Auth::user()->isExporter())
@@ -46,7 +46,7 @@
                         Ручной экспорт
                     </a>
                     <a href="{{ route('app.exporter.index') }}" class="linksWrapperA">
-                        Экспортировщик
+                        Экспортер
                     </a>
                 @endif
                 @if(Auth::user()->isAdministrator())

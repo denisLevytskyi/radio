@@ -1,9 +1,9 @@
 <x-l-layout::form action="/" >
     <x-slot:title>
-        Автозагрузчик
+        Импортер
     </x-slot:title>
     <x-slot:header_info>
-        Автозагрузчик
+        Импортер
     </x-slot:header_info>
     <p class="formFormP">
         Секунд до запроса
@@ -14,8 +14,8 @@
     </a>
     <x-slot:after>
         <script>
-            const php_route = '{{ route('app.autoloader.store') }}';
-            const php_delay = {{ (int) $prop->getProp('autoloader_delay') }};
+            const php_route = '{{ route('app.importer.store') }}';
+            const php_delay = {{ (int) $prop->getProp('importer_delay') }};
 
             const timerInput = document.getElementById('timer');
 
