@@ -59,6 +59,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->roles()->where('role', '=', 'RECORDER')->exists();
     }
 
+    public function isExporter () {
+        return $this->roles()->where('role', '=', 'EXPORTER')->exists();
+    }
+
     public function isUser () {
         return $this->roles()->where('role', '=', 'USER')->exists();
     }

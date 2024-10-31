@@ -29,6 +29,9 @@
     <x-l::form-input-check name="adminEditAdmin" :checked="old('adminEditAdmin', $user->isAdministrator())">
         Администратор
     </x-l::form-input-check>
+    <x-l::form-input-check name="adminEditExporter" :checked="old('adminEditExporter', $user->isExporter())">
+        Экспорт
+    </x-l::form-input-check>
     <x-l::form-input-check name="adminEditRecorder" :checked="old('adminEditRecorder', $user->isRecorder())">
         Диктофон
     </x-l::form-input-check>

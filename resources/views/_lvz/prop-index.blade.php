@@ -7,7 +7,7 @@
     </x-slot:header_info>
     <p class="formFormP">
         <strong>
-            Self
+            SELF
         </strong>
     </p>
     <p class="formFormP">
@@ -55,6 +55,56 @@
     </p>
     <x-l::form-input-error :messages="$errors->get('propFtpTimeout')"/>
     <x-l::form-input name="propFtpTimeout" type="number" :value="old('propFtpTimeout', $prop->getProp('ftp_timeout'))"/>
+    <p class="formFormP">
+        <strong>
+            TEMP
+        </strong>
+    </p>
+    <p class="formFormP">
+        Path
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propTempPath')"/>
+    <x-l::form-input name="propTempPath" type="text" :value="old('propTempPath', $prop->getProp('temp_path'))"/>
+    <p class="formFormP">
+        <strong>
+            OUT
+        </strong>
+    </p>
+    <p class="formFormP">
+        Host
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propOutHost')"/>
+    <x-l::form-input name="propOutHost" type="text" :value="old('propOutHost', $prop->getProp('out_host'))"/>
+    <p class="formFormP">
+        Username
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propOutUsername')"/>
+    <x-l::form-input name="propOutUsername" type="text" :value="old('propOutUsername', $prop->getProp('out_username'))"/>
+    <p class="formFormP">
+        Password
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propOutPassword')"/>
+    <x-l::form-input name="propOutPassword" type="text" :value="old('propOutPassword', $prop->getProp('out_password'))"/>
+    <p class="formFormP">
+        Root
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propOutRoot')"/>
+    <x-l::form-input name="propOutRoot" type="text" :value="old('propOutRoot', $prop->getProp('out_root'))"/>
+    <p class="formFormP">
+        Port
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propOutPort')"/>
+    <x-l::form-input name="propOutPort" type="number" :value="old('propOutPort', $prop->getProp('out_port'))"/>
+    <p class="formFormP">
+        Passive
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propOutPassive')"/>
+    <x-l::form-input name="propOutPassive" type="number" :value="old('propOutPassive', $prop->getProp('out_passive'))"/>
+    <p class="formFormP">
+        Timeout
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propOutTimeout')"/>
+    <x-l::form-input name="propOutTimeout" type="number" :value="old('propOutTimeout', $prop->getProp('out_timeout'))"/>
     <p class="formFormP">
         <strong>
             IMPORT
@@ -135,6 +185,36 @@
     </p>
     <x-l::form-input-error :messages="$errors->get('propAutoloaderDelay')"/>
     <x-l::form-input name="propAutoloaderDelay" type="number" :value="old('propAutoloaderDelay', $prop->getProp('autoloader_delay'))"/>
+    <p class="formFormP">
+        <strong>
+            EXPORT
+        </strong>
+    </p>
+    <p class="formFormP">
+        Limit
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propExportLimit')"/>
+    <x-l::form-input name="propExportLimit" type="number" :value="old('propExportLimit', $prop->getProp('export_limit'))"/>
+    <p class="formFormP">
+        Sleep
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propExportSleep')"/>
+    <x-l::form-input name="propExportSleep" type="number" :value="old('propExportSleep', $prop->getProp('export_sleep'))"/>
+    <p class="formFormP">
+        Separate
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propExportSeparate')"/>
+    <x-l::form-input name="propExportSeparate" type="number" :value="old('propExportSeparate', $prop->getProp('export_separate'))"/>
+    <p class="formFormP">
+        <strong>
+            EXPORTER
+        </strong>
+    </p>
+    <p class="formFormP">
+        Delay
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propExporterDelay')"/>
+    <x-l::form-input name="propExporterDelay" type="number" :value="old('propExporterDelay', $prop->getProp('exporter_delay'))"/>
     <p class="formFormP">
         <strong>
             APP

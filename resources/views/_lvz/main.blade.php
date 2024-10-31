@@ -38,6 +38,17 @@
                         Автозагрузчик
                     </a>
                 @endif
+                @if(Auth::user()->isExporter())
+                    <a href="{{ route('app.export') }}" class="linksWrapperA">
+                        Экспорт
+                    </a>
+                    <a href="{{ route('app.manual.export.index') }}" class="linksWrapperA">
+                        Ручной экспорт
+                    </a>
+                    <a href="{{ route('app.exporter.index') }}" class="linksWrapperA">
+                        Экспортировщик
+                    </a>
+                @endif
                 @if(Auth::user()->isAdministrator())
                     <a href="{{ route('app.prop.index') }}" class="linksWrapperA">
                         Параметры
