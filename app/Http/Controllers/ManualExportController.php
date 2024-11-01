@@ -14,7 +14,7 @@ class ManualExportController extends ExportController
 
     public StoreManualExportRequest $request;
 
-    public function local_disk () {
+    public function set_temp_disk () {
         return Storage::build([
             'driver' => 'local',
             'root' => storage_path('app/temp/' . $this->request->manualExportPath),

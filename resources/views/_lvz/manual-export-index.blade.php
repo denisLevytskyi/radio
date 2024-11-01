@@ -45,6 +45,14 @@
     </p>
     <x-l::form-input-error :messages="$errors->get('manualExportTimeout')"/>
     <x-l::form-input name="manualExportTimeout" type="number" :value="old('manualExportTimeout', $prop->getProp('out_timeout'))"/>
+    <p class="formFormP">
+        <strong>
+            Экспорт
+        </strong>
+    </p>
+    <p class="formFormP">
+        С диска TEMP на OUT
+    </p>
     <x-l::form-btn>
         Отправить записи
     </x-l::form-btn>
