@@ -14,6 +14,14 @@ class ManualExportController extends ExportController
 
     public StoreManualExportRequest $request;
 
+    public function checkFileName (string $filename) {
+        if ($this->request->boolean('manualExportIgnore')) {
+            return TRUE;
+        } else {
+            return parent::checkFileName($filename);
+        }
+    }
+
     public function set_temp_disk () {
         return Storage::build([
             'driver' => 'local',

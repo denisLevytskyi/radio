@@ -45,6 +45,25 @@
     </p>
     <x-l::form-input-error :messages="$errors->get('manualExportTimeout')"/>
     <x-l::form-input name="manualExportTimeout" type="number" :value="old('manualExportTimeout', $prop->getProp('out_timeout'))"/>
+    <x-l::form-input-check name="manualExportIgnore" :checked="(bool) old('manualExportIgnore')">
+        Ignore filename
+    </x-l::form-input-check>
+    <p class="formFormP">
+        <strong>
+            Настройка Audio Recorder в SDR#:
+        </strong>
+    </p>
+    <p class="formFormP">
+        date + "." + time  + "." + frequency
+    </p>
+    <p class="formFormP">
+        <strong>
+            Пример правильного имени файла:
+        </strong>
+    </p>
+    <p class="formFormP">
+        2024_12_31.23-59-59.100,000 MHz.wav
+    </p>
     <p class="formFormP">
         <strong>
             Экспорт
