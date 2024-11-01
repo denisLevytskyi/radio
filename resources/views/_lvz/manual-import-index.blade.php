@@ -69,6 +69,20 @@
     <p class="formFormP">
         2024_12_31.23-59-59.100,000 MHz.wav
     </p>
+    <p class="formFormP">
+        <strong>
+            Импорт
+        </strong>
+    </p>
+    @if((int) $prop->getProp('import_disk') == 0)
+        <p class="formFormP">
+            С диска SELF на RECORDS
+        </p>
+    @elseif((int) $prop->getProp('import_disk') == 1)
+        <p class="formFormP">
+            С диска FTP на RECORDS
+        </p>
+    @endif
     <x-l::form-btn>
         Получить записи
     </x-l::form-btn>

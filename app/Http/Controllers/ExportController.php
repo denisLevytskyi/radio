@@ -27,12 +27,16 @@ class ExportController extends ImportController
         }
     }
 
-    public function local_disk () {
+    public function set_temp_disk () {
         return Storage::build([
             'driver' => 'local',
             'root' => storage_path('app/temp/' . $this->prop->getProp('temp_path')),
             'throw' => false,
         ]);
+    }
+
+    public function local_disk () {
+        return $this->set_temp_disk();
     }
 
     public function set_out_disk () {

@@ -62,8 +62,12 @@ class ImportController extends Controller
         }
     }
 
-    public function local_disk () {
+    public function set_records_disk () {
         return Storage::disk('records');
+    }
+
+    public function local_disk () {
+        return $this->set_records_disk();
     }
 
     public function set_ftp_disk () {

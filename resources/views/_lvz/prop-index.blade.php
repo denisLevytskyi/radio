@@ -7,7 +7,7 @@
     </x-slot:header_info>
     <p class="formFormP">
         <strong>
-            SELF
+            SELF [DISK]
         </strong>
     </p>
     <p class="formFormP">
@@ -17,7 +17,7 @@
     <x-l::form-input name="propSelfPath" type="text" :value="old('propSelfPath', $prop->getProp('self_path'))"/>
     <p class="formFormP">
         <strong>
-            FTP
+            FTP [DISK]
         </strong>
     </p>
     <p class="formFormP">
@@ -57,7 +57,7 @@
     <x-l::form-input name="propFtpTimeout" type="number" :value="old('propFtpTimeout', $prop->getProp('ftp_timeout'))"/>
     <p class="formFormP">
         <strong>
-            TEMP
+            TEMP [DISK]
         </strong>
     </p>
     <p class="formFormP">
@@ -67,7 +67,7 @@
     <x-l::form-input name="propTempPath" type="text" :value="old('propTempPath', $prop->getProp('temp_path'))"/>
     <p class="formFormP">
         <strong>
-            OUT
+            OUT [DISK]
         </strong>
     </p>
     <p class="formFormP">
@@ -250,6 +250,25 @@
     </p>
     <p class="formFormP">
         2024_12_31.23-59-59.100,000 MHz.wav
+    </p>
+    <p class="formFormP">
+        <strong>
+            Импорт
+        </strong>
+    </p>
+    <p class="formFormP">
+        С диска SELF на RECORDS
+    </p>
+    <p class="formFormP">
+        С диска FTP на RECORDS
+    </p>
+    <p class="formFormP">
+        <strong>
+            Экспорт
+        </strong>
+    </p>
+    <p class="formFormP">
+        С диска TEMP на OUT
     </p>
     <x-l::form-btn>
         Обновить
