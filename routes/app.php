@@ -5,6 +5,7 @@ use App\Http\Controllers\PropController;
 use App\Http\Controllers\ImportController;
 use App\Http\Controllers\ManualImportController;
 use App\Http\Controllers\ImporterController;
+use App\Http\Controllers\BallastController;
 use App\Http\Controllers\RecorderController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\ManualExportController;
@@ -20,6 +21,8 @@ Route::name('app.')->middleware(['auth', 'verified', 'isGuest'])->group(function
     Route::post('manual-import', [ManualImportController::class, 'store'])->name('manual.import.store')->middleware('isRecorder');
     Route::get('importer', [ImporterController::class, 'index'])->name('importer.index')->middleware('isRecorder');
     Route::get('importer-store', [ImportController::class, 'import'])->name('importer.store')->middleware('isRecorder');
+    Route::get('ballast-create', [BallastController::class, 'create'])->name('ballast.create')->middleware('isRecorder');
+    Route::get('ballast-delete', [BallastController::class, 'delete'])->name('ballast.delete')->middleware('isRecorder');
     Route::get('recorder', [RecorderController::class, 'index'])->name('recorder.index')->middleware('isRecorder');
     Route::post('recorder', [RecorderController::class, 'store'])->name('recorder.store')->middleware('isRecorder');
     Route::get('export', [ExportController::class, 'export'])->name('export')->middleware('isExporter');

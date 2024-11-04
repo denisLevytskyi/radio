@@ -34,6 +34,12 @@
                     <a href="{{ route('app.importer.index') }}" class="linksWrapperA">
                         Импортер
                     </a>
+                    <a href="{{ route('app.ballast.create') }}" class="linksWrapperA">
+                        Создать балласт
+                    </a>
+                    <a href="{{ route('app.ballast.delete') }}" class="linksWrapperA">
+                        Удалить балласт
+                    </a>
                     <a href="{{ route('app.recorder.index') }}" class="linksWrapperA">
                         Диктофон
                     </a>
