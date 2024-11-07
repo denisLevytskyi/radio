@@ -11,6 +11,16 @@ use Illuminate\Support\Facades\Storage;
 
 class RecordController extends Controller
 {
+    public function getAudio (Request $request, Record $record) {
+        if ($request->user()->cannot('view', $record)) {
+            abort(404);
+        } elseif ($record->file) {
+            return response(Storage::disk('records')->get($record->file));
+        } elseif ($record->blob) {
+            return response($record->blob);
+        }
+    }
+
     public function search(StoreRecordSearchRequest $request, $url_freq = NULL)
     {
         if ($request_freq = $request->recordSearchFreq) {
@@ -54,15 +64,6 @@ class RecordController extends Controller
     /**
      * Display the specified resource.
      */
-    public function getAudio (Request $request, Record $record) {
-        if ($request->user()->cannot('view', $record)) {
-            abort(404);
-        } elseif ($record->file) {
-            return response(Storage::disk('records')->get($record->file));
-        } elseif ($record->blob) {
-            return response($record->blob);
-        }
-    }
 
     public function getNavigatorData (Record $record) {
         return [
