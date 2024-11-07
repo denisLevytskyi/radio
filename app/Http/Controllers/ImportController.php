@@ -42,7 +42,7 @@ class ImportController extends Controller
             'user_id' => Auth::user()->id,
             'timestamp' => Carbon::createFromFormat('Y_m_dH-i-s', $parts[0] . $parts[1])->toDateTimeString(),
             'freq' => (float) str_replace(',', '.', $parts[2]),
-            'path' => $filename,
+            'file' => $filename,
         ];
     }
 

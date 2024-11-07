@@ -22,7 +22,7 @@ class ManualImportController extends ImportController
                 'user_id' => Auth::user()->id,
                 'timestamp' => Carbon::now()->toDateTimeString(),
                 'freq' => (float) $this->request->manualImportFreq,
-                'path' => $filename,
+                'file' => $filename,
             ];
         } else {
             return parent::parse($filename);

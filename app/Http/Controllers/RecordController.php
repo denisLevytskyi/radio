@@ -7,6 +7,7 @@ use App\Http\Requests\StoreRecordRequest;
 use App\Http\Requests\UpdateRecordRequest;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreRecordSearchRequest;
+use Illuminate\Support\Facades\Storage;
 
 class RecordController extends Controller
 {
@@ -53,6 +54,16 @@ class RecordController extends Controller
     /**
      * Display the specified resource.
      */
+    public function getAudio (Request $request, Record $record) {
+        if ($request->user()->cannot('view', $record)) {
+            abort(404);
+        } elseif ($record->file) {
+            return response(Storage::disk('records')->get($record->file));
+        } elseif ($record->blob) {
+            return response($record->blob);
+        }
+    }
+
     public function getNavigatorData (Record $record) {
         return [
             'previousById' => Record::where('id', '<', $record->id)->select('id')->orderBy('id', 'desc')->first(),

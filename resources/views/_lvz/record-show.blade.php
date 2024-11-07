@@ -65,7 +65,7 @@
         @endif
     </div>
     <x-l::form-audio>
-        {{ asset('records/' . $record->path) }}
+        {{ route('app.record.audio', $record->id) }}
     </x-l::form-audio>
     <a href="{{ route('app.record.index') }}" class="formFormA">
         Назад

@@ -21,8 +21,12 @@ class RecorderController extends Controller
             'user_id' => $request->user()->id,
             'timestamp' => Carbon::now(),
             'freq' => $request->recorderFreq,
-            'path' => Storage::disk('records')->putFile('recorder', $request->file('recorderFile')),
         ];
+        if ((int) $this->prop->getProp('recorder_file')) {
+            $data['file'] = Storage::disk('records')->putFile('recorder', $request->file('recorderFile'));
+        } else {
+            $data['blob'] = $request->file('recorderFile')->get();
+        }
         if (Record::create($data)) {
             echo 1;
         } else {

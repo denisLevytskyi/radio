@@ -47,7 +47,6 @@ return [
         'records' => [
             'driver' => 'local',
             'root' => storage_path('app/records'),
-            'url' => env('APP_URL').'/records',
             'visibility' => 'public',
             'throw' => false,
         ],
@@ -79,7 +78,6 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
-        public_path('records') => storage_path('app/records'),
     ],
 
 ];

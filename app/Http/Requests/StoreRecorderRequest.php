@@ -32,7 +32,6 @@ class StoreRecorderRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        $response = response('',404);
-        throw new HttpResponseException($response);
+        abort(404);
     }
 }

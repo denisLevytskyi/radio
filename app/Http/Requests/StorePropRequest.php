@@ -52,6 +52,7 @@ class StorePropRequest extends FormRequest
             'propRecorderMinDuration' => ['required', 'min:0', 'max:100', 'integer'],
             'propRecorderMaxDuration' => ['required', 'min:10', 'max:1000', 'integer'],
             'propRecorderPlay' => ['required', 'min:0', 'max:1', 'integer'],
+            'propRecorderFile' => ['required', 'min:0', 'max:1', 'integer'],
             'propExportLimit' => ['required', 'min:0', 'max:100', 'integer'],
             'propExportSleep' => ['required', 'min:0', 'max:10', 'integer'],
             'propExportSeparate' => ['required', 'min:0', 'max:1', 'integer'],
