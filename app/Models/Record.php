@@ -14,7 +14,8 @@ class Record extends Model
         'user_id',
         'timestamp',
         'freq',
-        'path',
+        'file',
+        'blob',
     ];
 
     public function user () {

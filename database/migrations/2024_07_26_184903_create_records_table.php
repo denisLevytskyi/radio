@@ -18,7 +18,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users', 'id')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamp('timestamp')->nullable();
             $table->float('freq')->nullable();
-            $table->string('path')->nullable();
+            $table->string('file')->nullable();
+            $table->longText('blob')->charset('binary')->nullable();
         });
     }
 

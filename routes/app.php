@@ -32,5 +32,6 @@ Route::name('app.')->middleware(['auth', 'verified', 'isGuest'])->group(function
     Route::get('exporter-store', [ExportController::class, 'export'])->name('exporter.store')->middleware('isExporter');
     Route::resource('freq', FreqController::class)->middleware('isPassStrongMod');
     Route::resource('record', RecordController::class);
+    Route::get('record-audio/{record}', [RecordController::class, 'getAudio'])->name('record.audio');
     Route::any('record-search/{freq?}', [RecordController::class, 'search'])->name('record.search');
 });

@@ -186,6 +186,11 @@
     <x-l::form-input-error :messages="$errors->get('propRecorderPlay')"/>
     <x-l::form-input name="propRecorderPlay" type="number" :value="old('propRecorderPlay', $prop->getProp('recorder_play'))"/>
     <p class="formFormP">
+        File
+    </p>
+    <x-l::form-input-error :messages="$errors->get('propRecorderFile')"/>
+    <x-l::form-input name="propRecorderFile" type="number" :value="old('propRecorderFile', $prop->getProp('recorder_file'))"/>
+    <p class="formFormP">
         <strong>
             EXPORT
         </strong>

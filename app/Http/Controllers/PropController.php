@@ -59,6 +59,7 @@ class PropController extends Controller
             ['key' => 'recorder_min_duration', 'value' => $request->propRecorderMinDuration],
             ['key' => 'recorder_max_duration', 'value' => $request->propRecorderMaxDuration],
             ['key' => 'recorder_play', 'value' => $request->propRecorderPlay],
+            ['key' => 'recorder_file', 'value' => $request->propRecorderFile],
             ['key' => 'export_limit', 'value' => $request->propExportLimit],
             ['key' => 'export_sleep', 'value' => $request->propExportSleep],
             ['key' => 'export_separate', 'value' => $request->propExportSeparate],
