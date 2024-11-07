@@ -47,8 +47,7 @@ return [
         'records' => [
             'driver' => 'local',
             'root' => storage_path('app/records'),
-            'visibility' => 'public',
-            'throw' => false,
+            'throw' => true,
         ],
 
         's3' => [
