@@ -67,10 +67,10 @@ class RecordController extends Controller
 
     public function getNavigatorData (Record $record) {
         return [
-            'previousById' => Record::where('id', '<', $record->id)->select('id')->orderBy('id', 'desc')->first(),
-            'previousByFreq' => Record::where('id', '<', $record->id)->where('freq', '=', $record->freq)->select('id')->orderBy('id', 'desc')->first(),
-            'nextById' => Record::where('id', '>', $record->id)->select('id')->orderBy('id', 'asc')->first(),
-            'nextByFreq' => Record::where('id', '>', $record->id)->where('freq', '=', $record->freq)->select('id')->orderBy('id', 'asc')->first(),
+            'previousById' => Record::where('id', '<', $record->id)->orderBy('id', 'desc')->first(),
+            'previousByFreq' => Record::where('id', '<', $record->id)->where('freq', '=', $record->freq)->orderBy('id', 'desc')->first(),
+            'nextById' => Record::where('id', '>', $record->id)->orderBy('id', 'asc')->first(),
+            'nextByFreq' => Record::where('id', '>', $record->id)->where('freq', '=', $record->freq)->orderBy('id', 'asc')->first(),
         ];
     }
 
