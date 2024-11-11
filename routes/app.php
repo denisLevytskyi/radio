@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\PropController;
+use App\Http\Controllers\FreqController;
+use App\Http\Controllers\RecordController;
 use App\Http\Controllers\ImportController;
 use App\Http\Controllers\ManualImportController;
 use App\Http\Controllers\ImporterController;
@@ -10,12 +10,14 @@ use App\Http\Controllers\RecorderController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\ManualExportController;
 use App\Http\Controllers\ExporterController;
-use App\Http\Controllers\FreqController;
-use App\Http\Controllers\RecordController;
+use App\Http\Controllers\PropController;
+use App\Http\Controllers\AdminController;
 
 Route::name('app.')->middleware(['auth', 'verified', 'isGuest'])->group(function() {
-    Route::resource('admin', AdminController::class)->middleware('isAdministrator');
-    Route::resource('prop', PropController::class)->middleware('isAdministrator');
+    Route::resource('freq', FreqController::class)->middleware('isPassStrongMod');
+    Route::resource('record', RecordController::class);
+    Route::get('record-audio/{record}', [RecordController::class, 'getAudio'])->name('record.audio');
+    Route::any('record-search/{freq?}', [RecordController::class, 'search'])->name('record.search');
     Route::get('import', [ImportController::class, 'import'])->name('import')->middleware('isUser');
     Route::get('manual-import', [ManualImportController::class, 'index'])->name('manual.import.index')->middleware('isRecorder');
     Route::post('manual-import', [ManualImportController::class, 'store'])->name('manual.import.store')->middleware('isRecorder');
@@ -30,8 +32,6 @@ Route::name('app.')->middleware(['auth', 'verified', 'isGuest'])->group(function
     Route::post('manual-export', [ManualExportController::class, 'store'])->name('manual.export.store')->middleware('isExporter');
     Route::get('exporter', [ExporterController::class, 'index'])->name('exporter.index')->middleware('isExporter');
     Route::get('exporter-store', [ExportController::class, 'export'])->name('exporter.store')->middleware('isExporter');
-    Route::resource('freq', FreqController::class)->middleware('isPassStrongMod');
-    Route::resource('record', RecordController::class);
-    Route::get('record-audio/{record}', [RecordController::class, 'getAudio'])->name('record.audio');
-    Route::any('record-search/{freq?}', [RecordController::class, 'search'])->name('record.search');
+    Route::resource('prop', PropController::class)->middleware('isAdministrator');
+    Route::resource('admin', AdminController::class)->middleware('isAdministrator');
 });
