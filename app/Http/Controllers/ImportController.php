@@ -20,12 +20,12 @@ class ImportController extends Controller
     }
 
     public function parse (string $filename) {
-        preg_match('/\s(MHz|KHz)\.wav$/i', $filename, $match);
+        preg_match('/\h(MHz|KHz)\.wav$/u', $filename, $match);
         $unit = $match[1] ?? 'MHz';
-        $basename = preg_replace('/\s(?:MHz|KHz)\.wav$/i', '', $filename);
+        $basename = preg_replace('/\h(?:MHz|KHz)\.wav$/u', '', $filename);
         $parts = explode('.', $basename);
         if ($unit === 'KHz') {
-            $freq = (float) str_replace(' ', '', $parts[2]) / 1000;
+            $freq = (float) preg_replace('/\h+/u', '', $parts[2]) / 1000;
         } else {
             $freq = (float) str_replace(',', '.', $parts[2]);
         }
@@ -38,7 +38,7 @@ class ImportController extends Controller
     }
 
     public function checkFileName (string $filename) {
-        return preg_match('/^\d{4}_\d{2}_\d{2}\.\d{2}-\d{2}-\d{2}\.(\d+,\d+\sMHz|\d+(?: \d+)*\sKHz)\.wav$/i', $filename) === 1;
+        return preg_match('/^\d{4}_\d{2}_\d{2}\.\d{2}-\d{2}-\d{2}\.(?:\d+,\d+\hMHz|\d{1,3}(?:\h\d{3})*\hKHz)\.wav$/u', $filename) === 1;
     }
 
     public bool $canChangeStatus = FALSE;
