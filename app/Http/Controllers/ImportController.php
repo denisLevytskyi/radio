@@ -65,16 +65,16 @@ class ImportController extends Controller
             return back()->withErrors(['status' => 'Запрос уже выполняется']);
         }
         try {
-            if ($start + 15 <= Carbon::now()->getTimestamp()) {
-                return back()->withErrors(['status' => 'Исчерпан лимит времени']);
-            } elseif (!$list = $inputs_disk->files()) {
+            if (!$list = $inputs_disk->files()) {
                 return back()->with(['status' => 'Нет новых данных']);
             }
             foreach ($list as $k => $v) {
-               if (!$this->checkFileName($v)) {
-                    $inputs_disk->delete($v);
+                if ($start + 15 <= Carbon::now()->getTimestamp()) {
+                    return back()->withErrors(['status' => 'Исчерпан лимит времени']);
+                } elseif (!$this->checkFileName($v)) {
+                $inputs_disk->delete($v);
                     return back()->withErrors(['status' => 'Найден и удален временный файл: ' . $v]);
-               }
+                }
                 $records_disk->put($v, $inputs_disk->get($v));
                 $inputs_disk->delete($v);
                 Record::create($this->parse($v));
