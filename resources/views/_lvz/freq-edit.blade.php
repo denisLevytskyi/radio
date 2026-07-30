@@ -17,7 +17,7 @@
     <p class="formFormP">
         Частота
     </p>
-    <x-l::form-input readonly :value="$freq->freq"/>
+    <x-l::form-input readonly :value="$freq->freq_form"/>
     <p class="formFormP">
         Навигация
     </p>

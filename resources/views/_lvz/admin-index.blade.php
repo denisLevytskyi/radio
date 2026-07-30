@@ -14,7 +14,7 @@
                 @foreach($users as $user)
                 <div class="listWrapItem">
                     <a href="{{ route('app.admin.edit', $user->id) }}" class="listWrapItemA">
-                        {{ $user->id . ' ' . $user->email . ' ' . $user->name }}
+                        {{ $user->id . ' || ' . $user->email . ' || ' . $user->name }}
                     </a>
                 </div>
                 @endforeach

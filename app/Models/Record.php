@@ -22,11 +22,21 @@ class Record extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function name () {
+    public function getNameAttribute () {
         if (Freq::where('freq', '=', $this->freq)->exists()) {
             return Freq::where('freq', '=', $this->freq)->first()->name;
         } else {
             return 'NO NAME';
         }
+    }
+
+    public function getFreqFormAttribute () {
+        $hz = (int) round($this->freq * 1000000);
+        return sprintf(
+            '%dм%03dк%03dг',
+            intdiv($hz, 1000000),
+            intdiv($hz % 1000000, 1000),
+            $hz % 1000
+        );
     }
 }

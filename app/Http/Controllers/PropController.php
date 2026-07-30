@@ -42,7 +42,6 @@ class PropController extends Controller
             ['key' => 'app_register', 'value' => $request->propAppRegister],
             ['key' => 'app_paginator', 'value' => $request->propAppPaginator],
             ['key' => 'app_import_status', 'value' => 0],
-            ['key' => 'app_export_status', 'value' => 0],
         ];
         if ($this->prop->upsert($data, ['key'], ['value'])) {
             return back()->with(['status' => 'Обновлено']);

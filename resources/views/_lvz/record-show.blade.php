@@ -11,11 +11,11 @@
     <p class="formFormP">
         Название
     </p>
-    <x-l::form-input readonly :value="$record->name()"/>
+    <x-l::form-input readonly :value="$record->name"/>
     <p class="formFormP">
         Частота
     </p>
-    <x-l::form-input readonly :value="$record->freq"/>
+    <x-l::form-input readonly :value="$record->freq_form"/>
     <p class="formFormP">
         Дата
     </p>
@@ -42,7 +42,7 @@
                 [ X ]
             </p>
         @endif
-        <a href="{{ route('app.record.search', $record->freq) }}" class="formFormNavigatorSearch">
+        <a href="{{ route('app.record.search', $record->freq_form) }}" class="formFormNavigatorSearch">
             [ ПОИСК ]
         </a>
         @if($navigator['nextByFreq'])
