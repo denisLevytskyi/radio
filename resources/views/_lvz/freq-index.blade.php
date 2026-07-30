@@ -14,7 +14,7 @@
                 @foreach($freqs as $freq)
                     <div class="listWrapItem">
                         <a href="{{ route('app.freq.edit', $freq->id) }}" class="listWrapItemA">
-                            {{ $freq->id . ' ' . $freq->name . ' ' . $freq->freq }}
+                            {{ $freq->id . ' || ' . $freq->name . ' || ' . $freq->freq_form }}
                         </a>
                     </div>
                 @endforeach

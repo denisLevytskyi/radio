@@ -6,8 +6,9 @@
     <x-slot:header_info>
         Обновление частоты
     </x-slot:header_info>
-    <pre class="productFormP">Запись №: {{ $freq->id }}</pre>
-    <pre class="productFormP">Добавлена: [{{ $freq->user_id }}] {{ $freq->user->name }}</pre>
+    <pre class="formFormP">Запись №: {{ $freq->id }}</pre>
+    <pre class="formFormP">От: {{ $freq->created_at }}</pre>
+    <pre class="formFormP">Добавлена: [{{ $freq->user_id }}] {{ $freq->user->name }}</pre>
     <br>
     <p class="formFormP">
         Название
@@ -17,7 +18,7 @@
     <p class="formFormP">
         Частота
     </p>
-    <x-l::form-input readonly :value="$freq->freq"/>
+    <x-l::form-input readonly :value="$freq->freq_form"/>
     <p class="formFormP">
         Навигация
     </p>

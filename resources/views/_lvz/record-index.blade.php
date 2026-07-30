@@ -16,7 +16,7 @@
                     <option value="0">Поиск по частоте</option>
                     @foreach($freqs as $freq)
                         <option value="{{ $freq->freq }}" {{ $current == $freq->freq ? 'selected' : '' }}>
-                            {{ $freq->freq . ' ==> ' . $freq->name() }}
+                            {{ $freq->freq_form . ' ==> ' . $freq->name }}
                         </option>
                     @endforeach
                 </select>
@@ -25,7 +25,7 @@
                 @foreach($records as $record)
                     <div class="listWrapItem">
                         <a href="{{ route('app.record.show', $record->id) }}" class="listWrapItemA">
-                            {{ $record->id . ' ' . $record->timestamp . ' ' . $record->freq  . ' ' . $record->name()}}
+                            {{ $record->id . ' || ' . $record->timestamp . ' || ' . $record->freq_form  . ' || ' . $record->name}}
                         </a>
                     </div>
                 @endforeach

@@ -28,31 +28,8 @@
                     </a>
                 @endif
                 @if(Auth::user()->isRecorder())
-                    <a href="{{ route('app.manual.import.index') }}" class="linksWrapperA">
-                        Ручной импорт
-                    </a>
-                    <a href="{{ route('app.importer.index') }}" class="linksWrapperA">
-                        Импортер
-                    </a>
-                    <a href="{{ route('app.ballast.create') }}" class="linksWrapperA">
-                        Создать балласт
-                    </a>
-                    <a href="{{ route('app.ballast.delete') }}" class="linksWrapperA">
-                        Удалить балласт
-                    </a>
                     <a href="{{ route('app.recorder.index') }}" class="linksWrapperA">
                         Диктофон
-                    </a>
-                @endif
-                @if(Auth::user()->isExporter())
-                    <a href="{{ route('app.export') }}" class="linksWrapperA">
-                        Экспорт
-                    </a>
-                    <a href="{{ route('app.manual.export.index') }}" class="linksWrapperA">
-                        Ручной экспорт
-                    </a>
-                    <a href="{{ route('app.exporter.index') }}" class="linksWrapperA">
-                        Экспортер
                     </a>
                 @endif
                 @if(Auth::user()->isAdministrator())
