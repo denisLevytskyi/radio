@@ -20,18 +20,25 @@ class ImportController extends Controller
     }
 
     public function parse (string $filename) {
-        $basename = str_replace(' MHz.wav', '', $filename);
+        preg_match('/\s(MHz|KHz)\.wav$/i', $filename, $match);
+        $unit = $match[1] ?? 'MHz';
+        $basename = preg_replace('/\s(?:MHz|KHz)\.wav$/i', '', $filename);
         $parts = explode('.', $basename);
+        if ($unit === 'KHz') {
+            $freq = (float) str_replace(' ', '', $parts[2]) / 1000;
+        } else {
+            $freq = (float) str_replace(',', '.', $parts[2]);
+        }
         return [
             'user_id' => Auth::user()->id,
             'timestamp' => Carbon::createFromFormat('Y_m_dH-i-s', $parts[0] . $parts[1])->toDateTimeString(),
-            'freq' => (float) str_replace(',', '.', $parts[2]),
+            'freq' => $freq,
             'file' => $filename,
         ];
     }
 
     public function checkFileName (string $filename) {
-        return is_numeric($filename[0]);
+        return preg_match('/^\d{4}_\d{2}_\d{2}\.\d{2}-\d{2}-\d{2}\.(\d+,\d+\sMHz|\d+(?: \d+)*\sKHz)\.wav$/i', $filename) === 1;
     }
 
     public bool $canChangeStatus = FALSE;
@@ -58,7 +65,8 @@ class ImportController extends Controller
             }
             foreach ($list as $k => $v) {
                if (!$this->checkFileName($v)) {
-                    return back()->withErrors(['status' => 'Найден временный файл']);
+                    $inputs_disk->delete($v);
+                    return back()->withErrors(['status' => 'Найден и удален временный файл']);
                }
                 $records_disk->put($v, $inputs_disk->get($v));
                 $inputs_disk->delete($v);
