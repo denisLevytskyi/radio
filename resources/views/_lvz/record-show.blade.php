@@ -5,8 +5,9 @@
     <x-slot:header_info>
         Запись № {{ $record->id }}
     </x-slot:header_info>
-    <pre class="productFormP">Запись №: {{ $record->id }}</pre>
-    <pre class="productFormP">Добавлена: [{{ $record->user_id }}] {{ $record->user->name }}</pre>
+    <pre class="formFormP">Запись №: {{ $record->id }}</pre>
+    <pre class="formFormP">От: {{ $record->created_at }}</pre>
+    <pre class="formFormP">Добавлена: [{{ $record->user_id }}] {{ $record->user->name }}</pre>
     <br>
     <p class="formFormP">
         Название
