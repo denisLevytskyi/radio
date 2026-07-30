@@ -28,10 +28,6 @@ class RoleSeeder extends Seeder
             ],
             [
                 'id' => 4,
-                'role' => 'EXPORTER'
-            ],
-            [
-                'id' => 5,
                 'role' => 'ADMIN'
             ],
         ];

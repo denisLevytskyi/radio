@@ -7,9 +7,6 @@ use App\Http\Controllers\ManualImportController;
 use App\Http\Controllers\ImporterController;
 use App\Http\Controllers\BallastController;
 use App\Http\Controllers\RecorderController;
-use App\Http\Controllers\ExportController;
-use App\Http\Controllers\ManualExportController;
-use App\Http\Controllers\ExporterController;
 use App\Http\Controllers\PropController;
 use App\Http\Controllers\AdminController;
 
@@ -27,11 +24,6 @@ Route::name('app.')->middleware(['auth', 'verified', 'isGuest'])->group(function
     Route::get('ballast-delete', [BallastController::class, 'delete'])->name('ballast.delete')->middleware('isRecorder');
     Route::get('recorder', [RecorderController::class, 'index'])->name('recorder.index')->middleware('isRecorder');
     Route::post('recorder', [RecorderController::class, 'store'])->name('recorder.store')->middleware('isRecorder');
-    Route::get('export', [ExportController::class, 'export'])->name('export')->middleware('isExporter');
-    Route::get('manual-export', [ManualExportController::class, 'index'])->name('manual.export.index')->middleware('isExporter');
-    Route::post('manual-export', [ManualExportController::class, 'store'])->name('manual.export.store')->middleware('isExporter');
-    Route::get('exporter', [ExporterController::class, 'index'])->name('exporter.index')->middleware('isExporter');
-    Route::get('exporter-store', [ExportController::class, 'export'])->name('exporter.store')->middleware('isExporter');
     Route::resource('prop', PropController::class)->middleware('isAdministrator');
     Route::resource('admin', AdminController::class)->middleware('isAdministrator');
 });
