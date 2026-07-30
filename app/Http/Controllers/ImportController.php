@@ -72,7 +72,7 @@ class ImportController extends Controller
                 if ($start + 15 <= Carbon::now()->getTimestamp()) {
                     return back()->withErrors(['status' => 'Исчерпан лимит времени']);
                 } elseif (!$this->checkFileName($v)) {
-                $inputs_disk->delete($v);
+                    $inputs_disk->delete($v);
                     return back()->withErrors(['status' => 'Найден и удален временный файл: ' . $v]);
                 }
                 $records_disk->put($v, $inputs_disk->get($v));
