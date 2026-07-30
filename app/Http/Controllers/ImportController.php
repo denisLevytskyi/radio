@@ -20,14 +20,18 @@ class ImportController extends Controller
     }
 
     public function parse (string $filename) {
-        preg_match('/\h(MHz|KHz)\.wav$/u', $filename, $match);
+        preg_match('/\h(KHz|MHz|GHz)\.wav$/u', $filename, $match);
         $unit = $match[1] ?? 'MHz';
-        $basename = preg_replace('/\h(?:MHz|KHz)\.wav$/u', '', $filename);
+        $basename = preg_replace('/\h(?:KHz|MHz|GHz)\.wav$/u', '', $filename);
         $parts = explode('.', $basename);
-        if ($unit === 'KHz') {
-            $freq = (float) preg_replace('/\h+/u', '', $parts[2]) / 1000;
-        } else {
-            $freq = (float) str_replace(',', '.', $parts[2]);
+        $freq = (float) str_replace(',', '.', preg_replace('/\h+/u', '', $parts[2]));
+        switch ($unit) {
+            case 'KHz':
+                $freq /= 1000;
+                break;
+            case 'GHz':
+                $freq *= 1000;
+                break;
         }
         return [
             'user_id' => Auth::user()->id,
@@ -38,7 +42,7 @@ class ImportController extends Controller
     }
 
     public function checkFileName (string $filename) {
-        return preg_match('/^\d{4}_\d{2}_\d{2}\.\d{2}-\d{2}-\d{2}\.(?:\d+,\d+\hMHz|\d{1,3}(?:\h\d{3})*\hKHz)\.wav$/u', $filename) === 1;
+        return preg_match('/^\d{4}_\d{2}_\d{2}\.\d{2}-\d{2}-\d{2}\..+\h(?:KHz|MHz|GHz)\.wav$/u', $filename) === 1;
     }
 
     public bool $canChangeStatus = FALSE;
@@ -54,19 +58,22 @@ class ImportController extends Controller
     }
 
     public function import () {
+        $start = Carbon::now()->getTimestamp();
         $records_disk = Storage::disk('records');
         $inputs_disk = Storage::disk('inputs');
         if ($this->checkRequestStatus()) {
             return back()->withErrors(['status' => 'Запрос уже выполняется']);
         }
         try {
-            if (!$list = $inputs_disk->files()) {
+            if ($start + 15 <= Carbon::now()->getTimestamp()) {
+                return back()->withErrors(['status' => 'Исчерпан лимит времени']);
+            } elseif (!$list = $inputs_disk->files()) {
                 return back()->with(['status' => 'Нет новых данных']);
             }
             foreach ($list as $k => $v) {
                if (!$this->checkFileName($v)) {
                     $inputs_disk->delete($v);
-                    return back()->withErrors(['status' => 'Найден и удален временный файл']);
+                    return back()->withErrors(['status' => 'Найден и удален временный файл: ' . $v]);
                }
                 $records_disk->put($v, $inputs_disk->get($v));
                 $inputs_disk->delete($v);
