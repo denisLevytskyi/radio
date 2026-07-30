@@ -33,7 +33,7 @@ class Record extends Model
     public function getFreqFormAttribute () {
         $hz = (int) round($this->freq * 1000000);
         return sprintf(
-            '%dм%03dк%03dг',
+            '%03dм%03dк%03dг',
             intdiv($hz, 1000000),
             intdiv($hz % 1000000, 1000),
             $hz % 1000
