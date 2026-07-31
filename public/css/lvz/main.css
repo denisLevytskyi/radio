@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap);
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
 
 /** {
     border: 1px solid red;
@@ -12,14 +12,14 @@ div, p, input, button, form, span, a, ul, li, pre, * {
 }
 
 body, button {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     padding: 0;
     margin: 0;
     font-size: 16px;
 }
 
 body {
-    background: grey;
+    background: #2D2D2D;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -34,26 +34,26 @@ ul, li {
 
 a {
     text-decoration: none;
-    color: #4169E1;
+    color: #0631AF;
     font-size: 16px;
 }
 
 button {
     width: fit-content;
     display: inline;
-    background: #95F3FF;
+    background: none;
     font-weight: bold;
     text-align: center;
     padding: 5px 20px;
     margin: 0 0 0 auto;
-    border: 1px solid grey;
+    border: 1px solid #2D2D2D;
     border-radius: 5px;
     cursor: pointer;
     transition-duration: 1s;
 }
 
 button:hover {
-    background: palegreen;
+    background: #62E339;
     transition-duration: 1s;
 }
 
@@ -62,7 +62,7 @@ input, textarea, select {
     font-weight: bold;
     font-size: 14px;
     padding: 5px;
-    border: 1px solid grey;
+    border: 1px solid #2D2D2D;
     border-radius: 5px;
     cursor: pointer;
     margin-bottom: 5px;
@@ -121,8 +121,9 @@ section {
 }
 
 .status .container {
-    background: palegreen;
+    background: #62E339;
     text-align: center;
+    color: white;
 }
 
 .statusError .container {
