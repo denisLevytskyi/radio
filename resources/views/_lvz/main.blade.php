@@ -10,9 +10,6 @@
     </x-slot:style>
     <section class="links">
         <div class="container typicalContainer">
-            <h1 class="linksH1">
-                Доступные действия
-            </h1>
             <div class="linksWrapper">
                 @if(Auth::user()->isPassStrongMod())
                     <a href="{{ route('app.freq.index') }}" class="linksWrapperA">
