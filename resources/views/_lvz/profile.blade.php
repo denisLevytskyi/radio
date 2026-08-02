@@ -9,10 +9,10 @@
         <link rel="stylesheet" href="{{ asset('css/lvz/profile.css') }}">
     </x-slot:style>
     @method('patch')
-    <x-l::form-input-error :messages="$errors->get('profileEditName')"/>
-    <x-l::form-input name="profileEditName" type="text" placeholder="Имя" :value="old('profileEditName', $user->name)"/>
-    <x-l::form-input-error :messages="$errors->get('profileEditEmail')"/>
-    <x-l::form-input name="profileEditEmail" type="text" placeholder="Email" :value="old('profileEditEmail', $user->email)"/>
+    <x-l::form-input-error :messages="$errors->get('profileName')"/>
+    <x-l::form-input name="profileName" type="text" placeholder="Имя" :value="old('profileName', $user->name)"/>
+    <x-l::form-input-error :messages="$errors->get('profileEmail')"/>
+    <x-l::form-input name="profileEmail" type="text" placeholder="Email" :value="old('profileEmail', $user->email)"/>
     <x-l::form-btn>
         Обновить
     </x-l::form-btn>
@@ -42,12 +42,12 @@
                     <p class="formFormP">
                         Обновление пароля
                     </p>
-                    <x-l::form-input-error :messages="$errors->get('profileEditPasswordOld')"/>
-                    <x-l::form-input name="profileEditPasswordOld" type="password" placeholder="Старый пароль" :value="old('profileEditPasswordOld')"/>
-                    <x-l::form-input-error :messages="$errors->get('profileEditPassword')"/>
-                    <x-l::form-input name="profileEditPassword" type="password" placeholder="Новый пароль" :value="old('profileEditPassword')"/>
-                    <x-l::form-input-error :messages="$errors->get('profileEditPasswordOld_confirmation')"/>
-                    <x-l::form-input name="profileEditPassword_confirmation" type="password" placeholder="Новый пароль" :value="old('profileEditPassword_confirmation')"/>
+                    <x-l::form-input-error :messages="$errors->get('profilePasswordOld')"/>
+                    <x-l::form-input name="profilePasswordOld" type="password" placeholder="Старый пароль" :value="old('profilePasswordOld')"/>
+                    <x-l::form-input-error :messages="$errors->get('profilePassword')"/>
+                    <x-l::form-input name="profilePassword" type="password" placeholder="Новый пароль" :value="old('profilePassword')"/>
+                    <x-l::form-input-error :messages="$errors->get('profilePasswordOld_confirmation')"/>
+                    <x-l::form-input name="profilePassword_confirmation" type="password" placeholder="Новый пароль" :value="old('profilePassword_confirmation')"/>
                     <x-l::form-btn>
                         Обновить пароль
                     </x-l::form-btn>
@@ -70,8 +70,8 @@
                     <p class="formFormP">
                         Вы уверены, что хотите удалить свою учетную запись? После удаления вашей учетной записи все ее ресурсы и данные будут удалены без возможности восстановления. Пожалуйста, введите свой пароль, чтобы подтвердить, что вы хотите навсегда удалить свою учетную запись.
                     </p>
-                    <x-l::form-input-error :messages="$errors->get('profileEditDeletePassword')"/>
-                    <x-l::form-input name="profileEditDeletePassword" type="password" placeholder="Пароль" :value="old('profileEditDeletePassword')"/>
+                    <x-l::form-input-error :messages="$errors->get('profileDeletePassword')"/>
+                    <x-l::form-input name="profileDeletePassword" type="password" placeholder="Пароль" :value="old('profileDeletePassword')"/>
                     <x-l::form-btn style="background: #d32121; color: white">
                         Удалить профиль
                     </x-l::form-btn>
@@ -80,7 +80,7 @@
             <script>
                 const form1 = document.getElementById('form1');
                 const form2 = document.getElementById('form2');
-                const error = @error('profileEditDeletePassword'){{'true'}}@else{{'false'}}@enderror;
+                const error = @error('profileDeletePassword'){{'true'}}@else{{'false'}}@enderror;
                 let answer;
 
                 form1.addEventListener('submit', function () {

@@ -17,6 +17,16 @@
     <x-l::form-input-error :messages="$errors->get('adminEditEmail')"/>
     <x-l::form-input name="adminEditEmail" type="text" :value="old('adminEditEmail', $user->email)"/>
     <p class="formFormP">
+        PIN
+    </p>
+    <x-l::form-input-error :messages="$errors->get('adminEditPin')"/>
+    <x-l::form-input name="adminEditPin" type="number" step="1" :value="old('adminEditPin', $user->nfcCard?->pin)"/>
+    <p class="formFormP">
+        Токен
+    </p>
+    <x-l::form-input-error :messages="$errors->get('adminEditToken')"/>
+    <x-l::form-input name="adminEditToken" type="text" id="token" :value="old('adminEditToken', $user->nfcCard?->token)"/>
+    <p class="formFormP">
         Пароль
     </p>
     <x-l::form-input-error :messages="$errors->get('adminEditPassword')"/>
@@ -47,4 +57,7 @@
     <x-l::form-delete :action="route('app.admin.destroy', $user->id)">
         Удалить
     </x-l::form-delete>
+    <x-slot:after>
+        <script src="{{ asset('script/nfc.js') }}"></script>
+    </x-slot:after>
 </x-l-layout::form>

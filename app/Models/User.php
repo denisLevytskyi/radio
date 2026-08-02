@@ -51,6 +51,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Role::class, 'user_roles', 'user_id', 'role_id');
     }
 
+    public function nfcCard () {
+        return $this->hasOne(NfcCard::class, 'user_id', 'id');
+    }
+
     public function isAdministrator () {
         return $this->roles()->where('role', '=', 'ADMIN')->exists();
     }

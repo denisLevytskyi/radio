@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NfcCard;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\UserRole;
@@ -65,6 +66,13 @@ class AdminController extends Controller
                     'role_id' => 1
                 ]);
             }
+            if ($request->adminCreatePin or $request->adminCreateToken) {
+                NfcCard::create([
+                    'user_id' => $user->id,
+                    'pin' => $request->adminCreatePin,
+                    'token' => $request->adminCreateToken
+                ]);
+            }
             return to_route('app.admin.index')->with(['status' => 'Запись успешно добавлена']);
         } else {
             return back()->withErrors([
@@ -125,6 +133,14 @@ class AdminController extends Controller
                 UserRole::create([
                     'user_id' => $admin->id,
                     'role_id' => 1
+                ]);
+            }
+            NfcCard::where('user_id', $admin->id)->delete();
+            if ($request->adminEditPin or $request->adminEditToken) {
+                NfcCard::create([
+                    'user_id' => $admin->id,
+                    'pin' => $request->adminEditPin,
+                    'token' => $request->adminEditToken
                 ]);
             }
             return back()->with(['status' => 'Обновлено']);
