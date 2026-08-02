@@ -27,6 +27,8 @@ class UpdateAdminRequest extends FormRequest
         return [
             'adminEditName' => ['required', 'string', 'max:255'],
             'adminEditEmail' => ['required', 'string', 'email', 'max:255', Rule::unique(User::class, 'email')->ignore($this->admin)],
+            'adminEditPin' => ['nullable', 'required_with:adminEditToken', 'min:1000', 'max:9999', 'integer'],
+            'adminEditToken' => ['nullable', 'required_with:adminEditPin', 'min:100', 'max:1000'],
             'adminEditPassword' => ['nullable', 'confirmed', Rules\Password::defaults()],
         ];
     }

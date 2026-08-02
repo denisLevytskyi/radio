@@ -16,6 +16,16 @@
     <x-l::form-input-error :messages="$errors->get('adminCreateEmail')"/>
     <x-l::form-input name="adminCreateEmail" type="text" :value="old('adminCreateEmail')"/>
     <p class="formFormP">
+        PIN
+    </p>
+    <x-l::form-input-error :messages="$errors->get('adminCreatePin')"/>
+    <x-l::form-input name="adminCreatePin" type="number" step="1" :value="old('adminCreatePin')"/>
+    <p class="formFormP">
+        Токен
+    </p>
+    <x-l::form-input-error :messages="$errors->get('adminCreateToken')"/>
+    <x-l::form-input name="adminCreateToken" type="text" id="token" :value="old('adminCreateToken')"/>
+    <p class="formFormP">
         Пароль
     </p>
     <x-l::form-input-error :messages="$errors->get('adminCreatePassword')"/>
@@ -43,4 +53,7 @@
     <a href="{{ route('app.admin.index') }}" class="formFormA">
         Назад
     </a>
+    <x-slot:after>
+        <script src="{{ asset('script/nfc.js') }}"></script>
+    </x-slot:after>
 </x-l-layout::form>
