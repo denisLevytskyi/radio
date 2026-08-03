@@ -16,6 +16,7 @@ body, button {
     padding: 0;
     margin: 0;
     font-size: 16px;
+    color: white;
 }
 
 body {
@@ -34,8 +35,14 @@ ul, li {
 
 a {
     text-decoration: none;
-    color: #0631AF;
     font-size: 16px;
+    color: white;
+    transition-duration: 1s;
+}
+
+a:hover {
+    color: #d32121;
+    transition-duration: 1s;
 }
 
 button {
@@ -46,7 +53,7 @@ button {
     text-align: center;
     padding: 5px 20px;
     margin: 0 0 0 auto;
-    border: 1px solid #2D2D2D;
+    border: 1px solid white;
     border-radius: 5px;
     cursor: pointer;
     transition-duration: 1s;
@@ -58,11 +65,13 @@ button:hover {
 }
 
 input, textarea, select {
+    color: white;
     display: block;
     font-weight: bold;
     font-size: 14px;
     padding: 5px;
-    border: 1px solid #2D2D2D;
+    background: none;
+    border: 1px solid white;
     border-radius: 5px;
     cursor: pointer;
     margin-bottom: 5px;
@@ -86,9 +95,9 @@ section {
 }
 
 .typicalContainer {
-    background: white;
     padding: 5px;
     border-radius: 5px;
+    border: 1px solid white;
 }
 
 .header .container {
@@ -102,7 +111,6 @@ section {
     align-items: center;
     justify-content: space-between;
     background: black;
-    color: white;
 }
 
 .headerWrapLinkImg {
@@ -110,24 +118,16 @@ section {
     background: white;
 }
 
-.auth .container {
-    background: none;
-    border: 1px solid white;
-    color: white;
-}
-
-.authA {
-    color: white;
-}
-
 .status .container {
     background: #62E339;
     text-align: center;
-    color: white;
+    border: 1px solid white;
+    font-weight: bold;
 }
 
 .statusError .container {
     background: #d32121;
     text-align: center;
-    color: white;
+    border: 1px solid white;
+    font-weight: bold;
 }
