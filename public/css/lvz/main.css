@@ -77,6 +77,11 @@ input, textarea, select {
     margin-bottom: 5px;
 }
 
+input::placeholder {
+    color: white;
+    opacity: 0.5;
+}
+
 audio {
     display: block;
     margin-bottom: 5px;
