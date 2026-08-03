@@ -3,27 +3,29 @@
     flex-direction: column;
     max-width: 400px;
     margin: auto;
-    background: white;
     padding: 5px;
+    border: 1px solid white;
     border-radius: 5px;
 }
 
 .formFormError {
     background: #d32121;
     text-align: center;
-    color: white;
+    border: 1px solid white;
     margin-bottom: 2px;
     padding: 2px;
     border-radius: 10px;
+    font-weight: bold;
 }
 
 .formFormStatus {
     background: #62E339;
     text-align: center;
-    color: white;
+    border: 1px solid white;
     margin-bottom: 2px;
     padding: 2px;
     border-radius: 10px;
+    font-weight: bold;
 }
 
 .formFormA {
@@ -43,13 +45,12 @@
     align-items: center;
     justify-content: space-around;
     padding: 5px;
-    border: 1px solid #2D2D2D;
+    border: 1px solid white;
     border-radius: 5px;
     margin-bottom: 5px;
 }
 
 .formFormNavigatorA, .formFormNavigatorP, .formFormNavigatorSearch {
-    color: black;
     font-size: 14px;
     font-weight: bold;
 }

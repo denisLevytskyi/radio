@@ -1,8 +1,3 @@
-.links .container {
-    background: none;
-    border: 1px solid white;
-}
-
 .linksWrapper {
     display: flex;
     justify-content: space-around;
@@ -19,10 +14,10 @@
     text-align: center;
     margin: 5px;
     transition-duration: 1s;
-    color: white;
 }
 
 .linksWrapperA:hover {
+    color: white;
     transition-duration: 1s;
     background: #62E339;
 }

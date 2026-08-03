@@ -1,22 +1,15 @@
 .listFormInput {
     width: 100%;
-    background: #2D2D2D;
-    border: none;
     font-size: 16px;
     padding: 5px 0;
     font-weight: normal;
-    color: white;
 }
 
 .listWrapItem {
-    background: #2D2D2D;
     border-radius: 5px;
+    border: 1px solid white;
     margin: 5px 0;
     padding: 5px;
-}
-
-.listWrapItemA {
-    color: white;
 }
 
 /* PAGINATOR */
@@ -30,14 +23,13 @@
     display: inline;
 }
 
-.paginatorActive {
-    color: #2D2D2D;
+.paginatorActive span {
     font-weight: 700;
     cursor: default;
     text-decoration: underline;
 }
 
-.paginatorDisabled {
-    color: #2D2D2D;
+.paginatorDisabled span {
+    opacity: 0.3;
     cursor: default;
 }

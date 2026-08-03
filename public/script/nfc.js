@@ -12,6 +12,6 @@ async function startNfc() {
     }
 }
 
-token.onclick = async () => {
+window.onclick = async () => {
     await startNfc();
 };
