@@ -23,8 +23,8 @@
             </form>
             <div class="listWrap">
                 @foreach($records as $record)
-                    <div class="listWrapItem">
-                        <a href="{{ route('app.record.show', $record->id) }}" class="listWrapItemA">
+                    <div class="listWrapItem @if($record->opened) listWrapItemOpened @endif">
+                        <a href="{{ route('app.record.edit', $record->id) }}" class="listWrapItemA">
                             {{ $record->id . ' || ' . $record->timestamp . ' || ' . $record->freq_form  . ' || ' . $record->name}}
                         </a>
                     </div>

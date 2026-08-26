@@ -74,22 +74,23 @@ class RecordController extends Controller
         ];
     }
 
-    public function show(Request $request, Record $record)
+    public function show(Record $record)
     {
-        if ($request->user()->cannot('view', $record)) {
-            return back()->withErrors([
-                'status' => 'Вы не можете выполнить данное действие'
-            ]);
-        }
-        return view('_lvz.record-show', ['record' => $record, 'navigator' => $this->getNavigatorData($record)]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Record $record)
+    public function edit(Request $request, Record $record)
     {
-        //
+        if ($request->user()->cannot('update', $record)) {
+            return back()->withErrors([
+                'status' => 'Вы не можете выполнить данное действие'
+            ]);
+        }
+        $record->update(['opened' => TRUE]);
+        return view('_lvz.record-edit', ['record' => $record, 'navigator' => $this->getNavigatorData($record)]);
     }
 
     /**
@@ -97,7 +98,21 @@ class RecordController extends Controller
      */
     public function update(UpdateRecordRequest $request, Record $record)
     {
-        //
+        if ($request->user()->cannot('update', $record)) {
+            return back()->withErrors([
+                'status' => 'Вы не можете выполнить данное действие'
+            ]);
+        }
+        $data = [
+            'comment' => $request->recordEditComment,
+        ];
+        if ($record->update($data)) {
+            return back()->with(['status' => 'Обновлено']);
+        } else {
+            return back()->withErrors([
+                'status' => 'Ошибка внесения данных в БД'
+            ])->withInput();
+        }
     }
 
     /**

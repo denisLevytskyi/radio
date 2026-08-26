@@ -20,6 +20,8 @@ return new class extends Migration
             $table->float('freq')->nullable();
             $table->string('file')->nullable();
             $table->longText('blob')->charset('binary')->nullable();
+            $table->string('comment')->nullable();
+            $table->boolean('opened')->nullable();
         });
     }
 

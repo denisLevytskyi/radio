@@ -1,4 +1,5 @@
-<x-l-layout::form action="/">
+<x-l-layout::form :action="route('app.record.update' , $record->id)">
+    @method('put')
     <x-slot:title>
         Запись № {{ $record->id }}
     </x-slot:title>
@@ -21,6 +22,11 @@
         Дата
     </p>
     <x-l::form-input readonly :value="$record->timestamp"/>
+    <p class="formFormP">
+        Комментарий
+    </p>
+    <x-l::form-input-error :messages="$errors->get('recordEditComment')"/>
+    <x-l::form-input name="recordEditComment" type="text" :value="old('recordEditComment', $record->comment)"/>
     <p class="formFormP">
         Навигация
     </p>
@@ -68,6 +74,9 @@
     <x-l::form-audio>
         {{ route('app.record.audio', $record->id) }}
     </x-l::form-audio>
+    <x-l::form-btn>
+        Обновить
+    </x-l::form-btn>
     <a href="{{ route('app.record.index') }}" class="formFormA">
         Назад
     </a>

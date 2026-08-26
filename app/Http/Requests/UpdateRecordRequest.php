@@ -11,7 +11,7 @@ class UpdateRecordRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return TRUE;
     }
 
     /**
@@ -22,7 +22,7 @@ class UpdateRecordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'recordEditComment' => ['max:300'],
         ];
     }
 }

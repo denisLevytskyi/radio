@@ -15,6 +15,11 @@
     </p>
     <x-l::form-input-error :messages="$errors->get('freqCreateFreq')"/>
     <x-l::form-input name="freqCreateFreq" type="number" step="0.000001" :value="old('freqCreateFreq')"/>
+    <p class="formFormP">
+        Комментарий
+    </p>
+    <x-l::form-input-error :messages="$errors->get('freqCreateComment')"/>
+    <x-l::form-input name="freqCreateComment" type="text" :value="old('freqCreateComment')"/>
     <x-l::form-btn>
         Добавить
     </x-l::form-btn>

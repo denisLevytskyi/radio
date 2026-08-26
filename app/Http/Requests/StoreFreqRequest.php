@@ -26,6 +26,7 @@ class StoreFreqRequest extends FormRequest
         return [
             'freqCreateName' => ['required', 'min:3', 'max:30'],
             'freqCreateFreq' => ['required', 'min:1', 'max:5000', 'numeric', new FreqPrecision(6)],
+            'freqCreateComment' => ['max:300'],
         ];
     }
 }
