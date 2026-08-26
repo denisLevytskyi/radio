@@ -32,7 +32,7 @@
     </p>
     <div class="formFormNavigator">
         @if($navigator['previousById'])
-            <a href="{{ route('app.record.show', $navigator['previousById']->id) }}" class="formFormNavigatorA">
+            <a href="{{ route('app.record.edit', $navigator['previousById']->id) }}" class="formFormNavigatorA">
                 [ &#x21D0; ]
             </a>
         @else
@@ -41,7 +41,7 @@
             </p>
         @endif
         @if($navigator['previousByFreq'])
-            <a href="{{ route('app.record.show', $navigator['previousByFreq']->id) }}" class="formFormNavigatorA">
+            <a href="{{ route('app.record.edit', $navigator['previousByFreq']->id) }}" class="formFormNavigatorA">
                 [ &#8592; ]
             </a>
         @else
@@ -53,7 +53,7 @@
             [ ПОИСК ]
         </a>
         @if($navigator['nextByFreq'])
-            <a href="{{ route('app.record.show', $navigator['nextByFreq']->id) }}" class="formFormNavigatorA">
+            <a href="{{ route('app.record.edit', $navigator['nextByFreq']->id) }}" class="formFormNavigatorA">
                 [ &#8594; ]
             </a>
         @else
@@ -62,7 +62,7 @@
             </p>
         @endif
         @if($navigator['nextById'])
-            <a href="{{ route('app.record.show', $navigator['nextById']->id) }}" class="formFormNavigatorA">
+            <a href="{{ route('app.record.edit', $navigator['nextById']->id) }}" class="formFormNavigatorA">
                 [ &#x21D2; ]
             </a>
         @else
