@@ -14,6 +14,7 @@ Route::name('app.')->middleware(['auth', 'verified', 'isGuest'])->group(function
     Route::get('record-audio/{record}', [RecordController::class, 'getAudio'])->name('record.audio');
     Route::get('record-download/{record}', [RecordController::class, 'download'])->name('record.download');
     Route::any('record-search/{freq?}', [RecordController::class, 'search'])->name('record.search');
+    Route::get('record-commented', [RecordController::class, 'commented'])->name('record.commented');
     Route::get('import', [ImportController::class, 'import'])->name('import')->middleware('isUser');
     Route::get('recorder', [RecorderController::class, 'index'])->name('recorder.index')->middleware('isRecorder');
     Route::post('recorder', [RecorderController::class, 'store'])->name('recorder.store')->middleware('isRecorder');

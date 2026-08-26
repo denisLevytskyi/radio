@@ -47,6 +47,12 @@ class RecordController extends Controller
         return view('_lvz.record-index', ['records' => $records, 'freqs' => $freqs, 'current' => $search]);
     }
 
+    public function commented () {
+        $freqs = Record::select(['freq'])->orderby('freq')->distinct()->get();
+        $records = Record::whereNotNull('comment')->orderBy('id', 'desc')->paginate((int) $this->prop->getProp('app_paginator'));
+        return view('_lvz.record-index', ['records' => $records, 'freqs' => $freqs, 'current' => NULL]);
+    }
+
     /**
      * Display a listing of the resource.
      */
