@@ -40,6 +40,7 @@ class FreqController extends Controller
             'user_id' => $request->user()->id,
             'name' => $request->freqCreateName,
             'freq' => $request->freqCreateFreq,
+            'comment' => $request->freqCreateComment,
         ];
         if (Freq::create($data)) {
             return to_route('app.freq.index')->with(['status' => 'Запись успешно добавлена']);
@@ -85,6 +86,7 @@ class FreqController extends Controller
         }
         $data = [
             'name' => $request->freqEditName,
+            'comment' => $request->freqEditComment,
         ];
         if ($freq->update($data)) {
             return back()->with(['status' => 'Обновлено']);

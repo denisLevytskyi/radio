@@ -21,11 +21,7 @@ class RecordPolicy
      */
     public function view(User $user, Record $record): bool
     {
-        if ($user->isUser() or $user->isAdministrator()) {
-            return TRUE;
-        } else {
-            return FALSE;
-        }
+        //
     }
 
     /**
@@ -41,7 +37,11 @@ class RecordPolicy
      */
     public function update(User $user, Record $record): bool
     {
-        //
+        if ($user->isAdministrator() or ($user->id == $record->user_id and $user->isUser())) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
     }
 
     /**

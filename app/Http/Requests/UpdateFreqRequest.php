@@ -24,6 +24,7 @@ class UpdateFreqRequest extends FormRequest
     {
         return [
             'freqEditName' => ['required', 'min:3', 'max:30'],
+            'freqEditComment' => ['max:300'],
         ];
     }
 }

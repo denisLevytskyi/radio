@@ -14,6 +14,7 @@ class Freq extends Model
         'user_id',
         'name',
         'freq',
+        'comment',
     ];
 
     public function user () {

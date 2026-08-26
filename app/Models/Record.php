@@ -16,6 +16,8 @@ class Record extends Model
         'freq',
         'file',
         'blob',
+        'comment',
+        'opened',
     ];
 
     public function user () {

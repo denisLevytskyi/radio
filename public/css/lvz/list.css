@@ -12,6 +12,10 @@
     padding: 5px;
 }
 
+.listWrapItemOpened {
+    opacity: 0.3;
+}
+
 /* PAGINATOR */
 
 .listWrapPagination {

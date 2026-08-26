@@ -20,6 +20,11 @@
     </p>
     <x-l::form-input readonly :value="$freq->freq_form"/>
     <p class="formFormP">
+        Комментарий
+    </p>
+    <x-l::form-input-error :messages="$errors->get('freqEditComment')"/>
+    <x-l::form-input name="freqEditComment" type="text" :value="old('freqEditComment', $freq->comment)"/>
+    <p class="formFormP">
         Навигация
     </p>
     <div class="formFormNavigator">

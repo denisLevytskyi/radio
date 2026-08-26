@@ -36,6 +36,9 @@
                     <a href="{{ route('app.admin.index') }}" class="linksWrapperA">
                         Пользователи
                     </a>
+                    <a href="{{ route('app.clean') }}" class="linksWrapperA">
+                        Очистить БД
+                    </a>
                 @endif
             </div>
         </div>
