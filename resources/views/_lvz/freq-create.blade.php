@@ -19,7 +19,7 @@
         Комментарий
     </p>
     <x-l::form-input-error :messages="$errors->get('freqCreateComment')"/>
-    <x-l::form-input name="freqCreateComment" type="text" :value="old('freqCreateComment')"/>
+    <x-l::form-textarea name="freqCreateComment" :value="old('freqCreateComment')"/>
     <x-l::form-btn>
         Добавить
     </x-l::form-btn>

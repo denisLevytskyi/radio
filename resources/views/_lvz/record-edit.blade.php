@@ -26,7 +26,7 @@
         Комментарий
     </p>
     <x-l::form-input-error :messages="$errors->get('recordEditComment')"/>
-    <x-l::form-input name="recordEditComment" type="text" :value="old('recordEditComment', $record->comment)"/>
+    <x-l::form-textarea name="recordEditComment" :value="old('recordEditComment', $record->comment)"/>
     <p class="formFormP">
         Навигация
     </p>
@@ -77,6 +77,9 @@
     <x-l::form-btn>
         Обновить
     </x-l::form-btn>
+    <a href="{{ route('app.record.download', $record->id) }}" class="formFormA">
+        Загрузить
+    </a>
     <a href="{{ route('app.record.index') }}" class="formFormA">
         Назад
     </a>

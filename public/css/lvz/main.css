@@ -46,7 +46,7 @@ a:hover {
 }
 
 button {
-    width: fit-content;
+    width: 150px;
     display: inline;
     background: none;
     font-weight: bold;

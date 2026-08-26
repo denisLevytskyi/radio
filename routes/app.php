@@ -12,6 +12,7 @@ Route::name('app.')->middleware(['auth', 'verified', 'isGuest'])->group(function
     Route::resource('freq', FreqController::class)->middleware('isPassStrongMod');
     Route::resource('record', RecordController::class);
     Route::get('record-audio/{record}', [RecordController::class, 'getAudio'])->name('record.audio');
+    Route::get('record-download/{record}', [RecordController::class, 'download'])->name('record.download');
     Route::any('record-search/{freq?}', [RecordController::class, 'search'])->name('record.search');
     Route::get('import', [ImportController::class, 'import'])->name('import')->middleware('isUser');
     Route::get('recorder', [RecorderController::class, 'index'])->name('recorder.index')->middleware('isRecorder');

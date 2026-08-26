@@ -23,7 +23,7 @@
         Комментарий
     </p>
     <x-l::form-input-error :messages="$errors->get('freqEditComment')"/>
-    <x-l::form-input name="freqEditComment" type="text" :value="old('freqEditComment', $freq->comment)"/>
+    <x-l::form-textarea name="freqEditComment" :value="old('freqEditComment', $freq->comment)"/>
     <p class="formFormP">
         Навигация
     </p>

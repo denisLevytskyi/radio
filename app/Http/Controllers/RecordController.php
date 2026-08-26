@@ -12,17 +12,29 @@ use Illuminate\Support\Facades\Storage;
 class RecordController extends Controller
 {
     public function getAudio (Request $request, Record $record) {
-        if ($request->user()->cannot('view', $record)) {
+        if ($request->user()->cannot('update', $record)) {
             abort(404);
         } elseif ($record->file) {
             return response(Storage::disk('records')->get($record->file));
         } elseif ($record->blob) {
             return response($record->blob);
         }
+        abort(404);
     }
 
-    public function search(StoreRecordSearchRequest $request, $url_freq = NULL)
-    {
+    public function download (Request $request, Record $record) {
+        if ($request->user()->cannot('update', $record)) {
+            abort(404);
+        } elseif ($record->file) {
+            return Storage::disk('records')->download($record->file, basename($record->file));
+        } else {
+            return back()->withErrors([
+                'status' => 'Файл недоступен к скачиванию'
+            ]);
+        }
+    }
+
+    public function search (StoreRecordSearchRequest $request, $url_freq = NULL) {
         if ($request_freq = $request->recordSearchFreq) {
             $search = $request_freq;
         } elseif ((float) $url_freq) {
