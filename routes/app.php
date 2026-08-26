@@ -6,6 +6,7 @@ use App\Http\Controllers\ImportController;
 use App\Http\Controllers\RecorderController;
 use App\Http\Controllers\PropController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CleanController;
 
 Route::name('app.')->middleware(['auth', 'verified', 'isGuest'])->group(function() {
     Route::resource('freq', FreqController::class)->middleware('isPassStrongMod');
@@ -17,4 +18,5 @@ Route::name('app.')->middleware(['auth', 'verified', 'isGuest'])->group(function
     Route::post('recorder', [RecorderController::class, 'store'])->name('recorder.store')->middleware('isRecorder');
     Route::resource('prop', PropController::class)->middleware('isAdministrator');
     Route::resource('admin', AdminController::class)->middleware('isAdministrator');
+    Route::get('clean', [CleanController::Class, 'clean'])->name('clean')->middleware('isAdministrator');
 });
