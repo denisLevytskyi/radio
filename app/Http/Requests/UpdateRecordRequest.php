@@ -22,7 +22,7 @@ class UpdateRecordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'recordEditComment' => ['max:300'],
+            'recordEditComment' => ['max:1000'],
         ];
     }
 }

@@ -19,7 +19,7 @@
         Регистрация
     </a>
     <a href="{{ route('password.request') }}" class="formFormA">
-        Восстановить пароль
+        Восстановить
     </a>
     <script>
         let text;
