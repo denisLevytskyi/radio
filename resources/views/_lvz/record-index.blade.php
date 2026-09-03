@@ -16,6 +16,12 @@
             <a href="{{ route('app.record.commented')}}" class="listA">
                 С комментарием
             </a>
+            <p class="listP">
+                /
+            </p>
+            <a href="{{ route('app.record.index')}}" class="listA">
+                Все
+            </a>
             <form action="{{ route('app.record.search') }}" method="POST" class="listForm" id="form">
                 @csrf
                 <select class="listFormInput" id="input" name="recordSearchFreq">
